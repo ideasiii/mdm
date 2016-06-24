@@ -35,8 +35,6 @@ public abstract class Common
 	
 	final public static ArrayList<String> listPermissionField = new ArrayList<>(Arrays.asList(USER_EMAIL, USER_ID, PERMISSION, START_TIME,END_TIME,CREATE_TIME,UPDATE_TIME)); 
 	
-	final public static ArrayList<String> listUserGroup = new ArrayList<>(Arrays.asList(USER_ID, GROUP_ID, CREATE_TIME)); 
-	
 	
 	/**sqlite mdm_android.db 
 	 * table: group_info**/
@@ -46,10 +44,8 @@ public abstract class Common
 	final public static String MAXIMUM = "maximum";
 	final public static String CONNECTED = "connected";
 	
-	final public static ArrayList<String> listGroupField = new ArrayList<>(Arrays.asList(GROUP_ID, GROUP_NAME, ACCOUNT,
-			PASSWORD, MAXIMUM)); // Create & Edit group
-	
-	final public static ArrayList<String> listGroupManageField = new ArrayList<>(Arrays.asList(GROUP_ID, GROUP_NAME, MAXIMUM, CONNECTED)); //group list table
+	final public static ArrayList<String> listGroup = new ArrayList<>(Arrays.asList(USER_ID, GROUP_ID, GROUP_NAME, ACCOUNT,
+			PASSWORD, MAXIMUM, CONNECTED, CREATE_TIME, UPDATE_TIME)); 
 
 	
 	/**sqlite mdm_android.db 

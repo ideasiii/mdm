@@ -9,12 +9,10 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Iterator"%>
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Group Management | MDM</title>
 </head>
 <body>
 
@@ -57,16 +55,16 @@
 
 		ArrayList<Mdm.PermissionData> listPermission = new ArrayList<Mdm.PermissionData>();
 		int nCount = mdm.queryPermission(strEmail, listPermission);
+
+		if (0 < nCount) {
+			Iterator<Mdm.PermissionData> itPD = null;
+			itPD = listPermission.iterator();
+			Mdm.PermissionData permissionData = null;
+			while (itPD.hasNext()) {
+				permissionData = itPD.next();
+				if (permissionData.permission.trim().equals("android")) {
 	%>
 	<ul>
-		<%
-			if (0 < nCount) {
-				Iterator<Mdm.PermissionData> it = null;
-				it = listPermission.iterator();
-				Mdm.PermissionData permissionData = null;
-				while (it.hasNext()) {
-					permissionData = it.next();
-		%>
 		<li>
 			<div>
 				<p><%=permissionData.user_email%></p>
@@ -74,29 +72,44 @@
 				<p><%=permissionData.permission%></p>
 			</div>
 		</li>
-		<%
-		if (permissionData.permission.trim().equals("android"))
-		{
-			ArrayList<Mdm.UserGroupCateData> listUserGroup = new ArrayList<Mdm.UserGroupCateData>();
-			mdm.queryGroup(permissionData.user_id, listUserGroup);
-		}
-			
-		
-		//final String strUserId = getParameter(Common.USER_ID);
-		
-		
-		
-		%>
-		
-		
-		<%
-			} // while
-			}
-		%>
 	</ul>
 
 	<%
+	          /********** group info**************/
 
+					Iterator<Mdm.GroupData> itGD = null;
+					Mdm.GroupData groupData = null;
+
+					ArrayList<Mdm.GroupData> listGroup = new ArrayList<Mdm.GroupData>();
+					int nGCount = mdm.queryGroup(permissionData.user_id, listGroup);
+					out.println(nGCount);
+
+					itGD = listGroup.iterator();
+	%>
+
+	<div>
+		<select
+			onchange="location.href=this.options[this.selectedIndex].value">
+			<option value="group_management.html">Select Group</option>
+
+			<%
+			while (itGD.hasNext()) {
+				groupData = itGD.next();
+			%>
+
+			<option value="device_management.html"><%=groupData.group_name%></option>
+			<%
+				}
+							}
+					} // while
+					/********* end user group ************/
+			%>
+
+		</select>
+	</div>
+
+	<%
+		} // if
 	%>
 
 </body>

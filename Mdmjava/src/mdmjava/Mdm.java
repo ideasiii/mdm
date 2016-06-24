@@ -23,14 +23,18 @@ public class Mdm
 		public String update_time;
 	}
 	
-	public static class UserGroupCateData
+	public static class GroupData
 	{
 		public String user_id;
 		public String group_id;
+		public String group_name;
+		public String account;
+		public String password;
+		public String maximum;
+		public String connected;
 		public String create_time;
+		public String update_time;
 	}
-	
-	
 	
 	
 	public int queryPermission(String strEmail, ArrayList<PermissionData> listPermission)
@@ -79,7 +83,7 @@ public class Mdm
 		return nCount;
 	}
 
-	public int queryGroup(String strUserId, ArrayList<UserGroupCateData> listUserGroup)
+	public int queryGroup(String strUserId, ArrayList<GroupData> listGroup)
 	{
 		int nCount = 0;
 
@@ -87,9 +91,9 @@ public class Mdm
 		{
 			sqliteClient sqlite = new sqliteClient();
 			Connection con = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
-			String strSQL = "select * from user_group_category where user_id='"+strUserId+"' order by create_time ;";
+			String strSQL = "select * from group_info where user_id='"+strUserId+"' order by create_time ;";
 			ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
-			sqlite.query(con, strSQL, Common.listUserGroup, listData);
+			sqlite.query(con, strSQL, Common.listGroup, listData);
 			con.close();
 			sqlite = null;
 
@@ -98,18 +102,24 @@ public class Mdm
 				Iterator<HashMap<String, String>> it = null;
 				HashMap<String, String> mapItem;
 				it = listData.iterator();
-				UserGroupCateData userGroupCateData = null;
+				GroupData groupData = null;
 				while (it.hasNext())
 				{
-					userGroupCateData = new UserGroupCateData();
+					groupData = new GroupData();
 					mapItem = it.next();
-					userGroupCateData.user_id = mapItem.get(Common.USER_ID);
-					userGroupCateData.group_id = mapItem.get(Common.GROUP_ID);
-					userGroupCateData.create_time = mapItem.get(Common.CREATE_TIME);
-					listUserGroup.add(userGroupCateData);
-					userGroupCateData = null;
+					groupData.user_id = mapItem.get(Common.USER_ID);
+					groupData.group_id = mapItem.get(Common.GROUP_ID);
+					groupData.group_name = mapItem.get(Common.GROUP_NAME);
+					groupData.account = mapItem.get(Common.ACCOUNT);
+					groupData.password = mapItem.get(Common.PASSWORD);
+					groupData.maximum = mapItem.get(Common.MAXIMUM);
+					groupData.connected = mapItem.get(Common.CONNECTED);
+					groupData.create_time = mapItem.get(Common.CREATE_TIME);
+					groupData.update_time = mapItem.get(Common.UPDATE_TIME);
+					listGroup.add(groupData);
+					groupData = null;
 				}
-				nCount = 	listUserGroup.size();
+				nCount = 	listGroup.size();
 			}
 		}
 		catch (SQLException e)
