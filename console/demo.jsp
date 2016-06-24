@@ -9,6 +9,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Iterator"%>
 
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -168,7 +169,7 @@
 				<!-- END LOGO SECTION -->
 
 				<!-- CREATE GROUP -->
-				<div>
+					<div>
 					<button class="btn btn-info button-add semi-square"
 						data-toggle="modal" data-target="#AddGroup"
 						title="Create a new group">
@@ -176,7 +177,6 @@
 							class="sr-only">Create a new group</span>
 					</button>
 				</div>
-
 				<!--END CREATE GROUP -->
 
 				<!-- GROUP SELECT -->
@@ -242,7 +242,6 @@
 			</nav>
 		</div>
 		<!--END GROUP SELECT -->
-		</nav>
 	</div>
 
 
