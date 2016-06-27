@@ -36,6 +36,41 @@ public class Mdm
 		public String update_time;
 	}
 	
+	sqliteClient sqlite = null;
+	Connection conMdmUser = null;
+	Connection conMdmAndroid = null;
+	Connection conLocation = null;
+	
+	public boolean conDB()
+	{
+		sqlite = new sqliteClient();
+		boolean bResult = false;
+		 try {
+			 conMdmUser = sqlite.getConnection(Common.DB_PATH_MDM_USER);
+			 conMdmAndroid = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
+			 conLocation = sqlite.getConnection(Common.DB_PATH_LOCATION);
+			bResult = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return bResult;
+	}
+	
+	public void closeDB()
+	{
+		try {
+			conMdmUser.close();
+			conMdmAndroid.close();
+			conLocation.close();
+			sqlite = null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	public int queryPermission(String strEmail, ArrayList<PermissionData> listPermission)
 	{
@@ -43,13 +78,13 @@ public class Mdm
 
 		try
 		{
-			sqliteClient sqlite = new sqliteClient();
-			Connection con = sqlite.getConnection(Common.DB_PATH_MDM_USER);
+			//sqlite = new sqliteClient();
+			//Connection con = sqlite.getConnection(Common.DB_PATH_MDM_USER);
 			String strSQL = "select * from user_permission where user_email='"+strEmail+"' order by create_time ;";
 			ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
-			sqlite.query(con, strSQL, Common.listPermissionField, listData);
-			con.close();
-			sqlite = null;
+			sqlite.query(conMdmUser, strSQL, Common.listPermissionField, listData);
+			//con.close();
+			//sqlite = null;
 
 			if (0 < listData.size())
 			{
@@ -89,13 +124,13 @@ public class Mdm
 
 		try
 		{
-			sqliteClient sqlite = new sqliteClient();
-			Connection con = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
+			//sqliteClient sqlite = new sqliteClient();
+			//Connection con = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
 			String strSQL = "select * from group_info where user_id='"+strUserId+"' order by create_time ;";
 			ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
-			sqlite.query(con, strSQL, Common.listGroup, listData);
-			con.close();
-			sqlite = null;
+			sqlite.query(conMdmAndroid, strSQL, Common.listGroup, listData);
+			//con.close();
+			//sqlite = null;
 
 			if (0 < listData.size())
 			{

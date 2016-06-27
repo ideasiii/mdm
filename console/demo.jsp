@@ -87,10 +87,6 @@
 .blue select {
 	color: #fff;
 }
-
-.blue span {
-	color: #fff;
-}
 /* end dropdown */
 
 /* add button */
@@ -157,6 +153,7 @@
 
 			<nav class="navbar navbar-inverse navbar-fixed-top "
 				style="padding-top: 10px;">
+				
 				<!-- LOGO SECTION -->
 				<header class="navbar-header">
 					<div>
@@ -184,9 +181,15 @@
 					final String strEmail = "juliettechien@iii.org.tw";//request.getParameter(Common.USER_EMAIL);
 					Mdm mdm = new Mdm();
 
+					if (!mdm.conDB())
+					{
+						response.sendRedirect("error.html"); //insert error page 
+						return;
+					}
+					
 					ArrayList<Mdm.PermissionData> listPermission = new ArrayList<Mdm.PermissionData>();
 					int nCount = mdm.queryPermission(strEmail, listPermission);
-					nCount = 0;
+					//nCount = 0;
 					if (0 < nCount) {
 						Iterator<Mdm.PermissionData> itPD = null;
 						itPD = listPermission.iterator();
@@ -202,7 +205,7 @@
 
 								ArrayList<Mdm.GroupData> listGroup = new ArrayList<Mdm.GroupData>();
 								int nGCount = mdm.queryGroup(permissionData.user_id, listGroup);
-								out.println(nGCount);
+								//out.println(nGCount);
 
 								itGD = listGroup.iterator();
 				%>
@@ -222,7 +225,7 @@
 							}
 									}
 								} // while
-								/********* end user group ************/
+								/********* end group info************/
 						%>
 
 					</select>
@@ -242,8 +245,97 @@
 			</nav>
 		</div>
 		<!--END GROUP SELECT -->
-	</div>
+		
+		<div class="col-lg-12">
+			<div class="modal fade" id="AddGroup" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H3">Create Group</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form">
+								<div class="form-group">
+									<label>Group Name</label> <input class="form-control"
+										placeholder="Enter your group name" />
+									<p class="help-block">Notification: Group name cannot be
+										changed.</p>
+								</div>
+								<div class="form-group">
+									<label>Login Account</label> <input class="form-control" />
+									<p class="help-block">(Must be less than 20 letters in
+										alphanumeric format.)</p>
+								</div>
+								<div class="form-group">
+									<label>Password</label> <input class="form-control" />
+									<p class="help-block">(Must be less than 20 letters in
+										alphanumeric format.)</p>
+								</div>
+								<div class="form-group">
+									<label>Max Number of Devices</label> <select
+										class="form-control">
+										<option>5</option>
+										<option>10</option>
+										<option>15</option>
+										<option>20</option>
+										<option>25</option>
+										<option>30</option>
+										<option>35</option>
+										<option>40</option>
+										<option>45</option>
+										<option>50</option>
+									</select>
+								</div>
 
+								<div class="form-group">
+									<label>Device Type</label> <select class="form-control">
+										<option>Android</option>
 
+									</select>
+								</div>
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	
+	
+
+	
+</div>  <!--END MAIN WRAPPER -->
+	<% 
+	mdm.closeDB();
+	mdm = null;
+	%>
+	
+	<!-- GLOBAL SCRIPTS -->
+	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<!-- END GLOBAL SCRIPTS -->
+
+	<!-- PAGE LEVEL SCRIPTS -->
+	<script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').dataTable();
+		});
+	</script>
+	<script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
+
+	<!-- END PAGE LEVEL SCRIPTS -->
+	
 </body>
 </html>
