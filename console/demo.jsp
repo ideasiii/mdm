@@ -38,6 +38,9 @@
 
 <!-- END PAGE LEVEL  STYLES -->
 
+<!-- JavaScript -->
+<script src="js/formverify.js"></script>
+
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,6 +182,11 @@
 				<!-- GROUP SELECT -->
 				<%
 					final String strEmail = "juliettechien@iii.org.tw";//request.getParameter(Common.USER_EMAIL);
+					ArrayList<String> listPermissionName = new ArrayList<String>();
+					ArrayList<Mdm.PermissionData> listPermission = new ArrayList<Mdm.PermissionData>();
+					Mdm.PermissionData permissionData = null;
+					String strUserId_Android = null;
+					
 					Mdm mdm = new Mdm();
 
 					if (!mdm.conDB())
@@ -187,16 +195,17 @@
 						return;
 					}
 					
-					ArrayList<Mdm.PermissionData> listPermission = new ArrayList<Mdm.PermissionData>();
 					int nCount = mdm.queryPermission(strEmail, listPermission);
 					//nCount = 0;
 					if (0 < nCount) {
 						Iterator<Mdm.PermissionData> itPD = null;
 						itPD = listPermission.iterator();
-						Mdm.PermissionData permissionData = null;
+						
 						while (itPD.hasNext()) {
 							permissionData = itPD.next();
+							listPermissionName.add(permissionData.permission);
 							if (permissionData.permission.trim().equals("android")) {
+								strUserId_Android = permissionData.user_id;
 
 								/********** group info**************/
 
@@ -257,25 +266,26 @@
 							<h4 class="modal-title" id="H3">Create Group</h4>
 						</div>
 						<div class="modal-body">
-							<form role="form">
-								<div class="form-group">
-									<label>Group Name</label> <input class="form-control"
+							<form role="form" action="                    " name="formGroupAdd" id="formGroupAdd">
+							<input name="userId" type="hidden" value="<%=strUserId_Android%>"> 
+								<div class="form-group">						
+									<label>Group Name</label> <input class="form-control" name="<%=Common.GROUP_NAME%>"
 										placeholder="Enter your group name" />
 									<p class="help-block">Notification: Group name cannot be
 										changed.</p>
 								</div>
 								<div class="form-group">
-									<label>Login Account</label> <input class="form-control" />
+									<label>Login Account</label> <input class="form-control"  name="<%=Common.ACCOUNT%>"/>
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
 								</div>
 								<div class="form-group">
-									<label>Password</label> <input class="form-control" />
+									<label>Password</label> <input class="form-control" name="<%=Common.PASSWORD%>" />
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
 								</div>
 								<div class="form-group">
-									<label>Max Number of Devices</label> <select
+									<label>Max Number of Devices</label> <select name="<%=Common.MAXIMUM%>"
 										class="form-control">
 										<option>5</option>
 										<option>10</option>
@@ -291,8 +301,15 @@
 								</div>
 
 								<div class="form-group">
-									<label>Device Type</label> <select class="form-control">
-										<option>Android</option>
+									<label>Device Type</label> <select class="form-control"> 
+									<%
+								
+									for(int i = 0; i < listPermissionName.size(); ++i)
+									{
+										out.println("<option>" + listPermissionName.get(i) + "</option>");
+									}
+									%>
+										
 
 									</select>
 								</div>
@@ -302,7 +319,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+							<button type="button" class="btn btn-primary"  data-dismiss="modal" onClick="checkGroupAddData('formGroupAdd')">Create</button>
 						</div>
 					</div>
 				</div>
