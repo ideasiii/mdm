@@ -67,16 +67,6 @@
 	width: 268px;
 }
 
-.styled-select span {
-	background: transparent;
-	border: none;
-	font-size: 14px;
-	height: 31.5px;
-	padding: 5px;
-	width: 268px;
-	
-}
-
 .semi-square {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -266,8 +256,9 @@
 							<h4 class="modal-title" id="H3">Create Group</h4>
 						</div>
 						<div class="modal-body">
-							<form role="form" action="                    " name="formGroupAdd" id="formGroupAdd">
-							<input name="userId" type="hidden" value="<%=strUserId_Android%>"> 
+							<form role="form" action="pGroupAdd.jsp" name="formGroupAdd" id="formGroupAdd">
+							<input name="<%=Common.USER_EMAIL%>"  id="<%=Common.USER_EMAIL%>" type="hidden" value="<%=strEmail%>" />
+							<input name="userId_Android"  id="userId_Android" type="hidden" value="<%=strUserId_Android%>"> 
 								<div class="form-group">						
 									<label>Group Name</label> <input class="form-control" name="<%=Common.GROUP_NAME%>"
 										placeholder="Enter your group name" />
@@ -301,16 +292,13 @@
 								</div>
 
 								<div class="form-group">
-									<label>Device Type</label> <select class="form-control"> 
+									<label>Device Type</label> <select name="<%=Common.PERMISSION%>"  id="<%=Common.PERMISSION%>"class="form-control"> 
 									<%
-								
 									for(int i = 0; i < listPermissionName.size(); ++i)
 									{
 										out.println("<option>" + listPermissionName.get(i) + "</option>");
 									}
 									%>
-										
-
 									</select>
 								</div>
 
