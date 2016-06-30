@@ -40,6 +40,16 @@
 
 <!-- JavaScript -->
 <script src="js/formverify.js"></script>
+<script type="text/javascript">
+	function showBtnV() {
+		document.getElementById('btnV').style.display = "";
+		document.getElementById('btnA').style.display = "none";
+	}
+	function changeBtn() {
+		document.getElementById('btnV').style.display = "none";
+		document.getElementById('btnA').style.display = "block";
+	}
+</script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -146,7 +156,7 @@
 
 			<nav class="navbar navbar-inverse navbar-fixed-top "
 				style="padding-top: 10px;">
-				
+
 				<!-- LOGO SECTION -->
 				<header class="navbar-header">
 					<div>
@@ -159,7 +169,7 @@
 				<!-- END LOGO SECTION -->
 
 				<!-- CREATE GROUP -->
-					<div>
+				<div>
 					<button class="btn btn-info button-add semi-square"
 						data-toggle="modal" data-target="#AddGroup"
 						title="Create a new group">
@@ -171,42 +181,45 @@
 
 				<!-- GROUP SELECT -->
 				<%
-					final String strEmail = "juliettechien@iii.org.tw";//request.getParameter(Common.USER_EMAIL);
-					ArrayList<String> listPermissionName = new ArrayList<String>();
-					ArrayList<Mdm.PermissionData> listPermission = new ArrayList<Mdm.PermissionData>();
-					Mdm.PermissionData permissionData = null;
-					String strUserId_Android = null;
-					
-					Mdm mdm = new Mdm();
+				    final String strEmail = "juliettechien@iii.org.tw";//request.getParameter(Common.USER_EMAIL);
 
-					if (!mdm.conDB())
-					{
-						response.sendRedirect("error.html"); //insert error page 
-						return;
-					}
-					
-					int nCount = mdm.queryPermission(strEmail, listPermission);
-					//nCount = 0;
-					if (0 < nCount) {
-						Iterator<Mdm.PermissionData> itPD = null;
-						itPD = listPermission.iterator();
-						
-						while (itPD.hasNext()) {
-							permissionData = itPD.next();
-							listPermissionName.add(permissionData.permission);
-							if (permissionData.permission.trim().equals("android")) {
-								strUserId_Android = permissionData.user_id;
+							String strAccountV = "";
 
-								/********** group info**************/
+							ArrayList<String> listPermissionName = new ArrayList<String>();
 
-								Iterator<Mdm.GroupData> itGD = null;
-								Mdm.GroupData groupData = null;
+							ArrayList<Mdm.PermissionData> listPermission = new ArrayList<Mdm.PermissionData>();
+							Mdm.PermissionData permissionData = null;
+							String strUserId_Android = null;
 
-								ArrayList<Mdm.GroupData> listGroup = new ArrayList<Mdm.GroupData>();
-								int nGCount = mdm.queryGroup(permissionData.user_id, listGroup);
-								//out.println(nGCount);
+							Mdm mdm = new Mdm();
 
-								itGD = listGroup.iterator();
+							if (!mdm.conDB()) {
+								response.sendRedirect("error.html"); //insert error page 
+								return;
+							}
+
+							int nCount = mdm.queryPermission(strEmail, listPermission);
+							//nCount = 0;
+							if (0 < nCount) {
+								Iterator<Mdm.PermissionData> itPD = null;
+								itPD = listPermission.iterator();
+
+								while (itPD.hasNext()) {
+									permissionData = itPD.next();
+									listPermissionName.add(permissionData.permission);
+									if (permissionData.permission.trim().equals("android")) {
+										strUserId_Android = permissionData.user_id;
+
+										/********** group info**************/
+
+										Iterator<Mdm.GroupData> itGD = null;
+										Mdm.GroupData groupData = null;
+
+										ArrayList<Mdm.GroupData> listGroup = new ArrayList<Mdm.GroupData>();
+										int nGCount = mdm.queryGroup(permissionData.user_id, listGroup);
+										//out.println(nGCount);
+
+										itGD = listGroup.iterator();
 				%>
 				<div class="styled-select blue semi-square">
 					<select
@@ -214,37 +227,42 @@
 						<option>Select Group</option>
 
 						<%
-							while (itGD.hasNext()) {
-											groupData = itGD.next();
+						    while (itGD.hasNext()) {
+
+													groupData = itGD.next();
+													strAccountV = strAccountV + groupData.account;
+													if (itGD.hasNext()) {
+														strAccountV += ',';
+													}
 						%>
 
 						<option value="device_management.html"><%=groupData.group_name%></option>
 
 						<%
-							}
-									}
-								} // while
-								/********* end group info************/
+						    }
+											}
+										} // while
+										/********* end group info************/
 						%>
 
 					</select>
 				</div>
 
 				<%
-					} // if
-					else {
+				    } // if
+							else {
 				%>
 				<div class="styled-select blue semi-square">
-						<select ><option>Please Create a Group</select>
+					<select><option>Please Create a Group</select>
 				</div>
 				<%
-					}
+				    }
 				%>
 
 			</nav>
 		</div>
 		<!--END GROUP SELECT -->
-		
+
 		<div class="col-lg-12">
 			<div class="modal fade" id="AddGroup" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
@@ -256,28 +274,41 @@
 							<h4 class="modal-title" id="H3">Create Group</h4>
 						</div>
 						<div class="modal-body">
-							<form role="form" action="pGroupAdd.jsp" name="formGroupAdd" id="formGroupAdd">
-							<input name="<%=Common.USER_EMAIL%>"  id="<%=Common.USER_EMAIL%>" type="hidden" value="<%=strEmail%>" />
-							<input name="userId_Android"  id="userId_Android" type="hidden" value="<%=strUserId_Android%>"> 
-								<div class="form-group">						
-									<label>Group Name</label> <input class="form-control" name="<%=Common.GROUP_NAME%>"
+							<form role="form" action="pGroupAdd.jsp" name="formGroupAdd"
+								id="formGroupAdd">
+								<input name="accountList" id="accountList"
+									value="<%=strAccountV%>" type="hidden"> <input
+									name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
+									type="hidden" value="<%=strEmail%>" /> <input
+									name="userId_Android" id="userId_Android" type="hidden"
+									value="<%=strUserId_Android%>">
+								<div class="form-group">
+									<label>Group Name</label> <input class="form-control"
+										name="<%=Common.GROUP_NAME%>"
 										placeholder="Enter your group name" />
 									<p class="help-block">Notification: Group name cannot be
 										changed.</p>
 								</div>
 								<div class="form-group">
-									<label>Login Account</label> <input class="form-control"  name="<%=Common.ACCOUNT%>"/>
+									<label>Login Account</label> <input class="form-control"
+										name="<%=Common.ACCOUNT%>" onchange="showBtnV()" />
+									<button id="btnV" type="button" class="btn btn-default"
+										style="margin-top: 10px;"
+										onclick="checkAccountListData('formGroupAdd')">Verification</button>
+									<button id="btnA" type="button" class="btn btn-success"
+										style="margin-top: 10px;">Available</button>
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
 								</div>
 								<div class="form-group">
-									<label>Password</label> <input class="form-control" name="<%=Common.PASSWORD%>" />
+									<label>Password</label> <input class="form-control"
+										name="<%=Common.PASSWORD%>" />
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
 								</div>
 								<div class="form-group">
-									<label>Max Number of Devices</label> <select name="<%=Common.MAXIMUM%>"
-										class="form-control">
+									<label>Max Number of Devices</label> <select
+										name="<%=Common.MAXIMUM%>" class="form-control">
 										<option>5</option>
 										<option>10</option>
 										<option>15</option>
@@ -292,13 +323,14 @@
 								</div>
 
 								<div class="form-group">
-									<label>Device Type</label> <select name="<%=Common.PERMISSION%>"  id="<%=Common.PERMISSION%>"class="form-control"> 
-									<%
-									for(int i = 0; i < listPermissionName.size(); ++i)
-									{
-										out.println("<option>" + listPermissionName.get(i) + "</option>");
-									}
-									%>
+									<label>Device Type</label> <select
+										name="<%=Common.PERMISSION%>" id="<%=Common.PERMISSION%>"
+										class="form-control">
+										<%
+										    for (int i = 0; i < listPermissionName.size(); ++i) {
+														out.println("<option>" + listPermissionName.get(i) + "</option>");
+													}
+										%>
 									</select>
 								</div>
 
@@ -307,23 +339,47 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary"  data-dismiss="modal" onClick="checkGroupAddData('formGroupAdd')">Create</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" onClick="checkGroupAddData('formGroupAdd')">Create</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-	
-	
 
-	
-</div>  <!--END MAIN WRAPPER -->
-	<% 
-	mdm.closeDB();
-	mdm = null;
+
+
+
+
+		<!-- END HEADER SECTION -->
+
+		<!--PAGE CONTENT -->
+
+		<div id="content">
+
+			<div class="inner">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1>Group Management</h1>
+					</div>
+				</div>
+
+				<hr />
+
+
+
+
+			</div>
+		</div>
+	</div>
+	<!--END MAIN WRAPPER -->
+	<%
+	    mdm.closeDB();
+				mdm = null;
+
+				//	out.println(strAccountV);
 	%>
-	
+
 	<!-- GLOBAL SCRIPTS -->
 	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -339,8 +395,11 @@
 		});
 	</script>
 	<script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
-
+	<SCRIPT type="text/javascript">
+		changeBtn();
+		showBtnV();
+	</SCRIPT>
 	<!-- END PAGE LEVEL SCRIPTS -->
-	
+
 </body>
 </html>

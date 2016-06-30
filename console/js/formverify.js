@@ -14,46 +14,54 @@ function checkGroupAddData(formName) {
 
 	if (Trim(form.group_name.value) == '')
 		errMsg += "Please enter a group name !!\n";
-	else
-	{
+	else {
 		if (form.group_name.value.length > 20)
 			errMsg += "Group name must be less than 20 characters !!\n";
 	}
 
-if (Trim(form.account.value) == '')
-	errMsg += "Please enter a login account !!\n";
-else
-	{
-	if (re.test(Trim(form.account.value)))
-		{
-		errMsg += "Login account must contain only alphanumeric characters !!\n";
+	if (Trim(form.account.value) == '')
+		errMsg += "Please enter a login account !!\n";
+	else {
+		if (re.test(Trim(form.account.value))) {
+			errMsg += "Login account must contain only alphanumeric characters !!\n";
+		} else {
+			if (form.account.value.length > 20)
+				errMsg += "Login account must be less than 20 characters !!\n";
 		}
-else
-	{
-	if (form.account.value.length > 20)
-		errMsg += "Login account must be less than 20 characters !!\n";
-	}
 	}
 
-if (Trim(form.password.value) == '')
-	errMsg += "Please enter a password !!\n";
-else
-{
-if (re.test(Trim(form.password.value)))
-	{
-	errMsg += "Password must contain only alphanumeric characters !!\n";
+	if (Trim(form.password.value) == '')
+		errMsg += "Please enter a password !!\n";
+	else {
+		if (re.test(Trim(form.password.value))) {
+			errMsg += "Password must contain only alphanumeric characters !!\n";
+		} else {
+			if (form.password.value.length > 20)
+				errMsg += "Password must be less than 20 characters !!\n";
+		}
 	}
-else
-{
-if (form.password.value.length > 20)
-	errMsg += "Password must be less than 20 characters !!\n";
-}
+
+	if (errMsg == '') {
+		form.submit();
+		return true;
+	}
+	alert(errMsg);
+	return false;
 }
 
-if (errMsg == '') {
-	form.submit();
-	return true;
-}
-alert(errMsg);
-return false;
+function checkAccountListData(formName) {
+	var form = document.getElementById(formName);
+	var accountV = form.accountList.value;
+	var spl = accountV.split(",");
+
+	for ( var key in spl) {
+		// alert(spl[key]);
+		if (Trim(form.account.value) == spl[key]) {
+			alert("The login account '" + spl[key]
+					+ "' has been used, please change it !!");
+			return;
+		}
+	}
+	document.getElementById('btnA').style.display = "block";
+	document.getElementById('btnV').style.display = "none";
 }

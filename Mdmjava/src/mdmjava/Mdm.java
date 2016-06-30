@@ -12,6 +12,7 @@ public class Mdm
     public final static int MDM_DB_ERR_SUCCESS = 9;
     public final static int MDM_DB_ERR_FAIL = 8;
     public final static int MDM_DB_ERR_EXCEPTION = 7;
+    public final static int MDM_DB_ERR_ACCOUNT_EXIST = 6;
 
     public final static int MDM_JOB_SUCCESS = 1;
     public final static int MDM_JOB_CMMD = 0;

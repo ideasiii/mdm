@@ -3,8 +3,6 @@
 <%@ page import="mdmjava.*"%>
 
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +16,7 @@
 <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-<!-- GLOBAL STYLES -->
+
 <!-- GLOBAL STYLES -->
 <link rel="stylesheet"
 	href="assets/plugins/bootstrap/css/bootstrap_2.css" />
@@ -50,18 +48,13 @@
 
 <body>
 
-	<div class="col-lg-12 title">
-		<h2>Loading</h2>
-		Please Wait...
-	</div>
-	<br />
-	<br />
 	<div class="row">
-		<div class="col-lg-12">
-			<img src="assets/img/tumblr.gif">
-		</div>
+	<div class="col-lg-12 title" >
+		<h2>Loading</h2>
+		<p>Please Wait...</p>
+		<img  src="assets/img/loading.gif" width="600px;">
 	</div>
-
+</div>
 
 
 	<!-- GLOBAL SCRIPTS -->
@@ -104,7 +97,8 @@
 			}
 			
 			int nResult = mdm.insertpGroupAdd(strName, strAccount, strPassword, strMaximum, strUserId);
-
+			String strResult = null;
+			
 			mdm.closeDB();
 			
 			mdm = null;

@@ -46,7 +46,6 @@ public abstract class Common
 	
 	final public static ArrayList<String> listGroup = new ArrayList<>(Arrays.asList(USER_ID, GROUP_ID, GROUP_NAME, ACCOUNT,
 			PASSWORD, MAXIMUM, CONNECTED, CREATE_TIME, UPDATE_TIME)); 
-
 	
 	/**sqlite mdm_android.db 
 	 * table: app_manage**/
