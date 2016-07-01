@@ -174,75 +174,8 @@ select.icon-menu option {
 				<!-- GROUP SELECT -->
 				<%
 				    request.setCharacterEncoding("UTF-8");
-
-							final String strGroupId = request.getParameter(Common.GROUP_ID);
-							
-							    out.println(strGroupId);
-							    return;
-
-							Mdm mdm = new Mdm();
-
-							if (!mdm.conDB()) {
-								response.sendRedirect("error.html"); //insert error page 
-								return;
-							}
-
-							int nCount = mdm.queryPermission(strEmail, listPermission);
-							//nCount = 0;
-							if (0 < nCount) {
-								Iterator<Mdm.PermissionData> itPD = null;
-								itPD = listPermission.iterator();
-
-								while (itPD.hasNext()) {
-									permissionData = itPD.next();
-									listPermissionName.add(permissionData.permission);
-									if (permissionData.permission.trim().equals("android")) {
-										strUserId_Android = permissionData.user_id;
-
-										/********** group info**************/
-
-										Iterator<Mdm.GroupData> itGD = null;
-										Mdm.GroupData groupData = null;
-
-										ArrayList<Mdm.GroupData> listGroup = new ArrayList<Mdm.GroupData>();
-										int nGCount = mdm.queryGroup(permissionData.user_id, listGroup);
-										//out.println(nGCount);
-
-										itGD = listGroup.iterator();  
 				%>
-				<div class="styled-select blue semi-square">
-					<select
-						onchange="location.href=this.options[this.selectedIndex].value">
-						<option>Select Group</option>
-
-						<%
-						    while (itGD.hasNext()) {
-
-													groupData = itGD.next();
-						%>
-
-						<option value="device_management.html"><%=groupData.group_name%></option>
-
-						<%
-						    }
-											}
-										} // while
-										/********* end group info************/
-						%>
-
-					</select>
-				</div>
-
-				<%
-				    } // if
-							else {
-				%>
-				<div class="styled-select blue semi-square">
-					<select><option>Please Create a Group</select>
-				</div>
-				<%
-				    }
-				%>
+				<%@include file="groupBar.jsp"%>
 
 			</nav>
 		</div>
@@ -257,7 +190,8 @@ select.icon-menu option {
 	</div>
 	<!--END MAIN WRAPPER -->
 	<%
-	    mdm.closeDB();
+	    mdm.closeTypeDB(0);
+				mdm.closeDB();
 				mdm = null;
 	%>
 

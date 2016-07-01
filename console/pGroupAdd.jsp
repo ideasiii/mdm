@@ -96,6 +96,12 @@
 				return;
 			}
 			
+			if (!mdm.conTypeDB(0))
+			{
+			    response.sendRedirect("error.html"); //insert error page 
+			    return;
+			}
+			
 			int nResult = mdm.insertpGroupAdd(strName, strAccount, strPassword, strMaximum, strUserId);
 			String strResult = null;
 			
