@@ -209,7 +209,13 @@
 									listPermissionName.add(permissionData.permission);
 									if (permissionData.permission.trim().equals("android")) {
 										strUserId_Android = permissionData.user_id;
+										
 
+										if (!mdm.conTypeDB(0)) {
+											response.sendRedirect("error.html"); //insert error page 
+											return;
+										}
+							
 										/********** group info**************/
 
 										Iterator<Mdm.GroupData> itGD = null;
@@ -236,11 +242,15 @@
 													}
 						%>
 
-						<option value="device_management.html"><%=groupData.group_name%></option>
+						<option value="device_management.jsp?<%= Common.GROUP_ID%>=<%=groupData.group_id%>&type=android"><%=groupData.group_name%></option>
 
 						<%
 						    }
 											}
+									
+									
+									///add conTpyeBD else type DB
+									
 										} // while
 										/********* end group info************/
 						%>
@@ -366,40 +376,57 @@
 
 				<hr />
 
+				<!-- CHART & CHAT  SECTION -->
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="panel panel-default">
+							<div class="panel-heading">Welcome, please select a group
+								to start.</div>
+
+							<div class="demo-container">
+								<div id="placeholderRT" class="demo-placeholder"></div>
+							</div>
+						</div>
+					</div>
+					</div>
+					<!--END CHAT & CHAT SECTION -->
 
 
 
+
+
+
+				</div>
 			</div>
 		</div>
-	</div>
-	<!--END MAIN WRAPPER -->
-	<%
-	    mdm.closeDB();
-				mdm = null;
+		<!--END MAIN WRAPPER -->
+		<%
+		    mdm.closeTypeDB();
+		    mdm.closeDB();
+					mdm = null;
 
-				//	out.println(strAccountV);
-	%>
+					//	out.println(strAccountV);
+		%>
 
-	<!-- GLOBAL SCRIPTS -->
-	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	<!-- END GLOBAL SCRIPTS -->
+		<!-- GLOBAL SCRIPTS -->
+		<script src="assets/plugins/jquery-2.0.3.min.js"></script>
+		<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+		<!-- END GLOBAL SCRIPTS -->
 
-	<!-- PAGE LEVEL SCRIPTS -->
-	<script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
-	<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#dataTables-example').dataTable();
-		});
-	</script>
-	<script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
-	<SCRIPT type="text/javascript">
-		changeBtn();
-		showBtnV();
-	</SCRIPT>
-	<!-- END PAGE LEVEL SCRIPTS -->
-
+		<!-- PAGE LEVEL SCRIPTS -->
+		<script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
+		<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#dataTables-example').dataTable();
+			});
+		</script>
+		<script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
+		<SCRIPT type="text/javascript">
+			changeBtn();
+			showBtnV();
+		</SCRIPT>
+		<!-- END PAGE LEVEL SCRIPTS -->
 </body>
 </html>

@@ -175,16 +175,10 @@ select.icon-menu option {
 				<%
 				    request.setCharacterEncoding("UTF-8");
 
-							final String strName = request.getParameter(Common.GROUP_NAME);
-							String strGroupId = null;
+							final String strGroupId = request.getParameter(Common.GROUP_ID);
 							
-							if (null != strPermission && strPermission.trim().equals("android"))
-							    
-							    //
-							
-							ArrayList<Mdm.PermissionData> listPermission = new ArrayList<Mdm.PermissionData>();
-							Mdm.PermissionData permissionData = null;
-							String strUserId_Android = null;
+							    out.println(strGroupId);
+							    return;
 
 							Mdm mdm = new Mdm();
 
@@ -214,7 +208,7 @@ select.icon-menu option {
 										int nGCount = mdm.queryGroup(permissionData.user_id, listGroup);
 										//out.println(nGCount);
 
-										itGD = listGroup.iterator();
+										itGD = listGroup.iterator();  
 				%>
 				<div class="styled-select blue semi-square">
 					<select

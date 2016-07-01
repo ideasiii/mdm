@@ -44,9 +44,12 @@ public class Mdm
 
     sqliteClient sqlite = null;
     Connection conMdmUser = null;
-    Connection conMdmAndroid = null;
     Connection conLocation = null;
+    Connection conMdmAndroid = null;
 
+
+    
+    // common DB
     public boolean conDB()
     {
 	sqlite = new sqliteClient();
@@ -54,7 +57,6 @@ public class Mdm
 	try
 	{
 	    conMdmUser = sqlite.getConnection(Common.DB_PATH_MDM_USER);
-	    conMdmAndroid = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
 	    conLocation = sqlite.getConnection(Common.DB_PATH_LOCATION);
 	    bResult = true;
 	}
@@ -71,7 +73,6 @@ public class Mdm
 	try
 	{
 	    conMdmUser.close();
-	    conMdmAndroid.close();
 	    conLocation.close();
 	    sqlite = null;
 	}
@@ -81,7 +82,52 @@ public class Mdm
 	    e.printStackTrace();
 	}
     }
+    
+    
+    
+    // for android db
+    public boolean conTypeDB(int nType)
+    {
+	sqlite = new sqliteClient();
+	boolean bResult = false;
+	try
+	{
+	    switch(nType)
+	    {
+	    case 0:
+		 conMdmAndroid = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
+		break;
+	    }
+	    bResult = true;
+	}
+	catch (SQLException e)
+	{
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return bResult;
+    }
 
+    public void closeTypeDB(int nType)
+    {
+	try
+	{
+	    switch(nType)
+	    {
+	    case 0:
+		 conMdmAndroid.close();
+		break;
+	    }
+	    sqlite = null;
+	}
+	catch (SQLException e)
+	{
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+    }
+
+    
     public int queryPermission(String strEmail, ArrayList<PermissionData> listPermission)
     {
 	int nCount = 0;
