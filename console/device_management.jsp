@@ -163,7 +163,7 @@ select.icon-menu option {
 				<!-- LOGO SECTION -->
 				<header class="navbar-header">
 					<div>
-						<a href="group_management.html" class="navbar-brand"> <img
+						<a href="group_management.jsp" class="navbar-brand"> <img
 							width="100" style="padding-bottom: 5px;"
 							src="assets/img/more.png" alt="" />
 						</a>
@@ -181,13 +181,591 @@ select.icon-menu option {
 		</div>
 		<!--END GROUP SELECT -->
 
+		<!-- CONTROLLER FORM -->
+		<div class="col-lg-12">
+			<div class="modal fade" id="con-camera" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Turn Off / On Camera of All
+								Devices in This Group</h4>
+						</div>
+						<div class="modal-body">Lorem ipsum dolor sit amet,
+							consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+							nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+							commodo consequat. Duis aute irure dolor in reprehenderit in
+							voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum.</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-danger"
+								style="margin-right: 60px;" data-dismiss="modal">Off</button>
+							<button type="button" class="btn btn-metis-2"
+								data-dismiss="modal">On</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="con-screen" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Turn Off / On Screen Lock of
+								All Devices in This Group</h4>
+						</div>
+						<div class="modal-body">Lorem ipsum dolor sit amet,
+							consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+							nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+							commodo consequat. Duis aute irure dolor in reprehenderit in
+							voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum.</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-danger"
+								style="margin-right: 60px;" data-dismiss="modal">Off</button>
+							<button type="button" class="btn btn-metis-2" data-toggle="modal"
+								data-target="#screen-on" data-dismiss="modal">On</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="screen-on" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Set a Password to Lock Your
+								Screen</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form">
+								<div class="form-group">
+									<label>Screen Lock Password</label> <input class="form-control" />
+									<p class="help-block">(Must be less than 10 letters in
+										alphanumeric format.)</p>
+								</div>
+							</form>
+						</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-default"
+								style="margin-right: 60px;" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="con-mute" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Turn Off / On Mute of All
+								Devices in This Group</h4>
+						</div>
+						<div class="modal-body">Lorem ipsum dolor sit amet,
+							consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+							nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+							commodo consequat. Duis aute irure dolor in reprehenderit in
+							voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum.</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-danger"
+								style="margin-right: 60px;" data-dismiss="modal">Off</button>
+							<button type="button" class="btn btn-metis-2"
+								data-dismiss="modal">On</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="con-wifi" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Grant Permission for
+								Accessing WiFi</h4>
+						</div>
+						<div class="modal-body">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+							enim ad minim veniam, quis nostrud exercitation ullamco laboris
+							nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+							reprehenderit in voluptate velit esse cillum dolore eu fugiat
+							nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+							sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<p></p>
+							<form role="form">
+								<div class="form-group">
+									<label>SSID</label> <input class="form-control" />
+									<p class="help-block">1234</p>
+								</div>
+								<div class="form-group">
+									<label>Password</label> <input class="form-control" />
+									<p class="help-block">1234</p>
+								</div>
+							</form>
+						</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-default"
+								style="margin-right: 60px;" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="con-content" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Sent the Content to All
+								Devices in This Group</h4>
+						</div>
+						<div class="modal-body">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+							enim ad minim veniam, quis nostrud exercitation ullamco laboris
+							nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+							reprehenderit in voluptate velit esse cillum dolore eu fugiat
+							nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+							sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<p></p>
+							<form role="form">
+								<div class="form-group">
+									<br> <label>Your Content List</label>
+									<div class="box">
+										<div class="body"
+											style="margin-left: 40px; overflow-x: hidden; overflow-y: scroll; height: 180px;">
+											<div class="checkbox anim-checkbox" title="filename_demo1">
+												<input type="checkbox" id="ch1" class="success" /> <label
+													for="ch1">filename_demo1</label>
+											</div>
+											<span class="sr-only">filename_demo1</span>
+											<div class="checkbox anim-checkbox" title="filename_demo2">
+												<input type="checkbox" id="ch2" class="success" /> <label
+													for="ch2">filename_demo2</label>
+											</div>
+											<span class="sr-only">filename_demo2</span>
+											<div class="checkbox anim-checkbox" title="filename_demo3">
+												<input type="checkbox" id="ch3" class="success" /> <label
+													for="ch3">filename_demo3</label>
+											</div>
+											<span class="sr-only">filename_demo3</span>
+											<div class="checkbox anim-checkbox" title="filename_demo4">
+												<input type="checkbox" id="ch4" class="success" /> <label
+													for="ch4">filename_demo4</label>
+											</div>
+											<span class="sr-only">filename_demo4</span>
+											<div class="checkbox anim-checkbox" title="filename_demo5">
+												<input type="checkbox" id="ch5" class="success" /> <label
+													for="ch5">filename_demo5</label>
+											</div>
+											<span class="sr-only">filename_demo5</span>
+											<div class="checkbox anim-checkbox" title="filename_demo6">
+												<input type="checkbox" id="ch6" class="success" /> <label
+													for="ch6">filename_demo6</label>
+											</div>
+											<span class="sr-only">filename_demo6</span>
+										</div>
+									</div>
+									<p class="help-block"></p>
+								</div>
+							</form>
+						</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-default"
+								style="margin-right: 60px;" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="con-app" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Install or Uninstall Apps in
+								All Devices in This Group</h4>
+						</div>
+						<div class="modal-body">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+							enim ad minim veniam, quis nostrud exercitation ullamco laboris
+
+							<p></p>
+							<div id="div-3" class="accordion-body collapse in body">
+								<div class="row">
+
+									<div class="col-lg-5">
+										<div class="form-group">
+											<div class="input-group"></div>
+										</div>
+										<div class="form-group">
+											<label>Your Application Management List</label> <select
+												id="box1View" multiple="multiple" class="form-control"
+												size="9">
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501649">Facebook</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501497">Gmail</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501053">Google Maps</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="500001">Line</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501227">Skype</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501610">Todoist</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501514">Twitter</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501656">Word</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501050">Yahoo</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501075">YouTube</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501493">QR Reader</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501562">Messenger</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="500676">Cloud</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="501460">Calendar</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="500004">aNote</option>
+												<option
+													style="background-image: url(assets/img/Apps-Android-icon-mini.png); background-repeat: no-repeat; background-position: bottom left; padding-left: 30px;"
+													value="500336">Dropbox</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-lg-2" style="text-align: right;">
+										<div class="btn-group" style="white-space: normal;">
+											<button id="to2" type="button" class="btn btn-default">
+												<i class="icon-plus"></i>
+											</button>
+											<button id="allTo2" type="button" class="btn btn-default">
+												<span>Add all</span>
+											</button>
+											<button id="to1" type="button" class="btn btn-default">
+												<i class=" icon-minus icon-white"></i>
+											</button>
+											<button id="allTo1" type="button" class="btn btn-default">
+												<span>Remove all</span>
+											</button>
+										</div>
+									</div>
+
+									<div class="col-lg-5">
+										<div class="form-group">
+											<label>Implementation</label> <select id="box2View"
+												multiple="multiple" class="form-control" size="5"></select>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-primary"
+								style="margin-right: 60px;" data-dismiss="modal">Install</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Uninstall</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="con-record" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Record All Devices in This
+								Group</h4>
+						</div>
+						<div class="modal-body">Lorem ipsum dolor sit amet,
+							consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+							nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+							commodo consequat. Duis aute irure dolor in reprehenderit in
+							voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum.</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-default"
+								style="margin-right: 60px;" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" data-toggle="modal" data-target="#loading">Record</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="con-restore" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Restore All Devices in This
+								Group</h4>
+						</div>
+						<div class="modal-body">Lorem ipsum dolor sit amet,
+							consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+							labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+							nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+							commodo consequat. Duis aute irure dolor in reprehenderit in
+							voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum.</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-default"
+								style="margin-right: 60px;" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" data-toggle="modal" data-target="#loading">Restore</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="con-format" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Format All Devices in This
+								Group</h4>
+						</div>
+						<div class="modal-body">
+							<span><i
+								class="fa fa-exclamation-triangle fa-4x text-danger fa-pull-left fa-border"></i>Lorem
+								ipsum dolor sit amet, consectetur adipisicing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+								enim ad minim veniam, quis nostrud exercitation ullamco laboris
+								nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+								in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+								nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+								sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+						</div>
+						<div
+							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+							<button type="button" class="btn btn-default"
+								style="margin-right: 60px;" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" data-toggle="modal" data-target="#loading">Format</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END CONTROLLER FORM -->
+		<!-- END HEADER SECTION -->
+
+
+		<!--PAGE CONTENT -->
+		<div id="content">
+
+			<div class="inner" style="min-height: 700px;">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1>Device Management</h1>
+					</div>
+				</div>
+				<hr />
+
+				<!-- CHART & CHAT  SECTION -->
+
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="panel panel-default">
+							<div class="panel-heading">Connected devices: 12 mobile
+								phones in this group now.</div>
+
+
+							<div class="demo-container">
+								<div id="placeholderRT" class="demo-placeholder"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<!--END CHAT & CHAT SECTION -->
+
+						<br>
+
+						<!--CONTROLLER SECTION -->
+						<div class="row">
+							<div class="col-lg-12">
+								<div style="text-align: center;">
+
+									<a onmouseover="this.style.cursor='pointer'" class="quick-btn"
+										data-toggle="modal" data-target="#con-camera"> <i
+										class="icon-camera icon-2x"></i> <span> Camera</span> <span
+										class="label label-success">device</span>
+									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
+										data-toggle="modal" data-target="#con-screen"> <i
+										class="icon-lock icon-2x"></i> <span>Screen Lock</span> <span
+										class="label label-success">device</span>
+									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
+										data-toggle="modal" data-target="#con-mute"> <i
+										class="icon-volume-off icon-2x"></i> <span>Mute</span> <span
+										class="label label-success">device</span>
+									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
+										data-toggle="modal" data-target="#con-wifi"> <i
+										class="icon-rss icon-2x"></i> <span>Wi-Fi</span> <span
+										class="label label-warning">service</span>
+									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
+										data-toggle="modal" data-target="#con-content"> <i
+										class="icon-file-text icon-2x"></i> <span>Content</span> <span
+										class="label label-warning">service</span>
+									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
+										data-toggle="modal" data-target="#con-app"> <i
+										class="icon-android icon-2x"></i> <span>Application</span> <span
+										class="label label-warning">service</span>
+									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
+										data-toggle="modal" data-target="#con-record"> <i
+										class="icon-signin icon-2x"></i> <span>Record</span> <span
+										class="label btn-metis-4">system</span>
+									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
+										data-toggle="modal" data-target="#con-restore"> <i
+										class="icon-exchange icon-2x"></i> <span>Restore</span> <span
+										class="label btn-metis-4">system</span>
+									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
+										data-toggle="modal" data-target="#con-format"> <i
+										class="fa fa-dot-circle-o  fa-2x"></i> <span>Format</span> <span
+										class="label btn-metis-4">system</span>
+									</a><a class="quick-btn"> <i
+										class="icon-cog icon-2x disable-button"></i> <span
+										class="disable-button"> New</span> <span
+										class="label label-default">coming</span>
+									</a><a class="quick-btn"> <i
+										class="icon-map-marker icon-2x disable-button"></i> <span
+										class="disable-button"> New</span> <span
+										class="label label-default">coming</span>
+									</a>
+
+								</div>
+							</div>
+						</div>
+						<!--END CONTROLLER SECTION -->
+
+						<hr />
+
+						<!--TABLE, PANEL, ACCORDION AND MODAL  -->
 
 
 
 
 
 
+
+
+
+
+
+						<!--END TABLE, PANEL, ACCORDION AND MODAL  -->
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	<!--END PAGE CONTENT -->
+
+	<!--FOOTER -->
+	<footer class="footer">
+		<div class="link_area">
+			<dl class="link_group">
+				<dd class="link">
+					<a href="">Document</a>
+				</dd>
+			</dl>
+			<dl class="link_group">
+				<dd class="link">
+					<a href="">Privacy Policy</a>
+				</dd>
+			</dl>
+			<dl class="link_group">
+				<dd class="link">
+					<a href="">Contact Us</a>
+				</dd>
+			</dl>
+			<div class="copyright_area">Copyright ©</div>
+		</div>
+
+	</footer>
+
+	<!--END FOOTER -->
+
 	<!--END MAIN WRAPPER -->
 	<%
 	    mdm.closeTypeDB(0);
@@ -229,6 +807,7 @@ select.icon-menu option {
 		changeBtn();
 		showBtnV();
 	</SCRIPT>
+
 	<!--END PAGE LEVEL SCRIPT-->
 
 </body>

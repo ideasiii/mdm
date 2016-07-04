@@ -1,6 +1,7 @@
 
 <%
     final String strEmail = "juliettechien@iii.org.tw";//request.getParameter(Common.USER_EMAIL);
+    String strGroupId = request.getParameter(Common.GROUP_ID);
 
     String strAccountV = "";
 
@@ -51,19 +52,35 @@
 			itGD = listGroup.iterator();
 %>
 <div class="styled-select blue semi-square">
-	<select onchange="location.href=this.options[this.selectedIndex].value">
-		<option>Select Group</option>
+	<select id="groupBar" name="groupBar"
+		onchange="location.href=this.options[this.selectedIndex].value">
 
 		<%
-		    while (itGD.hasNext())
+		    if (null == strGroupId)
 					{
+		%>
+		<option value="#">Select Group</option>
+		<%
+		    }
 
+					while (itGD.hasNext())
+					{
 					    groupData = itGD.next();
 					    strAccountV = strAccountV + groupData.account;
 					    if (itGD.hasNext())
 					    {
 						strAccountV += ',';
 					    }
+
+					    if (null != strGroupId && (strGroupId.trim().equals(groupData.group_id.trim())))
+					    {
+		%>
+		<option selected
+			value="device_management.jsp?<%=Common.GROUP_ID%>=<%=groupData.group_id%>&type=android"><%=groupData.group_name%></option>
+		<%
+		    }
+					    else
+					    {
 		%>
 
 		<option
@@ -71,11 +88,12 @@
 
 		<%
 		    }
+					}
 				    }
 
 				    ///add conTpyeBD else type DB
 
-				} // while
+				} // end while(itPD.hasNext())
 				/********* end group info************/
 		%>
 
@@ -92,4 +110,14 @@
 </div>
 <%
     }
+%>
+
+<%
+Iterator<Mdm.GroupData> itGD = null;
+Mdm.GroupData groupData = null;
+
+ArrayList<Mdm.GroupData> listGroup = new ArrayList<Mdm.GroupData>();
+int nGCount = mdm.queryGroup(permissionData.user_id, listGroup);
+
+itGD = listGroup.iterator();
 %>

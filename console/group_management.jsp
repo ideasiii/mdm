@@ -50,7 +50,13 @@
 		document.getElementById('btnA').style.display = "block";
 	}
 </script>
-
+<script>
+function showGN(gName)
+{
+document.getElementById("GroupDeleteConfirm").innerHTML = gName;
+document.getElementById("GroupEditName").innerHTML = gName;
+}
+</script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -160,7 +166,7 @@
 				<!-- LOGO SECTION -->
 				<header class="navbar-header">
 					<div>
-						<a href="group_management.html" class="navbar-brand"> <img
+						<a href="group_management.jsp" class="navbar-brand"> <img
 							width="100" style="padding-bottom: 5px;"
 							src="assets/img/more.png" alt="" />
 						</a>
@@ -256,7 +262,6 @@
 										%>
 									</select>
 								</div>
-
 							</form>
 						</div>
 						<div class="modal-footer">
@@ -274,6 +279,35 @@
 
 
 
+
+
+		<div class="col-lg-12">
+			<div class="modal fade" id="DeleteGroup" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Delete Confirm</h4>
+						</div>
+						<div class="modal-body">
+							<span>You have selected to delete "<span id="GroupDeleteConfirm"></span>". <br>If this was
+								the action that you wanted to do, please confirm your choice, or
+								cancel and return to the page.
+							</span>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<!-- END HEADER SECTION -->
 
 		<!--PAGE CONTENT -->
@@ -289,7 +323,7 @@
 
 				<hr />
 
-				<!-- CHART & CHAT  SECTION -->
+				<!-- CHAT  SECTION -->
 				<div class="row">
 					<div class="col-lg-8">
 						<div class="panel panel-default">
@@ -301,45 +335,155 @@
 							</div>
 						</div>
 					</div>
+					<!--END CHAT SECTION -->
+
+					<!--  GROUPS FRAME SECTION   -->
+					<div class="col-lg-4">
+						<div class="chat-panel  ">
+							<br>
+
+							<div class="row"></div>
+						</div>
+						<!--END GROUPS FRAME SECTION  -->
+
+						<!--GRUOP OPTION TABLE  -->
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="box">
+									<header>
+										<h5>Groups</h5>
+										<div class="toolbar">
+											<div class="btn-group"></div>
+										</div>
+									</header>
+									<div id="sortableTable" class="body collapse in">
+										<table
+											class="table table-bordered sortableTable responsive-table">
+											<thead>
+												<tr>
+													<th>#<i class="icon-sort"></i><i
+														class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+													<th>Group Name<i class="icon-sort"></i><i
+														class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+													<th>Connected Devices<i class="icon-sort"></i><i
+														class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+													<th>Maximum of Devices<i class="icon-sort"></i><i
+														class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+													<th>Type<i class="icon-sort"></i><i
+														class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+													<th>Option<i class="icon-sort"></i><i
+														class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
+												</tr>
+											</thead>
+											<%
+											    while (itGD.hasNext()) {
+															groupData = itGD.next();
+											%>
+											<tbody>
+												<tr>
+													<td style="text-align: center;">1</td>
+													<td style="text-align: center;"><%=groupData.group_name%></td>
+													<td style="text-align: center;">42</td>
+													<td style="text-align: center;"><%=groupData.maximum%></td>
+													<td style="text-align: center;">Android</td>
+													<td style="text-align: center; padding: 0;"><a
+														style="color: #9fd256; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
+														data-toggle="modal" data-target="#AppManage"><span
+															class="fa-stack fa-lg"><i
+																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i><i
+																class="fa fa-android fa-stack-1x fa-inverse"
+																title="Application Management"></i></span><span class="sr-only">Application
+																Management</span></a><a
+														style="color: #f0ad4e; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
+														data-toggle="modal" data-target="#ContentManage"><span
+															class="fa-stack fa-lg"><i
+																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+																<i class="fa fa-file-text fa-stack-1x fa-inverse"
+																title="Content Management"></i></span><span class="sr-only">Content
+																Management</span></a><a class="btn btn-info"
+														style="margin-right: 8px; margin-left: 6px;"
+														data-toggle="modal" data-target="#EditGroup" title="Edit">
+															<i class="icon-pencil" aria-hidden="true"></i> <span
+															class="sr-only">Edit </span> Edit
+													</a><button class="btn btn-danger" data-toggle="modal"
+														data-target="#DeleteGroup" title="Delete" onclick="showGN('<%=groupData.group_name%>')"  value="gName"> <i
+															class="icon-trash" aria-hidden="true"></i> <span
+															class="sr-only">Delete</span>
+													</button></td>
+												</tr>
+												<%
+												    }
+												%>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--END GRUOP OPTION TABLE  -->
+
+
+
+
+
 					</div>
-					<!--END CHAT & CHAT SECTION -->
-
-
-
-
-
-
 				</div>
 			</div>
 		</div>
-		<!--END MAIN WRAPPER -->
-		<%
-		    mdm.closeTypeDB(0);
-		    mdm.closeDB();
-					mdm = null;
+	</div>
+	<!--END PAGE CONTENT -->
 
-					//	out.println(strAccountV);
-		%>
+	<!--FOOTER -->
+	<footer class="footer">
+		<div class="link_area">
+			<dl class="link_group">
+				<dd class="link">
+					<a href="">Document</a>
+				</dd>
+			</dl>
+			<dl class="link_group">
+				<dd class="link">
+					<a href="">Privacy Policy</a>
+				</dd>
+			</dl>
+			<dl class="link_group">
+				<dd class="link">
+					<a href="">Contact Us</a>
+				</dd>
+			</dl>
+			<div class="copyright_area">Copyright ©</div>
+		</div>
+	</footer>
+	<!--END FOOTER -->
 
-		<!-- GLOBAL SCRIPTS -->
-		<script src="assets/plugins/jquery-2.0.3.min.js"></script>
-		<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-		<!-- END GLOBAL SCRIPTS -->
+	<!--END MAIN WRAPPER -->
+	<%
+	    mdm.closeTypeDB(0);
+				mdm.closeDB();
+				mdm = null;
 
-		<!-- PAGE LEVEL SCRIPTS -->
-		<script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
-		<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
-		<script>
-			$(document).ready(function() {
-				$('#dataTables-example').dataTable();
-			});
-		</script>
-		<script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
-		<SCRIPT type="text/javascript">
-			changeBtn();
-			showBtnV();
-		</SCRIPT>
-		<!-- END PAGE LEVEL SCRIPTS -->
+				//	out.println(strAccountV);
+	%>
+
+	<!-- GLOBAL SCRIPTS -->
+	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<!-- END GLOBAL SCRIPTS -->
+
+	<!-- PAGE LEVEL SCRIPTS -->
+	<script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').dataTable();
+		});
+	</script>
+	<script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
+	<SCRIPT type="text/javascript">
+		changeBtn();
+		showBtnV();
+	</SCRIPT>
+	<!-- END PAGE LEVEL SCRIPTS -->
 </body>
 </html>
