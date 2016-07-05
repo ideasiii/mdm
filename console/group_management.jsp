@@ -300,7 +300,7 @@ document.getElementById("GroupEditName").innerHTML = gName;
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal" onClick="      ">Delete</button>
 						</div>
 					</div>
 				</div>
@@ -457,13 +457,7 @@ document.getElementById("GroupEditName").innerHTML = gName;
 	<!--END FOOTER -->
 
 	<!--END MAIN WRAPPER -->
-	<%
-	    mdm.closeTypeDB(0);
-				mdm.closeDB();
-				mdm = null;
 
-				//	out.println(strAccountV);
-	%>
 
 	<!-- GLOBAL SCRIPTS -->
 	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
@@ -485,5 +479,22 @@ document.getElementById("GroupEditName").innerHTML = gName;
 		showBtnV();
 	</SCRIPT>
 	<!-- END PAGE LEVEL SCRIPTS -->
+
 </body>
+
+	<form action=" " method="post" name="   " id="   ">
+		<input name="<%=Common.GROUP_ID%>" type="hidden" value="<%=strGroupId%>" />
+	</form>
+
+
+
 </html>
+
+	<%
+	mdm.deleteGroup(strGroupId);
+	    mdm.closeTypeDB(0);
+				mdm.closeDB();
+				mdm = null;
+
+				//	out.println(strAccountV);
+	%>

@@ -47,8 +47,6 @@ public class Mdm
     Connection conLocation = null;
     Connection conMdmAndroid = null;
 
-
-    
     // common DB
     public boolean conDB()
     {
@@ -82,9 +80,7 @@ public class Mdm
 	    e.printStackTrace();
 	}
     }
-    
-    
-    
+
     // for android db
     public boolean conTypeDB(int nType)
     {
@@ -92,10 +88,10 @@ public class Mdm
 	boolean bResult = false;
 	try
 	{
-	    switch(nType)
+	    switch (nType)
 	    {
 	    case 0:
-		 conMdmAndroid = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
+		conMdmAndroid = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
 		break;
 	    }
 	    bResult = true;
@@ -112,10 +108,10 @@ public class Mdm
     {
 	try
 	{
-	    switch(nType)
+	    switch (nType)
 	    {
 	    case 0:
-		 conMdmAndroid.close();
+		conMdmAndroid.close();
 		break;
 	    }
 	    sqlite = null;
@@ -127,7 +123,6 @@ public class Mdm
 	}
     }
 
-    
     public int queryPermission(String strEmail, ArrayList<PermissionData> listPermission)
     {
 	int nCount = 0;
@@ -229,7 +224,6 @@ public class Mdm
 	try
 	{
 	    String strSQL = "insert into group_info(group_name, account, password, maximum, user_id) values(?,?,?,?,?) ;";
-
 	    PreparedStatement pst = null;
 	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    int idx = 1;
@@ -243,12 +237,33 @@ public class Mdm
 	}
 	catch (Exception e)
 	{
-		Logs.showError(e.toString());
-		return MDM_DB_ERR_EXCEPTION;
+	    Logs.showError(e.toString());
+	    return MDM_DB_ERR_EXCEPTION;
 	}
 
 	return MDM_DB_ERR_SUCCESS;
-}
-    
-    
+    }
+
+    public void deleteGroup(final String strGroupId)
+    {
+	try
+	{
+	    String strSQL = "delete from group_info where group_id = ?";
+	    PreparedStatement pst = null;
+	    pst = conMdmAndroid.prepareStatement(strSQL);
+	    int idx = 1;
+	    pst.setString(idx++, strGroupId);
+	    pst.executeUpdate();
+	    pst.close();
+	}
+	catch (Exception e)
+	{
+	    Logs.showError(e.toString());
+	    e.printStackTrace();
+	}
+
+	
+
+    }
+
 }
