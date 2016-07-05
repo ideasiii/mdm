@@ -51,11 +51,13 @@
 	}
 </script>
 <script>
-function showGN(gName)
-{
-document.getElementById("GroupDeleteConfirm").innerHTML = gName;
-document.getElementById("GroupEditName").innerHTML = gName;
-}
+	function showGN(gName, gId) {
+		//alert(gId);
+		document.getElementById("GroupDeleteConfirm").innerHTML = gName;
+		document.getElementById("GroupEditName").innerHTML = gName;
+		var form = document.getElementById("FormDeleteGroup");
+		form.group_id.value = gId;
+	}
 </script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -203,8 +205,8 @@ document.getElementById("GroupEditName").innerHTML = gName;
 							<h4 class="modal-title" id="H3">Create Group</h4>
 						</div>
 						<div class="modal-body">
-							<form role="form" action="pGroupAdd.jsp" name="formGroupAdd"
-								id="formGroupAdd">
+							<form role="form" action="pGroupAdd.jsp" name="formAddGroup"
+								id="formAddGroup">
 								<input name="accountList" id="accountList"
 									value="<%=strAccountV%>" type="hidden"> <input
 									name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
@@ -215,16 +217,17 @@ document.getElementById("GroupEditName").innerHTML = gName;
 									<label>Group Name</label> <input class="form-control"
 										name="<%=Common.GROUP_NAME%>"
 										placeholder="Enter your group name" />
-									<p class="help-block">Notification: Group name cannot be
-										changed.</p>
+									<p class="help-block" style="color: #b94a48;">Notification:
+										Group name cannot be changed.</p>
 								</div>
 								<div class="form-group">
 									<label>Login Account</label> <input class="form-control"
 										name="<%=Common.ACCOUNT%>" onchange="showBtnV()" />
-									<button id="btnV" type="button" class="btn btn-default"
+									<button id="btnV" type="button"
+										class="btn btn-xs btn-grad btn-default"
 										style="margin-top: 10px;"
-										onclick="checkAccountListData('formGroupAdd')">Verification</button>
-									<button id="btnA" type="button" class="btn btn-success"
+										onclick="checkAccountListData('formAddGroup')">Verification</button>
+									<button id="btnA" type="button" class="btn btn-xs btn-success"
 										style="margin-top: 10px;">Available</button>
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
@@ -268,7 +271,65 @@ document.getElementById("GroupEditName").innerHTML = gName;
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
 							<button type="button" class="btn btn-primary"
-								data-dismiss="modal" onClick="checkGroupAddData('formGroupAdd')">Create</button>
+								data-dismiss="modal" onClick="checkGroupAddData('formAddGroup')">Create</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<div class="modal fade" id="EditGroup" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H3">Edit - 
+								<span id="GroupEditName"></span>
+							</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form" action="pGroupEdit.jsp" name="formEditGroup"
+								id="formEditGroup">
+								<input name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
+									type="hidden" value="<%=strEmail%>" /> <input
+									name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
+									type="hidden" value="<%=strGroupId%>" />
+								<div class="form-group">
+									<label>Login Account</label> <input class="form-control" />
+									<p class="help-block">(Must be less than 20 letters in
+										alphanumeric format.)</p>
+								</div>
+								<div class="form-group">
+									<label>Password</label> <input class="form-control" />
+									<p class="help-block">(Must be less than 20 letters in
+										alphanumeric format.)</p>
+								</div>
+								<div class="form-group">
+									<label>Max Number of Devices</label> <select
+										class="form-control">
+										<option>5</option>
+										<option>10</option>
+										<option>15</option>
+										<option>20</option>
+										<option>25</option>
+										<option>30</option>
+										<option>35</option>
+										<option>40</option>
+										<option>45</option>
+										<option>50</option>
+									</select>
+								</div>
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal">Save Changes</button>
 						</div>
 					</div>
 				</div>
@@ -291,17 +352,26 @@ document.getElementById("GroupEditName").innerHTML = gName;
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="H1">Delete Confirm</h4>
 						</div>
-						<div class="modal-body">
-							<span>You have selected to delete "<span id="GroupDeleteConfirm"></span>". <br>If this was
-								the action that you wanted to do, please confirm your choice, or
-								cancel and return to the page.
-							</span>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal" onClick="      ">Delete</button>
-						</div>
+						<form action="pDeleteGroup.jsp" method="post"
+							name="FormDeleteGroup" id="FormDeleteGroup">
+							<input name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
+								type="hidden" value="<%=strEmail%>" /> <input
+								name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
+								type="hidden" value="<%=strGroupId%>" />
+							<div class="modal-body">
+								<span>You have selected to delete "<span
+									id="GroupDeleteConfirm"></span>". <br>If this was the
+									action that you wanted to do, please confirm your choice, or
+									cancel and return to the page.
+								</span>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Cancel</button>
+								<input type="submit" class="btn btn-danger" value="Delete">
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -375,17 +445,17 @@ document.getElementById("GroupEditName").innerHTML = gName;
 														class="icon-sort-down"></i> <i class="icon-sort-up"></i></th>
 												</tr>
 											</thead>
-											<%
-											    while (itGD.hasNext()) {
-															groupData = itGD.next();
-											%>
 											<tbody>
+												<%
+												    while (itGD.hasNext()) {
+																groupData = itGD.next();
+												%>
 												<tr>
-													<td style="text-align: center;">1</td>
-													<td style="text-align: center;"><%=groupData.group_name%></td>
-													<td style="text-align: center;">42</td>
-													<td style="text-align: center;"><%=groupData.maximum%></td>
-													<td style="text-align: center;">Android</td>
+													<td style="text-align: center; vertical-align: middle;">1</td>
+													<td style="text-align: center; vertical-align: middle;"><%=groupData.group_name%></td>
+													<td style="text-align: center; vertical-align: middle;">42</td>
+													<td style="text-align: center; vertical-align: middle;"><%=groupData.maximum%></td>
+													<td style="text-align: center; vertical-align: middle;">Android</td>
 													<td style="text-align: center; padding: 0;"><a
 														style="color: #9fd256; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
 														data-toggle="modal" data-target="#AppManage"><span
@@ -400,16 +470,21 @@ document.getElementById("GroupEditName").innerHTML = gName;
 																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
 																<i class="fa fa-file-text fa-stack-1x fa-inverse"
 																title="Content Management"></i></span><span class="sr-only">Content
-																Management</span></a><a class="btn btn-info"
-														style="margin-right: 8px; margin-left: 6px;"
-														data-toggle="modal" data-target="#EditGroup" title="Edit">
+																Management</span></a>
+														<button class="btn btn-sm btn-info"
+															style="margin-right: 8px; margin-left: 6px;"
+															data-toggle="modal" data-target="#EditGroup" title="Edit" onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>')"
+															value="gName">
 															<i class="icon-pencil" aria-hidden="true"></i> <span
-															class="sr-only">Edit </span> Edit
-													</a><button class="btn btn-danger" data-toggle="modal"
-														data-target="#DeleteGroup" title="Delete" onclick="showGN('<%=groupData.group_name%>')"  value="gName"> <i
-															class="icon-trash" aria-hidden="true"></i> <span
-															class="sr-only">Delete</span>
-													</button></td>
+																class="sr-only">Edit </span> Edit
+														</button>
+														<button class="btn btn-sm btn-danger" data-toggle="modal"
+															data-target="#DeleteGroup" title="Delete"
+															onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>')"
+															value="gName">
+															<i class="icon-trash" aria-hidden="true"></i> <span
+																class="sr-only">Delete</span>
+														</button></td>
 												</tr>
 												<%
 												    }
@@ -482,19 +557,11 @@ document.getElementById("GroupEditName").innerHTML = gName;
 
 </body>
 
-	<form action=" " method="post" name="   " id="   ">
-		<input name="<%=Common.GROUP_ID%>" type="hidden" value="<%=strGroupId%>" />
-	</form>
-
-
-
 </html>
+<%
+    mdm.closeTypeDB(0);
+    mdm.closeDB();
+    mdm = null;
 
-	<%
-	mdm.deleteGroup(strGroupId);
-	    mdm.closeTypeDB(0);
-				mdm.closeDB();
-				mdm = null;
-
-				//	out.println(strAccountV);
-	%>
+    //	out.println(strAccountV);
+%>

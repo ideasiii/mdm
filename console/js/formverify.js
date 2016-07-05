@@ -7,6 +7,39 @@ function formSubmit(formName) {
 	form.submit();
 }
 
+function checkAccountListData(formName) {
+	var form = document.getElementById(formName);
+	var accountV = form.accountList.value;
+	var spl = accountV.split(",");
+	var errMsg = '';
+	re = /\W/;
+
+	if (Trim(form.account.value) == '')
+		errMsg += "Please enter a login account !!\n";
+	else {
+		if (re.test(Trim(form.account.value))) {
+			errMsg += "Login account must contain only alphanumeric characters !!\n";
+		} else {
+			if (form.account.value.length > 20)
+				errMsg += "Login account must be less than 20 characters !!\n";
+		}
+	}
+	for ( var key in spl) {
+		// alert(spl[key]);
+		if (Trim(form.account.value) == spl[key]) {
+			errMsg += "The login account '" + spl[key]
+					+ "' has been used, please change it !!";
+		}
+	}
+	if (errMsg == '') {
+		document.getElementById('btnA').style.display = "block";
+		document.getElementById('btnV').style.display = "none";
+		return true;
+	}
+	alert(errMsg);
+	return false;
+}
+
 function checkGroupAddData(formName) {
 	var form = document.getElementById(formName);
 	var errMsg = '';
@@ -47,21 +80,4 @@ function checkGroupAddData(formName) {
 	}
 	alert(errMsg);
 	return false;
-}
-
-function checkAccountListData(formName) {
-	var form = document.getElementById(formName);
-	var accountV = form.accountList.value;
-	var spl = accountV.split(",");
-
-	for ( var key in spl) {
-		// alert(spl[key]);
-		if (Trim(form.account.value) == spl[key]) {
-			alert("The login account '" + spl[key]
-					+ "' has been used, please change it !!");
-			return;
-		}
-	}
-	document.getElementById('btnA').style.display = "block";
-	document.getElementById('btnV').style.display = "none";
 }

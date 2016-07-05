@@ -220,7 +220,6 @@ public class Mdm
 
     public int insertpGroupAdd(final String strName, final String strAccount, final String strPassword, final String strMaximum, final String strUserId)
     {
-
 	try
 	{
 	    String strSQL = "insert into group_info(group_name, account, password, maximum, user_id) values(?,?,?,?,?) ;";
@@ -244,7 +243,30 @@ public class Mdm
 	return MDM_DB_ERR_SUCCESS;
     }
 
-    public void deleteGroup(final String strGroupId)
+    public int updatepGroupEdit(final String strAccount, final String strPassword, final String strMaximum)
+    {
+	try
+	{
+	    String strSQL = "update group_info set account =? , password =? , maximum =?";
+	    PreparedStatement pst = null;
+	    pst = conMdmAndroid.prepareStatement(strSQL);
+	    int idx = 1;
+	    pst.setString(idx++, strAccount);
+	    pst.setString(idx++, strPassword);
+	    pst.setString(idx++, strMaximum);
+	    pst.executeUpdate();
+	    pst.close();
+	}
+	catch (Exception e)
+	{
+	    Logs.showError(e.toString());
+	    return MDM_DB_ERR_EXCEPTION;
+	}
+
+	return MDM_DB_ERR_SUCCESS;
+    }
+    
+    public int deleteGroup(final String strGroupId)
     {
 	try
 	{
@@ -255,14 +277,34 @@ public class Mdm
 	    pst.setString(idx++, strGroupId);
 	    pst.executeUpdate();
 	    pst.close();
+	    
+	strSQL = "delete from device_info where group_id = ?";
+	  pst = conMdmAndroid.prepareStatement(strSQL);
+	    idx = 1;
+	    pst.setString(idx++, strGroupId);
+	    pst.executeUpdate();
+	    pst.close();
+
+	   strSQL = "delete from app_manage where group_id = ?";
+	   pst = conMdmAndroid.prepareStatement(strSQL);
+	    idx = 1;
+	    pst.setString(idx++, strGroupId);
+	    pst.executeUpdate();
+	    pst.close();
+	    
+	  strSQL = "delete from content_manage where group_id = ?";
+	  pst = conMdmAndroid.prepareStatement(strSQL);
+	    idx = 1;
+	    pst.setString(idx++, strGroupId);
+	    pst.executeUpdate();
+	    pst.close();
 	}
 	catch (Exception e)
 	{
 	    Logs.showError(e.toString());
-	    e.printStackTrace();
+	    return MDM_DB_ERR_EXCEPTION;
 	}
-
-	
+	return MDM_DB_ERR_SUCCESS;
 
     }
 

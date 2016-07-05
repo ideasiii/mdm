@@ -8,25 +8,16 @@
 <head>
 
 <meta charset="UTF-8" />
-<title>MDM GROUP ADD PROGRESS</title>
+<title>MDM PROGRESS</title>
 
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="" name="description" />
 <meta content="" name="author" />
-<!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
 
 <!-- GLOBAL STYLES -->
 <link rel="stylesheet"
 	href="assets/plugins/bootstrap/css/bootstrap_2.css" />
-<link rel="stylesheet"
-	href="assets/plugins/Font-Awesome/css/font-awesome_2.css" />
-<!--END GLOBAL STYLES -->
-
-<!-- PAGE LEVEL STYLES -->
 <link rel="stylesheet" href="assets/css/countdown.css" />
-<!-- END PAGE LEVEL STYLES -->
 
 <!-- JavaScript -->
 <script src="js/formverify.js"></script>
@@ -55,22 +46,6 @@
 		<img  src="assets/img/loading.gif" width="600px;">
 	</div>
 </div>
-
-
-	<!-- GLOBAL SCRIPTS -->
-	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
-	<!-- END GLOBAL SCRIPTS -->
-
-	<!-- PAGE LEVEL SCRIPTS -->
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="assets/plugins/countdown/jquery.countdown.min.js"></script>
-
-	<script type="text/javascript"
-		src="assets/plugins/jquery-validation-1.11.1/dist/jquery.validate.min.js"></script>
-
-	<script type="text/javascript" src="assets/js/countdown.js"></script>
-	<!-- END PAGE LEVEL SCRIPTS -->
 
 </body>
 
@@ -105,8 +80,8 @@
 			int nResult = mdm.insertpGroupAdd(strName, strAccount, strPassword, strMaximum, strUserId);
 			String strResult = null;
 			
+			mdm.closeTypeDB(0);
 			mdm.closeDB();
-			
 			mdm = null;
 %>
 
