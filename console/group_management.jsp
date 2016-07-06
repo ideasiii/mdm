@@ -41,24 +41,39 @@
 <!-- JavaScript -->
 <script src="js/formverify.js"></script>
 <script type="text/javascript">
-	function showBtnV() {
-		document.getElementById('btnV').style.display = "";
-		document.getElementById('btnA').style.display = "none";
+	function showBtnV(formName) {
+		var form = document.getElementById(formName);
+
+		var formname = form.name;
+
+		if (formname == "formEditGroup") {
+			document.getElementById("btnA2").style.display = "none";
+			document.getElementById("btnV2").style.display = "block";
+		}
+
+		if (formname == "formAddGroup") {
+			document.getElementById("btnA").style.display = "none";
+			document.getElementById("btnV").style.display = "block";
+		}
 	}
+
 	function changeBtn() {
-		document.getElementById('btnV').style.display = "none";
-		document.getElementById('btnA').style.display = "block";
+		var form = document.getElementById(formName);
+		document.getElementById("btnV").style.display = "none";
+		document.getElementById("btnA").style.display = "block";
 	}
 </script>
 <script>
-	function showGN(gName, gId) {
+	function showGN(gName, gId, gAccount, gPw) {
 		//alert(gId);
 		document.getElementById("GroupDeleteConfirm").innerHTML = gName;
 		document.getElementById("GroupEditName").innerHTML = gName;
 		var form = document.getElementById("FormDeleteGroup");
 		form.group_id.value = gId;
+		//document.getElementById("GroupEditAccount").innerHTML = gAccount;
 	}
 </script>
+
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -222,12 +237,12 @@
 								</div>
 								<div class="form-group">
 									<label>Login Account</label> <input class="form-control"
-										name="<%=Common.ACCOUNT%>" onchange="showBtnV()" />
+										name="<%=Common.ACCOUNT%>" onchange="showBtnV('formAddGroup')" />
 									<button id="btnV" type="button"
 										class="btn btn-xs btn-grad btn-default"
 										style="margin-top: 10px;"
 										onclick="checkAccountListData('formAddGroup')">Verification</button>
-									<button id="btnA" type="button" class="btn btn-xs btn-success"
+									<button id="btnA" type="button" class="btn btn-xs btn-success" style="display:none;"
 										style="margin-top: 10px;">Available</button>
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
@@ -286,29 +301,41 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="H3">Edit - 
-								<span id="GroupEditName"></span>
+							<h4 class="modal-title" id="H3">
+								Edit - <span id="GroupEditName"></span>
 							</h4>
 						</div>
 						<div class="modal-body">
 							<form role="form" action="pGroupEdit.jsp" name="formEditGroup"
 								id="formEditGroup">
-								<input name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
+								<input name="accountList" id="accountList"
+									value="<%=strAccountV%>" type="hidden"> <input
+									name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
 									type="hidden" value="<%=strEmail%>" /> <input
 									name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
 									type="hidden" value="<%=strGroupId%>" />
 								<div class="form-group">
-									<label>Login Account</label> <input class="form-control" />
+									<label>Login Account</label> <input name="<%=Common.ACCOUNT%>"
+										id="<%=Common.ACCOUNT%>" class="form-control"
+										onchange="showBtnV('formEditGroup')" value="         " />
+									<button id="btnV2" type="button"
+										class="btn btn-xs btn-grad btn-default"
+										style="margin-top: 10px;"
+										onclick="checkAccountListData('formEditGroup')">Verification</button>
+									<button id="btnA2" type="button" class="btn btn-xs btn-success" style="display:none;"
+										style="margin-top: 10px;">Available</button>
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
 								</div>
 								<div class="form-group">
-									<label>Password</label> <input class="form-control" />
+									<label>Password</label> <input name="<%=Common.PASSWORD%>"
+										id="<%=Common.PASSWORD%>" class="form-control" />
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
 								</div>
 								<div class="form-group">
 									<label>Max Number of Devices</label> <select
+										name="<%=Common.MAXIMUM%>" id="<%=Common.MAXIMUM%>"
 										class="form-control">
 										<option>5</option>
 										<option>10</option>
@@ -329,7 +356,8 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
 							<button type="button" class="btn btn-primary"
-								data-dismiss="modal">Save Changes</button>
+								data-dismiss="modal" onclick="checkGroupEditData(formEditGroup)">Save
+								Changes</button>
 						</div>
 					</div>
 				</div>
@@ -473,7 +501,8 @@
 																Management</span></a>
 														<button class="btn btn-sm btn-info"
 															style="margin-right: 8px; margin-left: 6px;"
-															data-toggle="modal" data-target="#EditGroup" title="Edit" onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>')"
+															data-toggle="modal" data-target="#EditGroup" title="Edit"
+															onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>')"
 															value="gName">
 															<i class="icon-pencil" aria-hidden="true"></i> <span
 																class="sr-only">Edit </span> Edit
