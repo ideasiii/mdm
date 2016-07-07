@@ -9,44 +9,65 @@ function formSubmit(formName) {
 
 function checkAccountListData(formName) {
 	var form = document.getElementById(formName);
-	var accountV = form.accountList.value;
-
-	var spl = accountV.split(",");
+	var formname = form.name;
 	var errMsg = '';
+	var accountV = form.accountList.value;
+	var spl = accountV.split(",");
 	re = /\W/;
 
-	if (Trim(form.account.value) == '')
-		errMsg += "Please enter a login account !!\n";
-	else {
-		if (re.test(Trim(form.account.value))) {
-			errMsg += "Login account must contain only alphanumeric characters !!\n";
-		} else {
-			if (form.account.value.length > 20)
-				errMsg += "Login account must be less than 20 characters !!\n";
+	if (formname == "formAddGroup") {
+		if (Trim(form.account.value) == '')
+			errMsg += "Please enter a login account !!\n";
+		else {
+			if (re.test(Trim(form.account.value))) {
+				errMsg += "Login account must contain only alphanumeric characters !!\n";
+			} else {
+				if (form.account.value.length > 20)
+					errMsg += "Login account must be less than 20 characters !!\n";
+			}
+		}
+		for ( var key in spl) {
+			// alert(spl[key]);
+			if (Trim(form.account.value) == spl[key]) {
+				errMsg += "The login account '" + spl[key]
+						+ "' has been used, please change it !!";
+			}
 		}
 	}
-	for ( var key in spl) {
-		// alert(spl[key]);
-		if (Trim(form.account.value) == spl[key]) {
-			errMsg += "The login account '" + spl[key]
-					+ "' has been used, please change it !!";
+
+	if (formname == "formEditGroup") {
+		if (Trim(form.GroupEditAccount.value) == '')
+			errMsg += "Please enter a login account !!\n";
+		else {
+			if (re.test(Trim(form.GroupEditAccount.value))) {
+				errMsg += "Login account must contain only alphanumeric characters !!\n";
+			} else {
+				if (form.GroupEditAccount.value.length > 20)
+					errMsg += "Login account must be less than 20 characters !!\n";
+			}
+		}
+		var oAccount = Trim(form.originalAccount.value);
+		for ( var key in spl) {
+			// alert(spl[key]);
+			if (Trim(form.GroupEditAccount.value) == spl[key] && Trim(form.GroupEditAccount.value)  != oAccount) {
+				errMsg += "The login account '" + spl[key]
+						+ "' has been used, please change it !!";
+			}
 		}
 	}
+	
 	if (errMsg == '') {
 
-		var formname = form.name;
-
-		if (formname == "formEditGroup") 
-		{
-			document.getElementById('btnA2').style.display = "block";
-			document.getElementById('btnV2').style.display = "none";
-		}
-
-		if (formname == "formAddGroup") 
-		{
+		if (formname == "formAddGroup") {
 			document.getElementById('btnA').style.display = "block";
 			document.getElementById('btnV').style.display = "none";
 		}
+		
+		if (formname == "formEditGroup") {
+			document.getElementById('btnA2').style.display = "block";
+			document.getElementById('btnV2').style.display = "none";
+		}
+		
 		return true;
 	}
 	alert(errMsg);
@@ -55,6 +76,7 @@ function checkAccountListData(formName) {
 
 function checkGroupAddData(formName) {
 	var form = document.getElementById(formName);
+	var btnA = document.getElementById("btnA");
 	var errMsg = '';
 	re = /\W/;
 
@@ -87,6 +109,9 @@ function checkGroupAddData(formName) {
 		}
 	}
 
+	if (document.getElementById("btnA").style.display == "none")
+		errMsg += "Please verify your login account !!\n";
+
 	if (errMsg == '') {
 		form.submit();
 		return true;
@@ -97,30 +122,34 @@ function checkGroupAddData(formName) {
 
 function checkGroupEditData(formName) {
 	var form = document.getElementById(formName);
+	var btnA2 = document.getElementById("btnA2");
 	var errMsg = '';
 	re = /\W/;
-
-	if (Trim(form.account.value) == '')
+	
+	if (Trim(form.GroupEditAccount.value) == '')
 		errMsg += "Please enter a login account !!\n";
 	else {
-		if (re.test(Trim(form.account.value))) {
+		if (re.test(Trim(form.GroupEditAccount.value))) {
 			errMsg += "Login account must contain only alphanumeric characters !!\n";
 		} else {
-			if (form.account.value.length > 20)
+			if (form.GroupEditAccount.value.length > 20)
 				errMsg += "Login account must be less than 20 characters !!\n";
 		}
 	}
-
-	if (Trim(form.password.value) == '')
+	
+	if (Trim(form.GroupEditPassword.value) == '')
 		errMsg += "Please enter a password !!\n";
 	else {
-		if (re.test(Trim(form.password.value))) {
+		if (re.test(Trim(form.GroupEditPassword.value))) {
 			errMsg += "Password must contain only alphanumeric characters !!\n";
 		} else {
-			if (form.password.value.length > 20)
+			if (form.GroupEditPassword.value.length > 20)
 				errMsg += "Password must be less than 20 characters !!\n";
 		}
 	}
+	
+	if (document.getElementById("btnA2").style.display == "none")
+		errMsg += "Please verify your login account !!\n";
 
 	if (errMsg == '') {
 		form.submit();

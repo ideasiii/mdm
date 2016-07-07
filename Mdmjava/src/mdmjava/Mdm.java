@@ -243,17 +243,21 @@ public class Mdm
 	return MDM_DB_ERR_SUCCESS;
     }
 
-    public int updatepGroupEdit(final String strAccount, final String strPassword, final String strMaximum)
+    public int updatepGroupEdit(final String strGroupId, final String strAccount, final String strPassword, final String strMaximum)
     {
 	try
 	{
-	    String strSQL = "update group_info set account =? , password =? , maximum =?";
+	    String strSQL = "update group_info set account =? , password =? , maximum =?, update_time = datetime('now','localtime')  where group_id ='" + strGroupId + "';";
+	    Logs.showError(strSQL);
+	    Logs.showError(strAccount);
+	    Logs.showError(strPassword);
+	    Logs.showError(strMaximum);
 	    PreparedStatement pst = null;
 	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    int idx = 1;
 	    pst.setString(idx++, strAccount);
 	    pst.setString(idx++, strPassword);
-	    pst.setString(idx++, strMaximum);
+	    pst.setInt(idx++, Integer.valueOf(strMaximum));
 	    pst.executeUpdate();
 	    pst.close();
 	}
@@ -265,7 +269,7 @@ public class Mdm
 
 	return MDM_DB_ERR_SUCCESS;
     }
-    
+
     public int deleteGroup(final String strGroupId)
     {
 	try
@@ -277,23 +281,23 @@ public class Mdm
 	    pst.setString(idx++, strGroupId);
 	    pst.executeUpdate();
 	    pst.close();
-	    
-	strSQL = "delete from device_info where group_id = ?";
-	  pst = conMdmAndroid.prepareStatement(strSQL);
+
+	    strSQL = "delete from device_info where group_id = ?";
+	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    idx = 1;
 	    pst.setString(idx++, strGroupId);
 	    pst.executeUpdate();
 	    pst.close();
 
-	   strSQL = "delete from app_manage where group_id = ?";
-	   pst = conMdmAndroid.prepareStatement(strSQL);
+	    strSQL = "delete from app_manage where group_id = ?";
+	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    idx = 1;
 	    pst.setString(idx++, strGroupId);
 	    pst.executeUpdate();
 	    pst.close();
-	    
-	  strSQL = "delete from content_manage where group_id = ?";
-	  pst = conMdmAndroid.prepareStatement(strSQL);
+
+	    strSQL = "delete from content_manage where group_id = ?";
+	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    idx = 1;
 	    pst.setString(idx++, strGroupId);
 	    pst.executeUpdate();

@@ -6,21 +6,21 @@
 
 			final String strEmail = request.getParameter(Common.USER_EMAIL);
 			final String strGroupId = request.getParameter(Common.GROUP_ID);
-			final String strAccount = request.getParameter(Common.ACCOUNT);
-			final String strPassword = request.getParameter(Common.PASSWORD);
-			final String strMaximum = request.getParameter(Common.MAXIMUM);
-
+			final String strAccount = request.getParameter("GroupEditAccount");
+			final String strPassword = request.getParameter("GroupEditPassword");
+			final String strMaximum = request.getParameter("GroupEditMaximum");
+			
+			out.println(strMaximum);
 			Mdm mdm = new Mdm();
-			
-			if (!mdm.conTypeDB(0))
-			{
-			    response.sendRedirect("error.html"); //insert error page 
-			    return;
+
+			if (!mdm.conTypeDB(0)) {
+				response.sendRedirect("error.html"); //insert error page 
+				return;
 			}
-			
-			int nResult = mdm.updatepGroupEdit(strAccount, strPassword, strMaximum);
+
+			int nResult = mdm.updatepGroupEdit(strGroupId, strAccount, strPassword, strMaximum);
 			String strResult = null;
-			
+
 			mdm.closeTypeDB(0);
 			mdm = null;
 %>
@@ -63,19 +63,19 @@
 		</div>
 	</div>
 
-	<form action="group_management.jsp" method="post"
-		name="FormHome" id="FormHome">
+	<form action="group_management.jsp" method="post" name="FormHome"
+		id="FormHome">
 		<input name="<%=Common.USER_EMAIL%>" type="hidden"
 			value="<%=strEmail%>" />
 	</form>
 	<%
-	if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {
+	    if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {
 	%>
 	<script>
 		formSubmit('FormHome');
 	</script>
 	<%
-	}
+	    }
 	%>
 </body>
 </html>

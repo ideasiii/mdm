@@ -57,20 +57,24 @@
 		}
 	}
 
-	function changeBtn() {
-		var form = document.getElementById(formName);
-		document.getElementById("btnV").style.display = "none";
-		document.getElementById("btnA").style.display = "block";
-	}
+	//	function changeBtn() {
+	//		var form = document.getElementById(formName);
+	//		document.getElementById("btnV").style.display = "none";
+	//		document.getElementById("btnA").style.display = "block";	}
 </script>
 <script>
-	function showGN(gName, gId, gAccount, gPw) {
+	function showGN(gName, gId, gAccount, gPw, gMax) {
 		//alert(gId);
 		document.getElementById("GroupDeleteConfirm").innerHTML = gName;
 		document.getElementById("GroupEditName").innerHTML = gName;
-		var form = document.getElementById("FormDeleteGroup");
+		var form = document.getElementById("formDeleteGroup");
 		form.group_id.value = gId;
-		//document.getElementById("GroupEditAccount").innerHTML = gAccount;
+		var form = document.getElementById("formEditGroup");
+		form.group_id.value = gId;
+		document.getElementById("GroupEditAccount").value = gAccount;
+		document.getElementById("originalAccount").value = gAccount;
+		document.getElementById("GroupEditPassword").value = gPw;
+		document.getElementById("GroupEditMaximum").value = gMax;
 	}
 </script>
 
@@ -242,7 +246,8 @@
 										class="btn btn-xs btn-grad btn-default"
 										style="margin-top: 10px;"
 										onclick="checkAccountListData('formAddGroup')">Verification</button>
-									<button id="btnA" type="button" class="btn btn-xs btn-success" style="display:none;"
+									<button id="btnA" type="button" class="btn btn-xs btn-success"
+										style="display: none; margin-top: 10px;"
 										style="margin-top: 10px;">Available</button>
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
@@ -256,16 +261,16 @@
 								<div class="form-group">
 									<label>Max Number of Devices</label> <select
 										name="<%=Common.MAXIMUM%>" class="form-control">
-										<option>5</option>
-										<option>10</option>
-										<option>15</option>
-										<option>20</option>
-										<option>25</option>
-										<option>30</option>
-										<option>35</option>
-										<option>40</option>
-										<option>45</option>
-										<option>50</option>
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
 									</select>
 								</div>
 
@@ -286,7 +291,7 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
 							<button type="button" class="btn btn-primary"
-								data-dismiss="modal" onClick="checkGroupAddData('formAddGroup')">Create</button>
+								onClick="checkGroupAddData('formAddGroup')">Create</button>
 						</div>
 					</div>
 				</div>
@@ -315,38 +320,40 @@
 									name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
 									type="hidden" value="<%=strGroupId%>" />
 								<div class="form-group">
-									<label>Login Account</label> <input name="<%=Common.ACCOUNT%>"
-										id="<%=Common.ACCOUNT%>" class="form-control"
-										onchange="showBtnV('formEditGroup')" value="         " />
+									<label>Login Account</label> <input name="GroupEditAccount"
+										id="GroupEditAccount" class="form-control"
+										onchange="showBtnV('formEditGroup')" /> <input
+										name="originalAccount" id="originalAccount" type="hidden" />
 									<button id="btnV2" type="button"
 										class="btn btn-xs btn-grad btn-default"
 										style="margin-top: 10px;"
 										onclick="checkAccountListData('formEditGroup')">Verification</button>
-									<button id="btnA2" type="button" class="btn btn-xs btn-success" style="display:none;"
+									<button id="btnA2" type="button" class="btn btn-xs btn-success"
+										style="display: none; margin-top: 10px;"
 										style="margin-top: 10px;">Available</button>
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
 								</div>
 								<div class="form-group">
-									<label>Password</label> <input name="<%=Common.PASSWORD%>"
-										id="<%=Common.PASSWORD%>" class="form-control" />
+									<label>Password</label> <input name="GroupEditPassword"
+										id="GroupEditPassword" class="form-control" />
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
 								</div>
 								<div class="form-group">
 									<label>Max Number of Devices</label> <select
-										name="<%=Common.MAXIMUM%>" id="<%=Common.MAXIMUM%>"
+										name="GroupEditMaximum" id="GroupEditMaximum"
 										class="form-control">
-										<option>5</option>
-										<option>10</option>
-										<option>15</option>
-										<option>20</option>
-										<option>25</option>
-										<option>30</option>
-										<option>35</option>
-										<option>40</option>
-										<option>45</option>
-										<option>50</option>
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
 									</select>
 								</div>
 
@@ -356,7 +363,7 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
 							<button type="button" class="btn btn-primary"
-								data-dismiss="modal" onclick="checkGroupEditData(formEditGroup)">Save
+								onclick="checkGroupEditData('formEditGroup')">Save
 								Changes</button>
 						</div>
 					</div>
@@ -381,7 +388,7 @@
 							<h4 class="modal-title" id="H1">Delete Confirm</h4>
 						</div>
 						<form action="pDeleteGroup.jsp" method="post"
-							name="FormDeleteGroup" id="FormDeleteGroup">
+							name="formDeleteGroup" id="formDeleteGroup">
 							<input name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
 								type="hidden" value="<%=strEmail%>" /> <input
 								name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
@@ -502,14 +509,14 @@
 														<button class="btn btn-sm btn-info"
 															style="margin-right: 8px; margin-left: 6px;"
 															data-toggle="modal" data-target="#EditGroup" title="Edit"
-															onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>')"
+															onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>','<%=groupData.account%>','<%=groupData.password%>','<%=groupData.maximum%>')"
 															value="gName">
 															<i class="icon-pencil" aria-hidden="true"></i> <span
 																class="sr-only">Edit </span> Edit
 														</button>
 														<button class="btn btn-sm btn-danger" data-toggle="modal"
 															data-target="#DeleteGroup" title="Delete"
-															onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>')"
+															onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>','<%=groupData.account%>','<%=groupData.password%>','<%=groupData.maximum%>')"
 															value="gName">
 															<i class="icon-trash" aria-hidden="true"></i> <span
 																class="sr-only">Delete</span>
