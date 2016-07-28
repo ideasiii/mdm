@@ -644,7 +644,7 @@ select.icon-menu option {
 				</div>
 				<hr />
 
-				<!-- CHART & CHAT  SECTION -->
+				<!-- CHAT  SECTION -->
 
 				<div class="row">
 					<div class="col-lg-8">
@@ -659,7 +659,7 @@ select.icon-menu option {
 						</div>
 					</div>
 					<div class="col-lg-4">
-						<!--END CHAT & CHAT SECTION -->
+						<!--END CHAT SECTION -->
 
 						<br>
 
@@ -721,19 +721,135 @@ select.icon-menu option {
 
 						<hr />
 
-						<!--TABLE, PANEL, ACCORDION AND MODAL  -->
+						<!--DEVICES LIST WINDOW -->
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="box">
+									<header>
+										<h5>Devices</h5>
+										<div class="toolbar">
+											<div class="btn-group"></div>
+										</div>
+									</header>
+									<div class="body">
+
+										<!-- APPlication List -->
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="panel panel-default">
 
 
+													<!-- Display app list-->
+													<!--item per slider -->
 
+													<div id="myCarousel" class="carousel slide"
+														data-ride="carousel" data-interval="false">
 
+														<!-- Indicators -->
+														<ol class="carousel-indicators">
+															<li data-target="#myCarousel" data-slide-to="0"
+																class="active"></li>
+															<li data-target="#myCarousel" data-slide-to="1"></li>
+															<li data-target="#myCarousel" data-slide-to="2"></li>
+															<li data-target="#myCarousel" data-slide-to="3"></li>
+														</ol>
 
+														<!-- Wrapper for slides -->
+														<div class="carousel-inner" role="listbox">
 
+															<div class="item active"
+																style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
+																<div class="span4">
 
+																	<a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>ASUS_TOOF</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>ASUS_TOOF</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>ASUS_TOOF</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>ASUS_TOOF</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>ASUS_TOOF</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>ASUS_TOOF</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>ASUS_TOOF</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>ASUS_TOOF</span>
+																	</a>
 
+																</div>
+															</div>
+															<div class="item text-primary">
+																<div class="span4"
+																	style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
+																	<a class="device-btn panel-heading panel-primary"
+																		href="#"> <i><img src="assets/img/phone.png"
+																			class="img-thumbnail"></i><br> <br> <span>iPhone
+																			6</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>iPhone 6</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>iPhone 6</span>
+																	</a> <a class="device-btn panel-heading panel-primary"
+																		href="device_controller.html"> <i><img
+																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																		<br> <span>iPhone 6</span>
+																	</a>
+																</div>
+															</div>
 
+															<!-- Controls -->
+															<div></div>
+															<a class="left carousel-control" href="#myCarousel"
+																role="button" data-slide="prev"> <span
+																class="glyphicon glyphicon-chevron-left"
+																aria-hidden="true"></span> <span class="sr-only">Previous</span>
 
+															</a> <a class="right carousel-control" href="#myCarousel"
+																role="button" data-slide="next"> <span
+																class="glyphicon glyphicon-chevron-right"
+																aria-hidden="true"></span> <span class="sr-only">Next</span>
+															</a>
+														</div>
 
-						<!--END TABLE, PANEL, ACCORDION AND MODAL  -->
+														<!--end item per slider -->
+
+														<!-- End Display app list-->
+
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /.row -->
+										<!-- APPlication List -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--END DEVICES LIST WINDOW  -->
+
 					</div>
 				</div>
 			</div>

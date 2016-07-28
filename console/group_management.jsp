@@ -67,6 +67,8 @@
 		//alert(gId);
 		document.getElementById("GroupDeleteConfirm").innerHTML = gName;
 		document.getElementById("GroupEditName").innerHTML = gName;
+		document.getElementById("AMGroupName").innerHTML = gName;
+		document.getElementById("CMGroupName").innerHTML = gName;
 		var form = document.getElementById("formDeleteGroup");
 		form.group_id.value = gId;
 		var form = document.getElementById("formEditGroup");
@@ -372,11 +374,6 @@
 		</div>
 
 
-
-
-
-
-
 		<div class="col-lg-12">
 			<div class="modal fade" id="DeleteGroup" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
@@ -412,6 +409,418 @@
 			</div>
 		</div>
 
+		<div class="col-lg-12">
+			<div class="modal fade" id="AppManage" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width: 90%;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="H1">
+								Application Management - <span  id="AMGroupName"></span>
+							</h3>
+						</div>
+						<div class="modal-body">te velit esse cillum dolore eu
+							fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est
+							laborum.</div>
+
+						<div class="row" style="margin-left: 10%; margin-right: 10%;">
+							<div class="col-lg-12">
+								<div>
+									<div class="panel-body">
+										<div>
+											<table class="table table-striped table-hover"
+												style="width: 100%; display: block; overflow-x: auto; overflow-y: scroll; height: 260px;">
+												<thead>
+													<tr>
+														<th style="width: 5%;"></th>
+														<th style="width: 10%;"></th>
+														<th style="width: 13%;">App Name</th>
+														<th style="width: 12%;">Category</th>
+														<th style="width: 10%;">Edition</th>
+														<th style="width: 55%;">Description</th>
+														<th style="width: 10%;">Option</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td style="vertical-align: middle;"></td>
+														<td><img src="assets/img/Apps-Android-icon.png"
+															vspace="1" class="img-responsive"
+															style="width: 30px; text-align: center;"
+															title="android app"></td>
+														<td style="vertical-align: middle;">aNote</td>
+														<td class="center" style="vertical-align: middle;">工具</td>
+														<td class="center" style="vertical-align: middle;">v8.4.7</td>
+														<td class="center" style="vertical-align: middle;">elit
+															esse eu nulla par iatur.</td>
+														<td class="center" style="vertical-align: middle;"><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr>
+														<td style="vertical-align: middle;"></td>
+														<td><img src="assets/img/Apps-Android-icon.png"
+															vspace="1" class="img-responsive"
+															style="width: 30px; text-align: center;"
+															title="android app"></td>
+														<td style="vertical-align: middle;">Calendar</td>
+														<td class="center" style="vertical-align: middle;">工具</td>
+														<td class="center" style="vertical-align: middle;">v8.4.7</td>
+														<td class="center" style="vertical-align: middle;">456</td>
+														<td class="center" style="vertical-align: middle;"><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr>
+														<td style="vertical-align: middle;"></td>
+														<td><img src="assets/img/Apps-Android-icon.png"
+															vspace="1" class="img-responsive"
+															style="width: 30px; text-align: center;"
+															title="android app"></td>
+														<td style="vertical-align: middle;">Cloud</td>
+														<td class="center" style="vertical-align: middle;">工具</td>
+														<td class="center" style="vertical-align: middle;">v8.4.7</td>
+														<td class="center" style="vertical-align: middle;">789</td>
+														<td class="center" style="vertical-align: middle;"><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr>
+														<td style="vertical-align: middle;"></td>
+														<td><img src="assets/img/Apps-Android-icon.png"
+															vspace="1" class="img-responsive"
+															style="width: 30px; text-align: center;"
+															title="android app"></td>
+														<td style="vertical-align: middle;">Dropbox</td>
+														<td class="center" style="vertical-align: middle;">工具</td>
+														<td class="center" style="vertical-align: middle;">v8.4.7</td>
+														<td class="center" style="vertical-align: middle;">012</td>
+														<td class="center" style="vertical-align: middle;"><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr>
+														<td style="vertical-align: middle;"></td>
+														<td><img src="assets/img/Apps-Android-icon.png"
+															vspace="1" class="img-responsive"
+															style="width: 30px; text-align: center;"
+															title="android app"></td>
+														<td style="vertical-align: middle;">Facebook</td>
+														<td class="center" style="vertical-align: middle;">工具</td>
+														<td class="center" style="vertical-align: middle;">v8.4.7</td>
+														<td class="center" style="vertical-align: middle;">234</td>
+														<td class="center" style="vertical-align: middle;"><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary"
+								title="Upload a new app" data-toggle="modal"
+								data-target="#UploadApp">
+								<i class="fa fa-plus" aria-hidden="true"
+									style="margin-right: 5px;"></i><span class="sr-only">Upload
+									a new app</span>Upload
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<div class="modal fade" id="UploadApp" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="padding-top: 100px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Upload an App</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form">
+								<div class="col-lg-8" style="float: right;">
+									<label class="control-label" style="margin-left: 20px;">App
+										icon</label>
+									<div class="fileupload fileupload-new"
+										style="text-align: center;" data-provides="fileupload">
+										<div class="fileupload-new thumbnail"
+											style="width: 100px; height: 90px;">
+											<img src="assets/img/demoUpload.jpg" alt="" />
+										</div>
+										<div
+											class="fileupload-preview fileupload-exists thumbnail form-group"
+											style="text-align: center; max-width: 100px; max-height: 100px; line-height: 20px;"></div>
+										<input style="margin-left: 20px;" type="file" />
+
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label>App Name</label> <input class="form-control"
+										style="width: 40%;" />
+								</div>
+								<div class="form-group">
+									<label>Edition</label> <input class="form-control"
+										style="width: 40%;" />
+								</div>
+								<div class="form-group">
+									<label>Describe</label> <input class="form-control"
+										style="width: 40%;" />
+								</div>
+								<div class="form-group">
+									<label>Category</label> <select class="form-control"
+										style="width: 40%;" id="app_category" name="app_category"
+										style="height: 34px;">
+										<option>工具</option>
+										<option>天氣</option>
+										<option>生活品味</option>
+										<option>生產應用</option>
+										<option>交通運輸</option>
+										<option>社交</option>
+										<option>音樂與音效</option>
+										<option>個人化</option>
+										<option>娛樂</option>
+										<option>旅遊與地方資訊</option>
+										<option>財經</option>
+										<option>健康塑身</option>
+										<option>動態桌布</option>
+										<option>商業</option>
+										<option>教育</option>
+										<option>通訊</option>
+										<option>媒體與影片</option>
+										<option>程式庫與試用程式</option>
+										<option>新聞與雜誌</option>
+										<option>運動</option>
+										<option>圖書與參考資源</option>
+										<option>漫畫</option>
+										<option>購物</option>
+										<option>醫療</option>
+										<option>攝影</option>
+										<option>遊戲</option>
+										<option>家庭</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>File input</label> <input type="file" />
+								</div>
+							</form>
+							<div style="text-align: right;">
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal">Confirm</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="ContentManage" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width: 90%;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="H1">
+								Content Management - <span id="CMGroupName"></span>
+							</h3>
+						</div>
+						<div class="modal-body">te velit esse cillum dolore eu
+							fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est
+							laborum.</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div>
+									<div class="panel-body">
+										<div class="table-responsive">
+											<table class="table table-striped table-bordered table-hover"
+												id="dataTables-example">
+												<thead class="toolbar">
+													<tr>
+														<th>#</th>
+														<th>Alias</th>
+														<th>File Name</th>
+														<th>Upload Time</th>
+														<th>Option</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="odd gradeX">
+														<td>1</td>
+														<td>A_alias</td>
+														<td>demo_alias_0527_1.pdf</td>
+														<td class="center">2016/05/27 16:59:40</td>
+														<td class="center"><a style="margin-right: 10px;"
+															href=""><i class="fa fa-eye" aria-hidden="true"
+																title="Preview"></i><span class="sr-only">Preview</span></a><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr class="even gradeC">
+														<td>2</td>
+														<td>B_alias</td>
+														<td>demo_alias_0527_2.pdf</td>
+														<td class="center">2016/05/27 16:59:42</td>
+														<td class="center"><a style="margin-right: 10px;"
+															href=""><i class="fa fa-eye" aria-hidden="true"
+																title="Preview"></i><span class="sr-only">Preview</span></a><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr class="odd gradeA">
+														<td>3</td>
+														<td>C_alias</td>
+														<td>demo_alias_0527_3.pdf</td>
+														<td class="center">2016/05/27 16:59:44</td>
+														<td class="center"><a style="margin-right: 10px;"
+															href=""><i class="fa fa-eye" aria-hidden="true"
+																title="Preview"></i><span class="sr-only">Preview</span></a><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr class="even gradeA">
+														<td>4</td>
+														<td>D_alias</td>
+														<td>demo_alias_0527_4.pdf</td>
+														<td class="center">2016/05/27 16:59:46</td>
+														<td class="center"><a style="margin-right: 10px;"
+															href=""><i class="fa fa-eye" aria-hidden="true"
+																title="Preview"></i><span class="sr-only">Preview</span></a><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr class="odd gradeA">
+														<td>5</td>
+														<td>E_alias</td>
+														<td>demo_alias_0527_5.pdf</td>
+														<td class="center">2016/05/27 16:59:48</td>
+														<td class="center"><a style="margin-right: 10px;"
+															href=""><i class="fa fa-eye" aria-hidden="true"
+																title="Preview"></i><span class="sr-only">Preview</span></a><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr class="odd gradeA">
+														<td>6</td>
+														<td>F_alias</td>
+														<td>demo_alias_0527_6.pdf</td>
+														<td class="center">2016/05/27 16:59:50</td>
+														<td class="center"><a style="margin-right: 10px;"
+															href=""><i class="fa fa-eye" aria-hidden="true"
+																title="Preview"></i><span class="sr-only">Preview</span></a><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+													<tr class="odd gradeA">
+														<td>7</td>
+														<td>G_alias</td>
+														<td>demo_alias_0527_7.pdf</td>
+														<td class="center">2016/05/27 16:59:52</td>
+														<td class="center"><a style="margin-right: 10px;"
+															href=""><i class="fa fa-eye" aria-hidden="true"
+																title="Preview"></i><span class="sr-only">Preview</span></a><a
+															href=""><i class="fa fa-trash-o" aria-hidden="true"
+																title="Delete" data-toggle="modal"
+																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary"
+								title="Upload a new file" data-toggle="modal"
+								data-target="#UploadContent">
+								<i class="fa fa-plus" aria-hidden="true"
+									style="margin-right: 5px;"></i><span class="sr-only">Upload
+									a new file</span>Upload
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="modal fade" id="UploadContent" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="padding-top: 150px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Upload Content</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form">
+								<div class="form-group">
+									<label>File Alias</label> <input class="form-control"
+										style="width: 60%;" />
+								</div>
+								<div class="form-group">
+									<label>File input</label> <input type="file" />
+								</div>
+							</form>
+							<div style="text-align: right;">
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal">Confirm</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<div class="modal fade" id="DeleteFile" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="padding-top: 150px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Delete Confirm</h4>
+						</div>
+						<div class="modal-body">
+							You have selected to delete this file. <br>If this was the
+							action that you wanted to do, please confirm your choice, or
+							cancel and return to the page.
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- END HEADER SECTION -->
 

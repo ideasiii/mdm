@@ -51,12 +51,17 @@ public abstract class Common
 	 * table: app_manage**/
 	final public static String CATEGORY = "category";
 	final public static String  EDITION= "edition";
-	final public static String DESCRIBE = "describe";
+	final public static String DESCRIPTION = "description";
+	
+	final public static ArrayList<String> listApp = new ArrayList<>(Arrays.asList(APP_ID, GROUP_ID, APP_NAME, CATEGORY,
+		EDITION, DESCRIPTION, APP_ICON, FILE_LOCATION, CREATE_TIME, UPDATE_TIME)); 
 
 	/**sqlite mdm_android.db 
 	 * table: content_manage**/
 	final public static String ALIAS  = "alias";
 	final public static String FILE_NAME  = "file_name";
+	
+	final public static ArrayList<String> listContent = new ArrayList<>(Arrays.asList(CONTENT_ID, GROUP_ID, ALIAS, FILE_NAME, FILE_LOCATION, CREATE_TIME, UPDATE_TIME)); 
 	
 	/**sqlite mdm_android.db 
 	 * table: device_info**/
@@ -64,7 +69,8 @@ public abstract class Common
 	final public static String TOTAL_SPACE  = "total_sapce";
 	final public static String USED_SPACE  = "used_space";
 
-
+	final public static ArrayList<String> listDevice = new ArrayList<>(Arrays.asList(MAC_ADDRESS, DEVICE_MODEL, GROUP_ID, BATTERY_PERCENT,
+		TOTAL_SPACE, USED_SPACE, DEVICE_IMG, CREATE_TIME, UPDATE_TIME)); 
 
 	
 	

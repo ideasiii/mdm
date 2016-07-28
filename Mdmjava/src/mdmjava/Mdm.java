@@ -41,7 +41,45 @@ public class Mdm
 	public String create_time;
 	public String update_time;
     }
+    
+    public static class AppData
+    {
+	public String app_id;
+	public String group_id;
+	public String app_name;
+	public String category;
+	public String edition;
+	public String description;
+	public String app_icon;
+	public String file_location;
+	public String create_time;
+	public String update_time;
+    }
 
+    public static class ContentData
+    {
+	public String content_id;
+	public String group_id;
+	public String alias;
+	public String file_name;
+	public String file_location;
+	public String create_time;
+	public String update_time;
+    }
+    
+    public static class DeviceData
+    {
+	public String mac_address;
+	public String device_model;
+	public String group_id;
+	public String battery_percent;
+	public String total_space;
+	public String used_space;
+	public String device_img;
+	public String create_time;
+	public String update_time;
+    }
+    
     sqliteClient sqlite = null;
     Connection conMdmUser = null;
     Connection conLocation = null;
@@ -312,4 +350,139 @@ public class Mdm
 
     }
 
+    public int queryApp(String strGroupId, ArrayList<AppData> listApp)
+    {
+	int nCount = 0;
+
+	try
+	{
+	    String strSQL = "select * from app_manage where group_id='" + strGroupId + "' order by create_time ;";
+	    ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
+	    sqlite.query(conMdmAndroid, strSQL, Common.listApp, listData);
+
+	    if (0 < listData.size())
+	    {
+		Iterator<HashMap<String, String>> it = null;
+		HashMap<String, String> mapItem;
+		it = listData.iterator();
+		AppData appData = null;
+		while (it.hasNext())
+		{
+		    appData = new AppData();
+		    mapItem = it.next();
+		    appData.app_id = mapItem.get(Common.APP_ID);
+		    appData.group_id = mapItem.get(Common.GROUP_ID);
+		    appData.app_name = mapItem.get(Common.APP_NAME);
+		    appData.category = mapItem.get(Common.CATEGORY);
+		    appData.edition = mapItem.get(Common.EDITION);
+		    appData.description = mapItem.get(Common.DESCRIPTION);
+		    appData.app_icon = mapItem.get(Common.APP_ICON);
+		    appData.file_location = mapItem.get(Common.FILE_LOCATION);
+		    appData.create_time = mapItem.get(Common.CREATE_TIME);
+		    appData.update_time = mapItem.get(Common.UPDATE_TIME);
+		    listApp.add( appData);
+		    appData = null;
+		}
+		nCount = listApp.size();
+	    }
+	}
+	catch (SQLException e)
+	{
+	    Logs.showError(e.toString());
+	    e.printStackTrace();
+	}
+
+	return nCount;
+    }
+
+    public int queryContent(String strGroupId, ArrayList<ContentData> listContent)
+    {
+	int nCount = 0;
+
+	try
+	{
+	    String strSQL = "select * from content_manage where group_id='" + strGroupId + "' order by create_time ;";
+	    ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
+	    sqlite.query(conMdmAndroid, strSQL, Common.listContent, listData);
+
+	    if (0 < listData.size())
+	    {
+		Iterator<HashMap<String, String>> it = null;
+		HashMap<String, String> mapItem;
+		it = listData.iterator();
+		ContentData contentData = null;
+		while (it.hasNext())
+		{
+		    contentData = new ContentData();
+		    mapItem = it.next();
+		    contentData.content_id = mapItem.get(Common.CONTENT_ID);
+		    contentData.group_id = mapItem.get(Common.GROUP_ID);
+		    contentData.alias = mapItem.get(Common.ALIAS);
+		    contentData.file_name = mapItem.get(Common.FILE_NAME);
+		    contentData.file_location = mapItem.get(Common.FILE_LOCATION);
+		    contentData.create_time = mapItem.get(Common.CREATE_TIME);
+		    contentData.update_time = mapItem.get(Common.UPDATE_TIME);
+		    listContent.add( contentData);
+		    contentData = null;
+		}
+		nCount = listContent.size();
+	    }
+	}
+	catch (SQLException e)
+	{
+	    Logs.showError(e.toString());
+	    e.printStackTrace();
+	}
+
+	return nCount;
+    }
+    
+    public int queryDevice(String strGroupId, ArrayList<DeviceData> listDevice)
+    {
+	int nCount = 0;
+
+	try
+	{
+	    String strSQL = "select * from device_info where group_id='" + strGroupId + "' order by create_time ;";
+	    ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
+	    sqlite.query(conMdmAndroid, strSQL, Common.listDevice, listData);
+
+	    if (0 < listData.size())
+	    {
+		Iterator<HashMap<String, String>> it = null;
+		HashMap<String, String> mapItem;
+		it = listData.iterator();
+		DeviceData deviceData = null;
+		while (it.hasNext())
+		{
+		    deviceData = new DeviceData();
+		    mapItem = it.next();
+		    deviceData.mac_address = mapItem.get(Common.MAC_ADDRESS);
+		    deviceData.device_model = mapItem.get(Common.DEVICE_MODEL);
+		    deviceData.group_id = mapItem.get(Common.GROUP_ID);
+		    deviceData.battery_percent = mapItem.get(Common.BATTERY_PERCENT);
+		    deviceData.total_space = mapItem.get(Common.TOTAL_SPACE);
+		    deviceData.used_space = mapItem.get(Common.USED_SPACE);
+		    deviceData.device_img = mapItem.get(Common.DEVICE_IMG);
+		    deviceData.create_time = mapItem.get(Common.CREATE_TIME);
+		    deviceData.update_time = mapItem.get(Common.UPDATE_TIME);
+		    listDevice.add(deviceData);
+		    deviceData = null;
+		}
+		nCount = listDevice.size();
+	    }
+	}
+	catch (SQLException e)
+	{
+	    Logs.showError(e.toString());
+	    e.printStackTrace();
+	}
+
+	return nCount;
+    }
+    
+    
+    
+    
+    
 }
