@@ -65,8 +65,8 @@ public abstract class Common
 	
 	/**sqlite mdm_android.db 
 	 * table: device_info**/
-	final public static String BATTERY_PERCENT  = "bgattery_percent";
-	final public static String TOTAL_SPACE  = "total_sapce";
+	final public static String BATTERY_PERCENT  = "battery_percent";
+	final public static String TOTAL_SPACE  = "total_space";
 	final public static String USED_SPACE  = "used_space";
 
 	final public static ArrayList<String> listDevice = new ArrayList<>(Arrays.asList(MAC_ADDRESS, DEVICE_MODEL, GROUP_ID, BATTERY_PERCENT,

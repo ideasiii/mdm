@@ -739,7 +739,15 @@ select.icon-menu option {
 												<div class="panel panel-default">
 
 
-													<!-- Display app list-->
+													<!-- Display device list-->
+													<%
+													    Iterator<Mdm.DeviceData> itDD = null;
+																Mdm.DeviceData deviceData = null;
+
+																ArrayList<Mdm.DeviceData> listDevice = new ArrayList<Mdm.DeviceData>();
+																int nDCount = mdm.queryDevice(strGroupId, listDevice);
+																itDD = listDevice.iterator();
+													%>
 													<!--item per slider -->
 
 													<div id="myCarousel" class="carousel slide"
@@ -760,11 +768,14 @@ select.icon-menu option {
 															<div class="item active"
 																style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
 																<div class="span4">
-
+																	<%
+																	    while (itDD.hasNext()) {
+																					deviceData = itDD.next();
+																	%>
 																	<a class="device-btn panel-heading panel-primary"
 																		href="device_controller.html"> <i><img
 																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>ASUS_TOOF</span>
+																		<br> <span><%=deviceData.device_model%></span>
 																	</a> <a class="device-btn panel-heading panel-primary"
 																		href="device_controller.html"> <i><img
 																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
@@ -836,6 +847,9 @@ select.icon-menu option {
 
 														<!--end item per slider -->
 
+														<%
+														    }
+														%>
 														<!-- End Display app list-->
 
 													</div>

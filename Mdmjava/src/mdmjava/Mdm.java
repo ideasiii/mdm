@@ -444,6 +444,7 @@ public class Mdm
 	try
 	{
 	    String strSQL = "select * from device_info where group_id='" + strGroupId + "' order by create_time ;";
+	    System.out.println(strSQL);
 	    ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
 	    sqlite.query(conMdmAndroid, strSQL, Common.listDevice, listData);
 
