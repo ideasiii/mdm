@@ -176,7 +176,10 @@ select.icon-menu option {
 				    request.setCharacterEncoding("UTF-8");
 				%>
 				<%@include file="groupBar.jsp"%>
-
+				<%
+				    mdm.closeTypeDB(0);
+							mdm.closeDB();
+				%>
 			</nav>
 		</div>
 		<!--END GROUP SELECT -->
@@ -731,130 +734,150 @@ select.icon-menu option {
 											<div class="btn-group"></div>
 										</div>
 									</header>
-									<div class="body">
 
-										<!-- APPlication List -->
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="panel panel-default">
+									<%
+									    if (!mdm.conTypeDB(0)) {
+													response.sendRedirect("error.html"); //insert error page 
+													return;
+												}
+												itGD = listGroup.iterator();
 
+												//	    Iterator<Mdm.DeviceData> itDD = null;
+												Mdm.DeviceData deviceData = null;
 
-													<!-- Display device list-->
-													<%
-													    //	    Iterator<Mdm.DeviceData> itDD = null;
-																Mdm.DeviceData deviceData = null;
+												ArrayList<Mdm.DeviceData> listDevice = new ArrayList<Mdm.DeviceData>();
+												int nDCount = mdm.queryDevice(strGroupId, listDevice);
+												//out.println(strGroupId);
+												//	itDD = listDevice.iterator();
 
-																ArrayList<Mdm.DeviceData> listDevice = new ArrayList<Mdm.DeviceData>();
-																int nDCount = mdm.queryDevice(strGroupId, listDevice);
-																//	itDD = listDevice.iterator();
-													%>
+												int nSum;
+												int nCountPage;
+												int nRemain;
+												nSum = listDevice.size();
+												nCountPage = nSum / 8;
+												nRemain = nSum % 8;
 
-													<!--item per slider -->
-													<%
-													    int nSum;
-																int nCountPage;
-																int nRemain;
-																nSum = listDevice.size();
-																nCountPage = nSum / 8;
-																nRemain = nSum % 8;
+												if (0 < nRemain) {
+													nCountPage = nCountPage + 1;
+												}
+									%>
 
-																if (0 < nRemain) {
-																	nCountPage = nCountPage + 1;
-																}
-													%>
-													<div id="myCarousel" class="carousel slide"
-														data-ride="carousel" data-interval="false">
+									<!-- APPlication List -->
+									<%
+									    if (nSum == 0) {
+									%>
+									<div class="body" style="height:300px;">
+										<%
+										    } else {
+										%>
+										<div class="body">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="panel panel-default">
 
-														<!-- Indicators -->
-														<ol class="carousel-indicators">
+														<!-- Display device list-->
 
-															<li data-target="#myCarousel" data-slide-to="0"
-																class="active"></li>
-															<li data-target="#myCarousel" data-slide-to="1"></li>
-															<li data-target="#myCarousel" data-slide-to="2"></li>
-															<li data-target="#myCarousel" data-slide-to="3"></li>
-														</ol>
+														<!--item per slider -->
 
-														<!-- Wrapper for slides -->
-														<div class="carousel-inner" role="listbox">
-															<%
-															    for (int nPage = 0; nPage < nCountPage; ++nPage) {
-																			out.println(nPage);
-																			out.println(nCountPage);
-																			int nStart;
-																			int nEnd;
-																			nStart = nPage * 8;
-																			nEnd = (nPage * 8) + 8;
+														<div id="myCarousel" class="carousel slide"
+															data-ride="carousel" data-interval="false">
 
-																			if (0 == nPage) {
-															%>
-															<div class="item active"
-																style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
-																<div class="span4">
-																	<%
-																	    } else {
-																	%><div class="item text-primary"
-																		style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
-																		<div class="span4">
-																			<%
-																			    }
-																							for (int i = nStart; i < nEnd; ++i) {
-																								deviceData = listDevice.get(i);
-																			%>
+															<!-- Indicators -->
+															<ol class="carousel-indicators">
 
-																			<a class="device-btn panel-heading panel-primary"
-																				href="device_controller.html"> <i><img
-																					src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																				<br> <span><%=deviceData.device_model%></span>
-																			</a>
-
-																			<%
-																			    }
-																							if (0 == nPage) {
-																			%>
-																		</div>
-																	</div>
-																	<%
-																	    } else {
-																	%>
-																</div>
-															</div>
+																<li data-target="#myCarousel" data-slide-to="0"
+																	class="active"></li>
+																<li data-target="#myCarousel" data-slide-to="1"></li>
+																<li data-target="#myCarousel" data-slide-to="2"></li>
+																<li data-target="#myCarousel" data-slide-to="3"></li>
+															</ol>
 															<%
 															    }
-																		}
 															%>
+															<!-- Wrapper for slides -->
+															<div class="carousel-inner" role="listbox">
+																<%
+																    for (int nPage = 0; nPage < nCountPage; ++nPage) {
+																				out.println(nPage);
+																				out.println(nCountPage);
+																				int nStart;
+																				int nEnd;
+																				nStart = nPage * 8;
+																				nEnd = (nPage * 8) + 8;
 
-															<!-- Controls -->
-															<div></div>
-															<a class="left carousel-control" href="#myCarousel"
-																role="button" data-slide="prev"> <span
-																class="glyphicon glyphicon-chevron-left"
-																aria-hidden="true"></span> <span class="sr-only">Previous</span>
+																				if (0 == nPage) {
+																%>
+																<div class="item active"
+																	style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
+																	<div class="span4">
+																		<%
+																		    } else {
+																		%><div class="item text-primary"
+																			style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
+																			<div class="span4">
+																				<%
+																				    }
+																								for (int i = nStart; i < nEnd; ++i) {
+																									deviceData = listDevice.get(i);
+																				%>
 
-															</a> <a class="right carousel-control" href="#myCarousel"
-																role="button" data-slide="next"> <span
-																class="glyphicon glyphicon-chevron-right"
-																aria-hidden="true"></span> <span class="sr-only">Next</span>
-															</a>
+																				<a class="device-btn panel-heading panel-primary"
+																					href="device_controller.html"> <i><img
+																						src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																					<br> <span><%=deviceData.device_model%></span>
+																				</a>
+
+																				<%
+																				    }
+																								if (0 == nPage) {
+																				%>
+																			</div>
+																		</div>
+																		<div></div>
+																		<a class="left carousel-control" href="#myCarousel"
+																	role="button" data-slide="prev"> <span
+																	class="glyphicon glyphicon-chevron-left"
+																	aria-hidden="true"></span> <span class="sr-only">Previoussss</span>
+
+																</a> <a class="right carousel-control" href="#myCarousel"
+																	role="button" data-slide="next"> <span
+																	class="glyphicon glyphicon-chevron-right"
+																	aria-hidden="true"></span> <span class="sr-only">Next</span>
+																</a>
+																		<%
+																		    } else {
+																		%>
+																	</div>
+																</div>
+										
+																<%
+																    }
+																			}
+																%>
+
+																<!-- Controls -->
+															
+																
+															</div>
+
+															<!--end item per slider -->
+
 														</div>
-
-														<!--end item per slider -->
+														<!-- End Display app list-->
 
 													</div>
-													<!-- End Display app list-->
-
 												</div>
 											</div>
-										</div>
-										<!-- /.row -->
-										<!-- APPlication List -->
+											<!-- /.row -->
+											<!-- APPlication List -->
 
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<!--END DEVICES LIST WINDOW  -->
+							<!--END DEVICES LIST WINDOW  -->
 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -889,7 +912,7 @@ select.icon-menu option {
 		<!--END MAIN WRAPPER -->
 		<%
 		    mdm.closeTypeDB(0);
-					mdm.closeDB();
+
 					mdm = null;
 		%>
 
