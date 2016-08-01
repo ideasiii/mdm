@@ -741,20 +741,33 @@ select.icon-menu option {
 
 													<!-- Display device list-->
 													<%
-													    Iterator<Mdm.DeviceData> itDD = null;
+													    //	    Iterator<Mdm.DeviceData> itDD = null;
 																Mdm.DeviceData deviceData = null;
 
 																ArrayList<Mdm.DeviceData> listDevice = new ArrayList<Mdm.DeviceData>();
 																int nDCount = mdm.queryDevice(strGroupId, listDevice);
-																itDD = listDevice.iterator();
+																//	itDD = listDevice.iterator();
 													%>
-													<!--item per slider -->
 
+													<!--item per slider -->
+													<%
+													    int nSum;
+																int nCountPage;
+																int nRemain;
+																nSum = listDevice.size();
+																nCountPage = nSum / 8;
+																nRemain = nSum % 8;
+
+																if (0 < nRemain) {
+																	nCountPage = nCountPage + 1;
+																}
+													%>
 													<div id="myCarousel" class="carousel slide"
 														data-ride="carousel" data-interval="false">
 
 														<!-- Indicators -->
 														<ol class="carousel-indicators">
+
 															<li data-target="#myCarousel" data-slide-to="0"
 																class="active"></li>
 															<li data-target="#myCarousel" data-slide-to="1"></li>
@@ -764,181 +777,149 @@ select.icon-menu option {
 
 														<!-- Wrapper for slides -->
 														<div class="carousel-inner" role="listbox">
+															<%
+															    for (int nPage = 0; nPage < nCountPage; ++nPage) {
+																			out.println(nPage);
+																			out.println(nCountPage);
+																			int nStart;
+																			int nEnd;
+																			nStart = nPage * 8;
+																			nEnd = (nPage * 8) + 8;
 
+																			if (0 == nPage) {
+															%>
 															<div class="item active"
 																style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
-																<div class="span4">
-																	<%
-																	    while (itDD.hasNext()) {
-																					deviceData = itDD.next();
-																	%>
-																	<a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span><%=deviceData.device_model%></span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>ASUS_TOOF</span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>ASUS_TOOF</span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>ASUS_TOOF</span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>ASUS_TOOF</span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>ASUS_TOOF</span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>ASUS_TOOF</span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>ASUS_TOOF</span>
-																	</a>
-
-																</div>
-															</div>
-															<div class="item text-primary">
-																<div class="span4"
+																<%
+																    } else {
+																%><div class="item text-primary"
 																	style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
-																	<a class="device-btn panel-heading panel-primary"
-																		href="#"> <i><img src="assets/img/phone.png"
-																			class="img-thumbnail"></i><br> <br> <span>iPhone
-																			6</span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>iPhone 6</span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>iPhone 6</span>
-																	</a> <a class="device-btn panel-heading panel-primary"
-																		href="device_controller.html"> <i><img
-																			src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																		<br> <span>iPhone 6</span>
-																	</a>
+																	<%
+																	    }
+																					for (int i = nStart; i < nEnd; ++i) {
+																						deviceData = listDevice.get(i);
+																	%>
+																	<div class="span4">
+
+																		<a class="device-btn panel-heading panel-primary"
+																			href="device_controller.html"> <i><img
+																				src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																			<br> <span><%=deviceData.device_model%></span>
+																		</a>
+																	</div>
+
+
+																	<%
+																	    }
+																	%>
 																</div>
+																<%
+																    }
+																%>
+
+																<!-- Controls -->
+																fffffffffffffffffff
+																<div></div>
+																<a class="left carousel-control" href="#myCarousel"
+																	role="button" data-slide="prev"> <span
+																	class="glyphicon glyphicon-chevron-left"
+																	aria-hidden="true"></span> <span class="sr-only">Previous</span>
+
+																</a> <a class="right carousel-control" href="#myCarousel"
+																	role="button" data-slide="next"> <span
+																	class="glyphicon glyphicon-chevron-right"
+																	aria-hidden="true"></span> <span class="sr-only">Next</span>
+																</a>
 															</div>
 
-															<!-- Controls -->
-															<div></div>
-															<a class="left carousel-control" href="#myCarousel"
-																role="button" data-slide="prev"> <span
-																class="glyphicon glyphicon-chevron-left"
-																aria-hidden="true"></span> <span class="sr-only">Previous</span>
+															<!--end item per slider -->
 
-															</a> <a class="right carousel-control" href="#myCarousel"
-																role="button" data-slide="next"> <span
-																class="glyphicon glyphicon-chevron-right"
-																aria-hidden="true"></span> <span class="sr-only">Next</span>
-															</a>
+
+															<!-- End Display app list-->
+
 														</div>
-
-														<!--end item per slider -->
-
-														<%
-														    }
-														%>
-														<!-- End Display app list-->
-
 													</div>
 												</div>
 											</div>
+											<!-- /.row -->
+											<!-- APPlication List -->
 										</div>
-										<!-- /.row -->
-										<!-- APPlication List -->
 									</div>
 								</div>
 							</div>
-						</div>
-						<!--END DEVICES LIST WINDOW  -->
+							<!--END DEVICES LIST WINDOW  -->
 
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!--END PAGE CONTENT -->
+		<!--END PAGE CONTENT -->
 
-	<!--FOOTER -->
-	<footer class="footer">
-		<div class="link_area">
-			<dl class="link_group">
-				<dd class="link">
-					<a href="">Document</a>
-				</dd>
-			</dl>
-			<dl class="link_group">
-				<dd class="link">
-					<a href="">Privacy Policy</a>
-				</dd>
-			</dl>
-			<dl class="link_group">
-				<dd class="link">
-					<a href="">Contact Us</a>
-				</dd>
-			</dl>
-			<div class="copyright_area">Copyright ©</div>
-		</div>
+		<!--FOOTER -->
+		<footer class="footer">
+			<div class="link_area">
+				<dl class="link_group">
+					<dd class="link">
+						<a href="">Document</a>
+					</dd>
+				</dl>
+				<dl class="link_group">
+					<dd class="link">
+						<a href="">Privacy Policy</a>
+					</dd>
+				</dl>
+				<dl class="link_group">
+					<dd class="link">
+						<a href="">Contact Us</a>
+					</dd>
+				</dl>
+				<div class="copyright_area">Copyright ©</div>
+			</div>
 
-	</footer>
+		</footer>
 
-	<!--END FOOTER -->
+		<!--END FOOTER -->
 
-	<!--END MAIN WRAPPER -->
-	<%
-	    mdm.closeTypeDB(0);
-				mdm.closeDB();
-				mdm = null;
-	%>
+		<!--END MAIN WRAPPER -->
+		<%
+		    mdm.closeTypeDB(0);
+					mdm.closeDB();
+					mdm = null;
+		%>
 
-	<!-- GLOBAL SCRIPTS -->
-	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	<!-- END GLOBAL SCRIPTS -->
+		<!-- GLOBAL SCRIPTS -->
+		<script src="assets/plugins/jquery-2.0.3.min.js"></script>
+		<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+		<!-- END GLOBAL SCRIPTS -->
 
-	<!-- PAGE LEVEL SCRIPT-->
-	<script src="assets/js/jquery-ui.min.js"></script>
-	<script src="assets/plugins/uniform/jquery.uniform.min.js"></script>
-	<script
-		src="assets/plugins/inputlimiter/jquery.inputlimiter.1.3.1.min.js"></script>
-	<script src="assets/plugins/chosen/chosen.jquery.min.js"></script>
-	<script src="assets/plugins/colorpicker/js/bootstrap-colorpicker.js"></script>
-	<script src="assets/plugins/tagsinput/jquery.tagsinput.min.js"></script>
-	<script src="assets/plugins/validVal/js/jquery.validVal.min.js"></script>
-	<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-	<script src="assets/plugins/daterangepicker/moment.min.js"></script>
-	<script src="assets/plugins/datepicker/js/bootstrap-datepicker.js"></script>
-	<script src="assets/plugins/timepicker/js/bootstrap-timepicker.min.js"></script>
-	<script src="assets/plugins/switch/static/js/bootstrap-switch.min.js"></script>
-	<script
-		src="assets/plugins/jquery.dualListbox-1.3/jquery.dualListBox-1.3.min.js"></script>
-	<script src="assets/plugins/autosize/jquery.autosize.min.js"></script>
-	<script src="assets/plugins/jasny/js/bootstrap-inputmask.js"></script>
-	<script src="assets/js/formsInit.js"></script>
-	<script>
-		$(function() {
-			formInit();
-		});
-	</script>
-	<SCRIPT type="text/javascript">
-		changeBtn();
-		showBtnV();
-	</SCRIPT>
+		<!-- PAGE LEVEL SCRIPT-->
+		<script src="assets/js/jquery-ui.min.js"></script>
+		<script src="assets/plugins/uniform/jquery.uniform.min.js"></script>
+		<script
+			src="assets/plugins/inputlimiter/jquery.inputlimiter.1.3.1.min.js"></script>
+		<script src="assets/plugins/chosen/chosen.jquery.min.js"></script>
+		<script src="assets/plugins/colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script src="assets/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+		<script src="assets/plugins/validVal/js/jquery.validVal.min.js"></script>
+		<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+		<script src="assets/plugins/daterangepicker/moment.min.js"></script>
+		<script src="assets/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="assets/plugins/timepicker/js/bootstrap-timepicker.min.js"></script>
+		<script src="assets/plugins/switch/static/js/bootstrap-switch.min.js"></script>
+		<script
+			src="assets/plugins/jquery.dualListbox-1.3/jquery.dualListBox-1.3.min.js"></script>
+		<script src="assets/plugins/autosize/jquery.autosize.min.js"></script>
+		<script src="assets/plugins/jasny/js/bootstrap-inputmask.js"></script>
+		<script src="assets/js/formsInit.js"></script>
+		<script>
+			$(function() {
+				formInit();
+			});
+		</script>
 
-	<!--END PAGE LEVEL SCRIPT-->
 
+		<!--END PAGE LEVEL SCRIPT-->
 </body>
 </html>

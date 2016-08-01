@@ -458,6 +458,7 @@ public class Mdm
 		{
 		    deviceData = new DeviceData();
 		    mapItem = it.next();
+		    
 		    deviceData.mac_address = mapItem.get(Common.MAC_ADDRESS);
 		    deviceData.device_model = mapItem.get(Common.DEVICE_MODEL);
 		    deviceData.group_id = mapItem.get(Common.GROUP_ID);
@@ -468,6 +469,7 @@ public class Mdm
 		    deviceData.create_time = mapItem.get(Common.CREATE_TIME);
 		    deviceData.update_time = mapItem.get(Common.UPDATE_TIME);
 		    listDevice.add(deviceData);
+		    System.out.println(deviceData.mac_address);
 		    deviceData = null;
 		}
 		nCount = listDevice.size();

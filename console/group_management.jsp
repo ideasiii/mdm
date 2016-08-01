@@ -995,7 +995,7 @@
 	</script>
 	<script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
 	<SCRIPT type="text/javascript">
-		changeBtn();
+		//changeBtn();
 		showBtnV();
 	</SCRIPT>
 	<!-- END PAGE LEVEL SCRIPTS -->
