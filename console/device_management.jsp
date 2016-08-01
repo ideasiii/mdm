@@ -790,66 +790,71 @@ select.icon-menu option {
 															%>
 															<div class="item active"
 																style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
-																<%
-																    } else {
-																%><div class="item text-primary"
-																	style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
+																<div class="span4">
 																	<%
-																	    }
-																					for (int i = nStart; i < nEnd; ++i) {
-																						deviceData = listDevice.get(i);
-																	%>
-																	<div class="span4">
+																	    } else {
+																	%><div class="item text-primary"
+																		style="text-align: center; margin-top: 30px; margin-bottom: 70px; padding-left: 15%; padding-right: 15%;">
+																		<div class="span4">
+																			<%
+																			    }
+																							for (int i = nStart; i < nEnd; ++i) {
+																								deviceData = listDevice.get(i);
+																			%>
 
-																		<a class="device-btn panel-heading panel-primary"
-																			href="device_controller.html"> <i><img
-																				src="assets/img/phone.png" class="img-thumbnail"></i><br>
-																			<br> <span><%=deviceData.device_model%></span>
-																		</a>
+																			<a class="device-btn panel-heading panel-primary"
+																				href="device_controller.html"> <i><img
+																					src="assets/img/phone.png" class="img-thumbnail"></i><br>
+																				<br> <span><%=deviceData.device_model%></span>
+																			</a>
+
+																			<%
+																			    }
+																							if (0 == nPage) {
+																			%>
+																		</div>
 																	</div>
-
-
 																	<%
-																	    }
+																	    } else {
 																	%>
 																</div>
-																<%
-																    }
-																%>
-
-																<!-- Controls -->
-																fffffffffffffffffff
-																<div></div>
-																<a class="left carousel-control" href="#myCarousel"
-																	role="button" data-slide="prev"> <span
-																	class="glyphicon glyphicon-chevron-left"
-																	aria-hidden="true"></span> <span class="sr-only">Previous</span>
-
-																</a> <a class="right carousel-control" href="#myCarousel"
-																	role="button" data-slide="next"> <span
-																	class="glyphicon glyphicon-chevron-right"
-																	aria-hidden="true"></span> <span class="sr-only">Next</span>
-																</a>
 															</div>
+															<%
+															    }
+																		}
+															%>
 
-															<!--end item per slider -->
+															<!-- Controls -->
+															<div></div>
+															<a class="left carousel-control" href="#myCarousel"
+																role="button" data-slide="prev"> <span
+																class="glyphicon glyphicon-chevron-left"
+																aria-hidden="true"></span> <span class="sr-only">Previous</span>
 
-
-															<!-- End Display app list-->
-
+															</a> <a class="right carousel-control" href="#myCarousel"
+																role="button" data-slide="next"> <span
+																class="glyphicon glyphicon-chevron-right"
+																aria-hidden="true"></span> <span class="sr-only">Next</span>
+															</a>
 														</div>
+
+														<!--end item per slider -->
+
 													</div>
+													<!-- End Display app list-->
+
 												</div>
 											</div>
-											<!-- /.row -->
-											<!-- APPlication List -->
 										</div>
+										<!-- /.row -->
+										<!-- APPlication List -->
+
 									</div>
 								</div>
 							</div>
-							<!--END DEVICES LIST WINDOW  -->
-
 						</div>
+						<!--END DEVICES LIST WINDOW  -->
+
 					</div>
 				</div>
 			</div>
