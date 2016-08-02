@@ -484,7 +484,28 @@ public class Mdm
 	return nCount;
     }
     
-    
+    public int insertControllerJob(final String strControlId, final String strCmmdFrom, final String strMacAddress)
+    {
+	try
+	{
+	    String strSQL = "insert into job(control_id, cmmd_from, mac_address) values(?,?,?) ;";
+	    PreparedStatement pst = null;
+	    pst = conMdmAndroid.prepareStatement(strSQL);
+	    int idx = 1;
+	    pst.setString(idx++, strControlId);
+	    pst.setString(idx++, strCmmdFrom);
+	    pst.setString(idx++, strMacAddress);
+	    pst.executeUpdate();
+	    pst.close();
+	}
+	catch (Exception e)
+	{
+	    Logs.showError(e.toString());
+	    return MDM_DB_ERR_EXCEPTION;
+	}
+
+	return MDM_DB_ERR_SUCCESS;
+    }
     
     
     

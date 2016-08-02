@@ -700,42 +700,92 @@ select.icon-menu option {
 						<div class="row">
 							<div class="col-lg-12">
 								<div style="text-align: center;">
-
+									<%
+									    if (nSum == 0) {
+									%>
+									<a class="quick-btn"> <i
+										class="icon-camera icon-2x disable-button"></i> <span
+										class="disable-button"> Camera</span> <span
+										class="label label-success">device</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-lock icon-2x disable-button"></i> <span
+										class="disable-button">Screen Lock</span> <span
+										class="label label-success">device</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-volume-off icon-2x disable-button"></i> <span
+										class="disable-button">Mute</span> <span
+										class="label label-success">device</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-rss icon-2x disable-button"></i> <span
+										class="disable-button">Wi-Fi</span> <span
+										class="label label-warning">service</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-file-text icon-2x disable-button"></i> <span
+										class="disable-button">Content</span> <span
+										class="label label-warning">service</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-android icon-2x disable-button"></i> <span
+										class="disable-button">Application</span> <span
+										class="label label-warning">service</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-signin icon-2x disable-button"></i> <span
+										class="disable-button">Record</span> <span
+										class="label btn-metis-4">system</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-exchange icon-2x disable-button"></i> <span
+										class="disable-button">Restore</span> <span
+										class="label btn-metis-4">system</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-stop  icon-2x disable-button"></i> <span
+										class="disable-button">Format</span> <span
+										class="label btn-metis-4">system</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-cog icon-2x disable-button"></i> <span
+										class="disable-button"> New</span> <span
+										class="label label-default">coming</span>
+									</a> <a class="quick-btn"> <i
+										class="icon-map-marker icon-2x disable-button"></i> <span
+										class="disable-button"> New</span> <span
+										class="label label-default">coming</span>
+									</a>
+									<%
+									    } else {
+									%>
 									<a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-camera"> <i
+										data-toggle="modal" data-target="#con-camera" onclick="checkControllerId('1')"> <i
 										class="icon-camera icon-2x"></i> <span> Camera</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-screen"> <i
+										data-toggle="modal" data-target="#con-screen" onclick="checkControllerId('2')"> <i
 										class="icon-lock icon-2x"></i> <span>Screen Lock</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-mute"> <i
+										data-toggle="modal" data-target="#con-mute" onclick="checkControllerId('3')"> <i
 										class="icon-volume-off icon-2x"></i> <span>Mute</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-wifi"> <i
+										data-toggle="modal" data-target="#con-wifi" onclick="checkControllerId('4')"> <i
 										class="icon-rss icon-2x"></i> <span>Wi-Fi</span> <span
 										class="label label-warning">service</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-content"> <i
+										data-toggle="modal" data-target="#con-content" onclick="checkControllerId('5')"> <i
 										class="icon-file-text icon-2x"></i> <span>Content</span> <span
 										class="label label-warning">service</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-app"> <i
+										data-toggle="modal" data-target="#con-app" onclick="checkControllerId('6')"> <i
 										class="icon-android icon-2x"></i> <span>Application</span> <span
 										class="label label-warning">service</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-record"> <i
+										data-toggle="modal" data-target="#con-record" onclick="checkControllerId('7')"> <i
 										class="icon-signin icon-2x"></i> <span>Record</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-restore"> <i
+										data-toggle="modal" data-target="#con-restore" onclick="checkControllerId('8')"> <i
 										class="icon-exchange icon-2x"></i> <span>Restore</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-format"> <i
-										class="fa fa-dot-circle-o  fa-2x"></i> <span>Format</span> <span
+										data-toggle="modal" data-target="#con-format" onclick="checkControllerId('9')"> <i
+										class="icon-stop  icon-2x"></i> <span>Format</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a class="quick-btn"> <i
 										class="icon-cog icon-2x disable-button"></i> <span
@@ -746,7 +796,9 @@ select.icon-menu option {
 										class="disable-button"> New</span> <span
 										class="label label-default">coming</span>
 									</a>
-
+									<%
+									    }
+									%>
 								</div>
 							</div>
 						</div>
@@ -919,11 +971,7 @@ select.icon-menu option {
 	<!--END FOOTER -->
 
 	<!--END MAIN WRAPPER -->
-	<%
-	    mdm.closeTypeDB(0);
 
-				mdm = null;
-	%>
 
 	<!-- GLOBAL SCRIPTS -->
 	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
@@ -959,4 +1007,16 @@ select.icon-menu option {
 
 	<!--END PAGE LEVEL SCRIPT-->
 </body>
+
+<form action="controller.jsp" method="post" name="ControllerJob" id="ControllerJob" >
+<input name="<%=Common.GROUP_ID%>" type="hidden" value="<%=strGroupId%>" />
+<input name="control_id" type="hidden" value="" />
+<input name="cmmd_from" type="hidden" value="group" />
+</form>
+
 </html>
+	<%
+	    mdm.closeTypeDB(0);
+
+				mdm = null;
+	%>
