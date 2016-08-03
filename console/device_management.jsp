@@ -210,7 +210,7 @@ select.icon-menu option {
 							<button type="button" class="btn btn-danger"
 								style="margin-right: 60px;" data-dismiss="modal">Off</button>
 							<button type="button" class="btn btn-metis-2"
-								data-dismiss="modal" onclick="checkControllerId('formControllerJob','1')">On</button>
+								data-dismiss="modal" onclick="checkControllerId('1')">On</button>
 						</div>
 					</div>
 				</div>
@@ -753,39 +753,47 @@ select.icon-menu option {
 									    } else {
 									%>
 									<a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-camera" > <i
+										data-toggle="modal" data-target="#con-camera"> <i
 										class="icon-camera icon-2x"></i> <span> Camera</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-screen" onclick="checkControllerId('2')"> <i
+										data-toggle="modal" data-target="#con-screen"
+										onclick="checkControllerId('2')"> <i
 										class="icon-lock icon-2x"></i> <span>Screen Lock</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-mute" onclick="checkControllerId('3')"> <i
+										data-toggle="modal" data-target="#con-mute"
+										onclick="checkControllerId('3')"> <i
 										class="icon-volume-off icon-2x"></i> <span>Mute</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-wifi" onclick="checkControllerId('4')"> <i
+										data-toggle="modal" data-target="#con-wifi"
+										onclick="checkControllerId('4')"> <i
 										class="icon-rss icon-2x"></i> <span>Wi-Fi</span> <span
 										class="label label-warning">service</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-content" onclick="checkControllerId('5')"> <i
+										data-toggle="modal" data-target="#con-content"
+										onclick="checkControllerId('5')"> <i
 										class="icon-file-text icon-2x"></i> <span>Content</span> <span
 										class="label label-warning">service</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-app" onclick="checkControllerId('6')"> <i
+										data-toggle="modal" data-target="#con-app"
+										onclick="checkControllerId('6')"> <i
 										class="icon-android icon-2x"></i> <span>Application</span> <span
 										class="label label-warning">service</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-record" onclick="checkControllerId('7')"> <i
+										data-toggle="modal" data-target="#con-record"
+										onclick="checkControllerId('7')"> <i
 										class="icon-signin icon-2x"></i> <span>Record</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-restore" onclick="checkControllerId('8')"> <i
+										data-toggle="modal" data-target="#con-restore"
+										onclick="checkControllerId('8')"> <i
 										class="icon-exchange icon-2x"></i> <span>Restore</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-format" onclick="checkControllerId('9')"> <i
+										data-toggle="modal" data-target="#con-format"
+										onclick="checkControllerId('9')"> <i
 										class="icon-stop  icon-2x"></i> <span>Format</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a class="quick-btn"> <i
@@ -870,7 +878,10 @@ select.icon-menu option {
 																				int nEnd;
 																				nStart = nPage * 8;
 																				nEnd = (nPage * 8) + 8;
-
+	                                                                           if(nPage == (nCountPage -1))
+	                                                                           {
+	                                                                               nEnd = (nPage * 8) + nRemain;
+	                                                                           }
 																				if (0 == nPage) {
 																%>
 																<div class="item active"
@@ -899,27 +910,31 @@ select.icon-menu option {
 																				%>
 																			</div>
 																		</div>
-
-																		<!-- Controls -->
-																		<div></div>
-																		<a class="left carousel-control" href="#myCarousel"
-																			style="outline: 0;" role="button" data-slide="prev">
-																			<span class="glyphicon glyphicon-chevron-left"
-																			aria-hidden="true"></span> <span class="sr-only">Previous</span>
-
-																		</a> <a class="right carousel-control" href="#myCarousel"
-																			style="outline: 0;" role="button" data-slide="next">
-																			<span class="glyphicon glyphicon-chevron-right"
-																			aria-hidden="true"></span> <span class="sr-only">Next</span>
-																		</a>
 																		<%
 																		    } else {
 																		%>
 																	</div>
 																</div>
+
+																<%
+																  }
+																%>
+
+																<!-- Controls -->
+																<div></div>
+																<a class="left carousel-control" href="#myCarousel"
+																	style="outline: 0;" role="button" data-slide="prev">
+																	<span class="glyphicon glyphicon-chevron-left"
+																	aria-hidden="true"></span> <span class="sr-only">Previous</span>
+
+																</a> <a class="right carousel-control" href="#myCarousel"
+																	style="outline: 0;" role="button" data-slide="next">
+																	<span class="glyphicon glyphicon-chevron-right"
+																	aria-hidden="true"></span> <span class="sr-only">Next</span>
+																</a>
+
 																<%
 																    }
-																			}
 																%>
 
 															</div>
@@ -1005,19 +1020,21 @@ select.icon-menu option {
 		});
 	</script>
 
-<form action="controller.jsp" method="post" name="formControllerJob" id="formControllerJob" >
-<input name="<%=Common.GROUP_ID%>" type="hidden" value="<%=strGroupId%>" />
-<input name="ControlId" id="ControlId" type="hidden"  />
-<input name="cmmd_from" id="cmmd_from" type="hidden" value="group" />
-</form>
+	<form action="controller.jsp" method="post" name="formControllerJob"
+		id="formControllerJob">
+		<input name="<%=Common.GROUP_ID%>" type="hidden"
+			value="<%=strGroupId%>" /> <input name="control_id" id="control_id"
+			type="hidden" value="" /> <input name="cmmd_from" id="cmmd_from"
+			type="hidden" value="group" />
+	</form>
 	<!--END PAGE LEVEL SCRIPT-->
 </body>
 
 
 
 </html>
-	<%
-	    mdm.closeTypeDB(0);
+<%
+    mdm.closeTypeDB(0);
 
-				mdm = null;
-	%>
+    mdm = null;
+%>

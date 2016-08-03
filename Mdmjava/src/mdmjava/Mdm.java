@@ -80,6 +80,15 @@ public class Mdm
 	public String update_time;
     }
     
+    public static class ActionDeviceData
+    {
+	public String job_id;
+	public String control_id;
+	public String action;
+	public String input;
+	public String create_time;
+    }
+    
     sqliteClient sqlite = null;
     Connection conMdmUser = null;
     Connection conLocation = null;
@@ -506,6 +515,31 @@ public class Mdm
 
 	return MDM_DB_ERR_SUCCESS;
     }
+    
+    public int insertActionDevice(final String strJobId, final String strControlId, final String strAction, final String strInput)
+    {
+	try
+	{
+	    String strSQL = "insert into action_device(job_id, control_id, action, input) values(?,?,?,?) ;";
+	    PreparedStatement pst = null;
+	    pst = conMdmAndroid.prepareStatement(strSQL);
+	    int idx = 1;
+	    pst.setString(idx++, strJobId);
+	    pst.setString(idx++, strControlId);
+	    pst.setString(idx++, strAction);
+	    pst.setString(idx++, strInput);
+	    pst.executeUpdate();
+	    pst.close();
+	}
+	catch (Exception e)
+	{
+	    Logs.showError(e.toString());
+	    return MDM_DB_ERR_EXCEPTION;
+	}
+
+	return MDM_DB_ERR_SUCCESS;
+    }
+    
     
     
     

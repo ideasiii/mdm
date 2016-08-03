@@ -18,6 +18,7 @@
 			}
 
 			Mdm.DeviceData deviceData = null;
+			Mdm.ActionDeviceData actionDeviceData = null;
 
 			ArrayList<Mdm.DeviceData> listDevice = new ArrayList<Mdm.DeviceData>();
 			int nDCount = mdm.queryDevice(strGroupId, listDevice);
@@ -31,6 +32,11 @@
 						break;
 					}
 				}
+				
+				  if (nResult  == Mdm.MDM_DB_ERR_SUCCESS) {
+				      nResult = mdm.insertActionDevice(strJobId, strControlId, strAction, strInput);
+				  }
+				
 			}
 
 		//	String strResult = null;

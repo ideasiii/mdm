@@ -27,6 +27,9 @@ public abstract class Common
 	final public static String MAC_ADDRESS  = "mac_address";
 	final public static String DEVICE_MODEL  = "device_model";
 	final public static String DEVICE_IMG  = "device_img";
+	final public static String JOB_ID  = "job_id";
+	final public static String CONTROL_ID  = "control_id";
+	final public static String ACTION  = "action";
 	
 	/**sqlite mdm_user.db 
 	 * table: user_permission**/
@@ -72,6 +75,10 @@ public abstract class Common
 	final public static ArrayList<String> listDevice = new ArrayList<>(Arrays.asList(MAC_ADDRESS, DEVICE_MODEL, GROUP_ID, BATTERY_PERCENT,
 		TOTAL_SPACE, USED_SPACE, DEVICE_IMG, CREATE_TIME, UPDATE_TIME)); 
 
+	/**sqlite mdm_android.db 
+	 * table: action_device**/
+	final public static String INPUT  = "input";
 	
+	final public static ArrayList<String> listActionDevice = new ArrayList<>(Arrays.asList(JOB_ID, CONTROL_ID, ACTION, INPUT, CREATE_TIME)); 
 	
 }
