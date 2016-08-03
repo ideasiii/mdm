@@ -21,7 +21,7 @@
 
 			ArrayList<Mdm.DeviceData> listDevice = new ArrayList<Mdm.DeviceData>();
 			int nDCount = mdm.queryDevice(strGroupId, listDevice);
-			int nResult;
+			int nResult = Mdm.MDM_DB_ERR_FAIL;
 
 			if (0 < nDCount) {
 				for (int i = 0; i < listDevice.size(); ++i) {
@@ -33,7 +33,7 @@
 				}
 			}
 
-			String strResult = null;
+		//	String strResult = null;
 
 			mdm.closeTypeDB(0);
 			mdm = null;
@@ -65,7 +65,7 @@
 	</form>
 
 	<%
-	    if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {
+	    if (nResult  == Mdm.MDM_DB_ERR_SUCCESS) {
 	%>
 	<script>
 		formSubmit('FormHome');

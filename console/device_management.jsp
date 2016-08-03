@@ -35,6 +35,7 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="assets/js/bootstrap.min.js"></script>
+<script src="js/controller_list.js"></script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -209,7 +210,7 @@ select.icon-menu option {
 							<button type="button" class="btn btn-danger"
 								style="margin-right: 60px;" data-dismiss="modal">Off</button>
 							<button type="button" class="btn btn-metis-2"
-								data-dismiss="modal">On</button>
+								data-dismiss="modal" onclick="checkControllerId('formControllerJob','1')">On</button>
 						</div>
 					</div>
 				</div>
@@ -752,7 +753,7 @@ select.icon-menu option {
 									    } else {
 									%>
 									<a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-camera" onclick="checkControllerId('1')"> <i
+										data-toggle="modal" data-target="#con-camera" > <i
 										class="icon-camera icon-2x"></i> <span> Camera</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
@@ -1004,15 +1005,15 @@ select.icon-menu option {
 		});
 	</script>
 
-
+<form action="controller.jsp" method="post" name="formControllerJob" id="formControllerJob" >
+<input name="<%=Common.GROUP_ID%>" type="hidden" value="<%=strGroupId%>" />
+<input name="ControlId" id="ControlId" type="hidden"  />
+<input name="cmmd_from" id="cmmd_from" type="hidden" value="group" />
+</form>
 	<!--END PAGE LEVEL SCRIPT-->
 </body>
 
-<form action="controller.jsp" method="post" name="ControllerJob" id="ControllerJob" >
-<input name="<%=Common.GROUP_ID%>" type="hidden" value="<%=strGroupId%>" />
-<input name="control_id" type="hidden" value="" />
-<input name="cmmd_from" type="hidden" value="group" />
-</form>
+
 
 </html>
 	<%
