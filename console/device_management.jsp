@@ -208,9 +208,10 @@ select.icon-menu option {
 						<div
 							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
 							<button type="button" class="btn btn-danger"
-								style="margin-right: 60px;" data-dismiss="modal">Off</button>
+								style="margin-right: 60px;" data-dismiss="modal"
+								onclick="checkControllerId('1','off',' ')">Off</button>
 							<button type="button" class="btn btn-metis-2"
-								data-dismiss="modal" onclick="checkControllerId('1')">On</button>
+								data-dismiss="modal" onclick="checkControllerId('1','on',' ')">On</button>
 						</div>
 					</div>
 				</div>
@@ -878,10 +879,9 @@ select.icon-menu option {
 																				int nEnd;
 																				nStart = nPage * 8;
 																				nEnd = (nPage * 8) + 8;
-	                                                                           if(nPage == (nCountPage -1))
-	                                                                           {
-	                                                                               nEnd = (nPage * 8) + nRemain;
-	                                                                           }
+																				if (nPage == (nCountPage - 1)) {
+																					nEnd = (nPage * 8) + nRemain;
+																				}
 																				if (0 == nPage) {
 																%>
 																<div class="item active"
@@ -917,7 +917,7 @@ select.icon-menu option {
 																</div>
 
 																<%
-																  }
+																    }
 																%>
 
 																<!-- Controls -->
@@ -1024,6 +1024,8 @@ select.icon-menu option {
 		id="formControllerJob">
 		<input name="<%=Common.GROUP_ID%>" type="hidden"
 			value="<%=strGroupId%>" /> <input name="control_id" id="control_id"
+			type="hidden" value="" /> <input name="action" id="action"
+			type="hidden" value="" /> <input name="input" id="input"
 			type="hidden" value="" /> <input name="cmmd_from" id="cmmd_from"
 			type="hidden" value="group" />
 	</form>

@@ -3,12 +3,15 @@ function formSubmit(formName) {
 	form.submit();
 }
 
-function checkControllerId(item) {
+function checkControllerId(item, action, input) {
 	alert('hello');
 	var form = document.getElementById('formControllerJob');
 	alert(form);
 	
-	form.control_id.value =item;
+	form.control_id.value = item;
+	form.action.value = action;
+	form.input.value = input;
+	alert(input);
 	
 //	if('1' == item)
 //		{

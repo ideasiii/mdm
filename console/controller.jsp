@@ -8,8 +8,12 @@
 
 			final String strGroupId = request.getParameter(Common.GROUP_ID);
 			final String strControlId = request.getParameter("control_id");
+			final String strAction = request.getParameter("action");
+			final String strInput = request.getParameter("input");
 			final String strCmmdFrom = request.getParameter("cmmd_from");
 
+
+			
 			Mdm mdm = new Mdm();
 
 			if (!mdm.conTypeDB(0)) {
@@ -18,28 +22,29 @@
 			}
 
 			Mdm.DeviceData deviceData = null;
-			Mdm.ActionDeviceData actionDeviceData = null;
 
 			ArrayList<Mdm.DeviceData> listDevice = new ArrayList<Mdm.DeviceData>();
 			int nDCount = mdm.queryDevice(strGroupId, listDevice);
 			int nResult = Mdm.MDM_DB_ERR_FAIL;
 
 			if (0 < nDCount) {
+			    String strJobSeq = Mdm.generateShortUuid();
+			    
+			    
 				for (int i = 0; i < listDevice.size(); ++i) {
 					deviceData = listDevice.get(i);
-					nResult = mdm.insertControllerJob(strControlId, strCmmdFrom, deviceData.mac_address);
+					nResult = mdm.insertControllerJob(strControlId, strJobSeq, strCmmdFrom, deviceData.mac_address);
 					if (Mdm.MDM_DB_ERR_SUCCESS != nResult) {
 						break;
 					}
 				}
 				
 				  if (nResult  == Mdm.MDM_DB_ERR_SUCCESS) {
-				      nResult = mdm.insertActionDevice(strJobId, strControlId, strAction, strInput);
+				     
+				      nResult = mdm.insertActionDevice(strJobSeq, strControlId, strAction, strInput);
 				  }
 				
 			}
-
-		//	String strResult = null;
 
 			mdm.closeTypeDB(0);
 			mdm = null;

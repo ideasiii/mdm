@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.UUID;
 
 public class Mdm
 {
@@ -41,7 +42,7 @@ public class Mdm
 	public String create_time;
 	public String update_time;
     }
-    
+
     public static class AppData
     {
 	public String app_id;
@@ -66,7 +67,7 @@ public class Mdm
 	public String create_time;
 	public String update_time;
     }
-    
+
     public static class DeviceData
     {
 	public String mac_address;
@@ -79,16 +80,17 @@ public class Mdm
 	public String create_time;
 	public String update_time;
     }
-    
+
     public static class ActionDeviceData
     {
 	public String job_id;
+	public String job_seq;
 	public String control_id;
 	public String action;
 	public String input;
 	public String create_time;
     }
-    
+
     sqliteClient sqlite = null;
     Connection conMdmUser = null;
     Connection conLocation = null;
@@ -389,7 +391,7 @@ public class Mdm
 		    appData.file_location = mapItem.get(Common.FILE_LOCATION);
 		    appData.create_time = mapItem.get(Common.CREATE_TIME);
 		    appData.update_time = mapItem.get(Common.UPDATE_TIME);
-		    listApp.add( appData);
+		    listApp.add(appData);
 		    appData = null;
 		}
 		nCount = listApp.size();
@@ -431,7 +433,7 @@ public class Mdm
 		    contentData.file_location = mapItem.get(Common.FILE_LOCATION);
 		    contentData.create_time = mapItem.get(Common.CREATE_TIME);
 		    contentData.update_time = mapItem.get(Common.UPDATE_TIME);
-		    listContent.add( contentData);
+		    listContent.add(contentData);
 		    contentData = null;
 		}
 		nCount = listContent.size();
@@ -445,7 +447,7 @@ public class Mdm
 
 	return nCount;
     }
-    
+
     public int queryDevice(String strGroupId, ArrayList<DeviceData> listDevice)
     {
 	int nCount = 0;
@@ -467,7 +469,7 @@ public class Mdm
 		{
 		    deviceData = new DeviceData();
 		    mapItem = it.next();
-		    
+
 		    deviceData.mac_address = mapItem.get(Common.MAC_ADDRESS);
 		    deviceData.device_model = mapItem.get(Common.DEVICE_MODEL);
 		    deviceData.group_id = mapItem.get(Common.GROUP_ID);
@@ -492,16 +494,17 @@ public class Mdm
 
 	return nCount;
     }
-    
-    public int insertControllerJob(final String strControlId, final String strCmmdFrom, final String strMacAddress)
+
+    public int insertControllerJob(final String strControlId,final String strJobSeq, final String strCmmdFrom, final String strMacAddress)
     {
 	try
 	{
-	    String strSQL = "insert into job(control_id, cmmd_from, mac_address) values(?,?,?) ;";
+	    String strSQL = "insert into job(control_id, job_seq, cmmd_from, mac_address) values(?,?,?,?) ;";
 	    PreparedStatement pst = null;
 	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    int idx = 1;
 	    pst.setString(idx++, strControlId);
+	    pst.setString(idx++, strJobSeq);
 	    pst.setString(idx++, strCmmdFrom);
 	    pst.setString(idx++, strMacAddress);
 	    pst.executeUpdate();
@@ -515,16 +518,16 @@ public class Mdm
 
 	return MDM_DB_ERR_SUCCESS;
     }
-    
-    public int insertActionDevice(final String strJobId, final String strControlId, final String strAction, final String strInput)
+
+    public int insertActionDevice(final String strJobSeq, final String strControlId, final String strAction, final String strInput)
     {
 	try
 	{
-	    String strSQL = "insert into action_device(job_id, control_id, action, input) values(?,?,?,?) ;";
+	    String strSQL = "insert into action_device(job_seq, control_id, action, input) values(?,?,?,?) ;";
 	    PreparedStatement pst = null;
 	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    int idx = 1;
-	    pst.setString(idx++, strJobId);
+	    pst.setString(idx++, strJobSeq);
 	    pst.setString(idx++, strControlId);
 	    pst.setString(idx++, strAction);
 	    pst.setString(idx++, strInput);
@@ -539,8 +542,22 @@ public class Mdm
 
 	return MDM_DB_ERR_SUCCESS;
     }
-    
-    
-    
-    
+
+    public static String[] chars = new String[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+	    "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W",
+	    "X", "Y", "Z" };
+
+    public static String generateShortUuid()
+    {
+	StringBuffer shortBuffer = new StringBuffer();
+	String uuid = UUID.randomUUID().toString().replace("-", "");
+	for (int i = 0; i < 8; i++)
+	{
+	    String str = uuid.substring(i * 4, i * 4 + 4);
+	    int x = Integer.parseInt(str, 16);
+	    shortBuffer.append(chars[x % 0x3E]);
+	}
+	return shortBuffer.toString();
+    }
+
 }

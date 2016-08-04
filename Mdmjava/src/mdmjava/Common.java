@@ -28,6 +28,7 @@ public abstract class Common
 	final public static String DEVICE_MODEL  = "device_model";
 	final public static String DEVICE_IMG  = "device_img";
 	final public static String JOB_ID  = "job_id";
+	final public static String JOB_SEQ  = "job_seq";
 	final public static String CONTROL_ID  = "control_id";
 	final public static String ACTION  = "action";
 	
@@ -53,7 +54,7 @@ public abstract class Common
 	/**sqlite mdm_android.db 
 	 * table: app_manage**/
 	final public static String CATEGORY = "category";
-	final public static String  EDITION= "edition";
+	final public static String  EDITION = "edition";
 	final public static String DESCRIPTION = "description";
 	
 	final public static ArrayList<String> listApp = new ArrayList<>(Arrays.asList(APP_ID, GROUP_ID, APP_NAME, CATEGORY,
