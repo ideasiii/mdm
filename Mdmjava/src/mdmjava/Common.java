@@ -80,6 +80,6 @@ public abstract class Common
 	 * table: action_device**/
 	final public static String INPUT  = "input";
 	
-	final public static ArrayList<String> listActionDevice = new ArrayList<>(Arrays.asList(JOB_ID, CONTROL_ID, ACTION, INPUT, CREATE_TIME)); 
+	
 	
 }

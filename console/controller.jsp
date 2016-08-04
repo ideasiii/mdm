@@ -9,7 +9,7 @@
 			final String strGroupId = request.getParameter(Common.GROUP_ID);
 			final String strControlId = request.getParameter("control_id");
 			final String strAction = request.getParameter("action");
-			final String strInput = request.getParameter("input");
+			final String strInput = request.getParameter(Common.INPUT);
 			final String strCmmdFrom = request.getParameter("cmmd_from");
 
 

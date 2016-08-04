@@ -35,8 +35,11 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="assets/js/bootstrap.min.js"></script>
+
+<!-- JavaScript -->
 <script src="js/controller_list.js"></script>
 
+		
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -180,6 +183,8 @@ select.icon-menu option {
 				<%
 				    mdm.closeTypeDB(0);
 							mdm.closeDB();
+
+							String strInput = request.getParameter(Common.INPUT);
 				%>
 			</nav>
 		</div>
@@ -239,7 +244,8 @@ select.icon-menu option {
 						<div
 							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
 							<button type="button" class="btn btn-danger"
-								style="margin-right: 60px;" data-dismiss="modal">Off</button>
+								style="margin-right: 60px;" data-dismiss="modal"
+								onclick="checkControllerId('2','off',' ')">Off</button>
 							<button type="button" class="btn btn-metis-2" data-toggle="modal"
 								data-target="#screen-on" data-dismiss="modal">On</button>
 						</div>
@@ -258,22 +264,31 @@ select.icon-menu option {
 							<h4 class="modal-title" id="H1">Set a Password to Lock Your
 								Screen</h4>
 						</div>
+						<form role="form" action="controller.jsp" name="formScreenLock"
+								id="formScreenLock">
 						<div class="modal-body">
-							<form role="form">
 								<div class="form-group">
-									<label>Screen Lock Password</label> <input class="form-control" />
+									<label>Screen Lock Password</label> <input class="form-control"
+										name="<%=Common.INPUT%>" id="<%=Common.INPUT%>" 
+										 /><input name="<%=Common.GROUP_ID%>" type="hidden"
+			value="<%=strGroupId%>" /> <input name="control_id" id="control_id"
+			type="hidden" value="" /> <input name="action" id="action"
+			type="hidden" value="" />  <input name="cmmd_from" id="cmmd_from"
+			type="hidden" value="group" />
+										 
 									<p class="help-block">(Must be less than 10 letters in
 										alphanumeric format.)</p>
 								</div>
-							</form>
+							
 						</div>
 						<div
 							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
 							<button type="button" class="btn btn-default"
 								style="margin-right: 60px;" data-dismiss="modal">Cancel</button>
 							<button type="button" class="btn btn-primary"
-								data-dismiss="modal">Confirm</button>
+								data-dismiss="modal" onclick="checkScreenLockInput('2','on')">Confirm</button>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -300,9 +315,10 @@ select.icon-menu option {
 						<div
 							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
 							<button type="button" class="btn btn-danger"
-								style="margin-right: 60px;" data-dismiss="modal">Off</button>
+								style="margin-right: 60px;" data-dismiss="modal"
+								onclick="checkControllerId('3','off',' ')">Off</button>
 							<button type="button" class="btn btn-metis-2"
-								data-dismiss="modal">On</button>
+								data-dismiss="modal" onclick="checkControllerId('3','on',' ')">On</button>
 						</div>
 					</div>
 				</div>
@@ -758,44 +774,36 @@ select.icon-menu option {
 										class="icon-camera icon-2x"></i> <span> Camera</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-screen"
-										onclick="checkControllerId('2')"> <i
-										class="icon-lock icon-2x"></i> <span>Screen Lock</span> <span
+										data-toggle="modal" data-target="#con-screen">
+										<i class="icon-lock icon-2x"></i> <span>Screen Lock</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-mute"
-										onclick="checkControllerId('3')"> <i
+										data-toggle="modal" data-target="#con-mute"> <i
 										class="icon-volume-off icon-2x"></i> <span>Mute</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-wifi"
-										onclick="checkControllerId('4')"> <i
+										data-toggle="modal" data-target="#con-wifi"> <i
 										class="icon-rss icon-2x"></i> <span>Wi-Fi</span> <span
 										class="label label-warning">service</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-content"
-										onclick="checkControllerId('5')"> <i
-										class="icon-file-text icon-2x"></i> <span>Content</span> <span
+										data-toggle="modal" data-target="#con-content">
+										<i class="icon-file-text icon-2x"></i> <span>Content</span> <span
 										class="label label-warning">service</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-app"
-										onclick="checkControllerId('6')"> <i
+										data-toggle="modal" data-target="#con-app"> <i
 										class="icon-android icon-2x"></i> <span>Application</span> <span
 										class="label label-warning">service</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-record"
-										onclick="checkControllerId('7')"> <i
-										class="icon-signin icon-2x"></i> <span>Record</span> <span
+										data-toggle="modal" data-target="#con-record">
+										<i class="icon-signin icon-2x"></i> <span>Record</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-restore"
-										onclick="checkControllerId('8')"> <i
-										class="icon-exchange icon-2x"></i> <span>Restore</span> <span
+										data-toggle="modal" data-target="#con-restore">
+										<i class="icon-exchange icon-2x"></i> <span>Restore</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-format"
-										onclick="checkControllerId('9')"> <i
-										class="icon-stop  icon-2x"></i> <span>Format</span> <span
+										data-toggle="modal" data-target="#con-format">
+										<i class="icon-stop  icon-2x"></i> <span>Format</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a class="quick-btn"> <i
 										class="icon-cog icon-2x disable-button"></i> <span
@@ -1025,8 +1033,7 @@ select.icon-menu option {
 		<input name="<%=Common.GROUP_ID%>" type="hidden"
 			value="<%=strGroupId%>" /> <input name="control_id" id="control_id"
 			type="hidden" value="" /> <input name="action" id="action"
-			type="hidden" value="" /> <input name="input" id="input"
-			type="hidden" value="" /> <input name="cmmd_from" id="cmmd_from"
+			type="hidden" value="" />  <input name="cmmd_from" id="cmmd_from"
 			type="hidden" value="group" />
 	</form>
 	<!--END PAGE LEVEL SCRIPT-->
