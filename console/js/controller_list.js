@@ -13,6 +13,7 @@ function checkControllerId(item, action) {
 
 }
 
+//Screen Lock on
 function checkScreenLockInput(item, action){
 	var form = document.getElementById('formScreenLock');
 	

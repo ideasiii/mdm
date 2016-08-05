@@ -39,7 +39,7 @@
 <!-- JavaScript -->
 <script src="js/controller_list.js"></script>
 
-		
+
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -265,29 +265,29 @@ select.icon-menu option {
 								Screen</h4>
 						</div>
 						<form role="form" action="controller.jsp" name="formScreenLock"
-								id="formScreenLock">
-						<div class="modal-body">
+							id="formScreenLock">
+							<div class="modal-body">
 								<div class="form-group">
 									<label>Screen Lock Password</label> <input class="form-control"
-										name="<%=Common.INPUT%>" id="<%=Common.INPUT%>" 
-										 /><input name="<%=Common.GROUP_ID%>" type="hidden"
-			value="<%=strGroupId%>" /> <input name="control_id" id="control_id"
-			type="hidden" value="" /> <input name="action" id="action"
-			type="hidden" value="" />  <input name="cmmd_from" id="cmmd_from"
-			type="hidden" value="group" />
-										 
+										name="<%=Common.INPUT%>" id="<%=Common.INPUT%>" /><input
+										name="<%=Common.GROUP_ID%>" type="hidden"
+										value="<%=strGroupId%>" /> <input name="control_id"
+										id="control_id" type="hidden" value="" /> <input
+										name="action" id="action" type="hidden" value="" /> <input
+										name="cmmd_from" id="cmmd_from" type="hidden" value="group" />
+
 									<p class="help-block">(Must be less than 10 letters in
 										alphanumeric format.)</p>
 								</div>
-							
-						</div>
-						<div
-							style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
-							<button type="button" class="btn btn-default"
-								style="margin-right: 60px;" data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary"
-								data-dismiss="modal" onclick="checkScreenLockInput('2','on')">Confirm</button>
-						</div>
+
+							</div>
+							<div
+								style="border-top: 1px solid #e5e5e5; padding: 15px 15px 15px; text-align: center;">
+								<button type="button" class="btn btn-default"
+									style="margin-right: 60px;" data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal" onclick="checkScreenLockInput('2','on')">Confirm</button>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -774,8 +774,8 @@ select.icon-menu option {
 										class="icon-camera icon-2x"></i> <span> Camera</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-screen">
-										<i class="icon-lock icon-2x"></i> <span>Screen Lock</span> <span
+										data-toggle="modal" data-target="#con-screen"> <i
+										class="icon-lock icon-2x"></i> <span>Screen Lock</span> <span
 										class="label label-success">device</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
 										data-toggle="modal" data-target="#con-mute"> <i
@@ -786,24 +786,24 @@ select.icon-menu option {
 										class="icon-rss icon-2x"></i> <span>Wi-Fi</span> <span
 										class="label label-warning">service</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-content">
-										<i class="icon-file-text icon-2x"></i> <span>Content</span> <span
+										data-toggle="modal" data-target="#con-content"> <i
+										class="icon-file-text icon-2x"></i> <span>Content</span> <span
 										class="label label-warning">service</span>
 									</a> <a onmouseover="this.style.cursor='pointer'" class="quick-btn"
 										data-toggle="modal" data-target="#con-app"> <i
 										class="icon-android icon-2x"></i> <span>Application</span> <span
 										class="label label-warning">service</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-record">
-										<i class="icon-signin icon-2x"></i> <span>Record</span> <span
+										data-toggle="modal" data-target="#con-record"> <i
+										class="icon-signin icon-2x"></i> <span>Record</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-restore">
-										<i class="icon-exchange icon-2x"></i> <span>Restore</span> <span
+										data-toggle="modal" data-target="#con-restore"> <i
+										class="icon-exchange icon-2x"></i> <span>Restore</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a onmouseover="this.style.cursor='pointer'" class="quick-btn"
-										data-toggle="modal" data-target="#con-format">
-										<i class="icon-stop  icon-2x"></i> <span>Format</span> <span
+										data-toggle="modal" data-target="#con-format"> <i
+										class="icon-stop  icon-2x"></i> <span>Format</span> <span
 										class="label btn-metis-4">system</span>
 									</a><a class="quick-btn"> <i
 										class="icon-cog icon-2x disable-button"></i> <span
@@ -926,8 +926,8 @@ select.icon-menu option {
 
 																<%
 																    }
+																			}
 																%>
-
 																<!-- Controls -->
 																<div></div>
 																<a class="left carousel-control" href="#myCarousel"
@@ -940,11 +940,6 @@ select.icon-menu option {
 																	<span class="glyphicon glyphicon-chevron-right"
 																	aria-hidden="true"></span> <span class="sr-only">Next</span>
 																</a>
-
-																<%
-																    }
-																%>
-
 															</div>
 														</div>
 														<!--end item per slider -->
@@ -1027,19 +1022,17 @@ select.icon-menu option {
 			formInit();
 		});
 	</script>
-
-	<form action="controller.jsp" method="post" name="formControllerJob"
-		id="formControllerJob">
-		<input name="<%=Common.GROUP_ID%>" type="hidden"
-			value="<%=strGroupId%>" /> <input name="control_id" id="control_id"
-			type="hidden" value="" /> <input name="action" id="action"
-			type="hidden" value="" />  <input name="cmmd_from" id="cmmd_from"
-			type="hidden" value="group" />
-	</form>
 	<!--END PAGE LEVEL SCRIPT-->
 </body>
 
-
+<form action="controller.jsp" method="post" name="formControllerJob"
+	id="formControllerJob">
+	<input name="<%=Common.GROUP_ID%>" type="hidden"
+		value="<%=strGroupId%>" /> <input name="control_id" id="control_id"
+		type="hidden" value="" /> <input name="action" id="action"
+		type="hidden" value="" /> <input name="cmmd_from" id="cmmd_from"
+		type="hidden" value="group" />
+</form>
 
 </html>
 <%
