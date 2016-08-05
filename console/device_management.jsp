@@ -162,14 +162,14 @@ select.icon-menu option {
 		<div id="top">
 
 			<nav class="navbar navbar-inverse navbar-fixed-top "
-				style="padding-top: 10px;">
+				style="padding-top: 7px;">
 
 				<!-- LOGO SECTION -->
 				<header class="navbar-header">
 					<div>
 						<a href="group_management.jsp" class="navbar-brand"> <img
-							width="100" style="padding-bottom: 5px;"
-							src="assets/img/more.png" alt="" />
+							height="60" style="padding-bottom: 7px;"
+							src="assets/img/mdm_logo_web9.png" alt="" />
 						</a>
 					</div>
 				</header>

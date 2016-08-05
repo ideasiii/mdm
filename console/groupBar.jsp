@@ -51,7 +51,7 @@
 
 			itGD = listGroup.iterator();
 %>
-<div class="styled-select blue semi-square">
+<div class="styled-select blue semi-square" style="margin-top:7px;">
 	<select id="groupBar" name="groupBar"
 		onchange="location.href=this.options[this.selectedIndex].value">
 
