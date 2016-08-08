@@ -129,6 +129,7 @@
 	float: right;
 	margin-left: 6px;
 	margin-right: 8px;
+	margin-top:6.5px;
 }
 
 /* end add button */
@@ -184,14 +185,14 @@
 		<div id="top">
 
 			<nav class="navbar navbar-inverse navbar-fixed-top "
-				style="padding-top: 10px;">
+				style="padding-top: 7px;">
 
 				<!-- LOGO SECTION -->
 				<header class="navbar-header">
 					<div>
 						<a href="group_management.jsp" class="navbar-brand"> <img
-							width="100" style="padding-bottom: 5px;"
-							src="assets/img/more.png" alt="" />
+							height="55" style="padding-bottom: 7px;margin-left:35px;"
+							src="assets/img/mdm_logo_web69.png" alt="" />
 						</a>
 					</div>
 				</header>

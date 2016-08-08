@@ -168,8 +168,8 @@ select.icon-menu option {
 				<header class="navbar-header">
 					<div>
 						<a href="group_management.jsp" class="navbar-brand"> <img
-							height="60" style="padding-bottom: 7px;"
-							src="assets/img/mdm_logo_web9.png" alt="" />
+							height="55" style="padding-bottom: 7px;margin-left:35px;"
+							src="assets/img/mdm_logo_web69.png" alt="" />
 						</a>
 					</div>
 				</header>

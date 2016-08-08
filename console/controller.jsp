@@ -12,8 +12,6 @@
 			final String strInput = request.getParameter(Common.INPUT);
 			final String strCmmdFrom = request.getParameter("cmmd_from");
 
-
-			
 			Mdm mdm = new Mdm();
 
 			if (!mdm.conTypeDB(0)) {
@@ -28,9 +26,8 @@
 			int nResult = Mdm.MDM_DB_ERR_FAIL;
 
 			if (0 < nDCount) {
-			    String strJobSeq = Mdm.generateShortUuid();
-			    
-			    
+				String strJobSeq = Mdm.generateShortUuid();
+
 				for (int i = 0; i < listDevice.size(); ++i) {
 					deviceData = listDevice.get(i);
 					nResult = mdm.insertControllerJob(strControlId, strJobSeq, strCmmdFrom, deviceData.mac_address);
@@ -38,12 +35,12 @@
 						break;
 					}
 				}
-				
-				  if (nResult  == Mdm.MDM_DB_ERR_SUCCESS) {
-				     
-				      nResult = mdm.insertActionDevice(strJobSeq, strControlId, strAction, strInput);
-				  }
-				
+
+				if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {
+
+					nResult = mdm.insertActionDevice(strJobSeq, strControlId, strAction, strInput);
+				}
+
 			}
 
 			mdm.closeTypeDB(0);
@@ -76,7 +73,7 @@
 	</form>
 
 	<%
-	    if (nResult  == Mdm.MDM_DB_ERR_SUCCESS) {
+	    if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {
 	%>
 	<script>
 		formSubmit('FormHome');
