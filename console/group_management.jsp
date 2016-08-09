@@ -43,7 +43,6 @@
 <script type="text/javascript">
 	function showBtnV(formName) {
 		var form = document.getElementById(formName);
-
 		var formname = form.name;
 
 		if (formname == "formEditGroup") {
@@ -192,7 +191,7 @@
 					<div>
 						<a href="group_management.jsp" class="navbar-brand"> <img
 							height="55" style="padding-bottom: 7px;margin-left:35px;"
-							src="assets/img/mdm_logo_web69.png" alt="" />
+							src="assets/img/mdm_logo_web67t4.png" alt="" />
 						</a>
 					</div>
 				</header>

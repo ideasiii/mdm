@@ -1025,7 +1025,7 @@ select.icon-menu option {
 	<!--END PAGE LEVEL SCRIPT-->
 </body>
 
-<form action="controller.jsp" method="post" name="formControllerJob"
+<form action="aConDeviceGroup.jsp" method="post" name="formControllerJob"
 	id="formControllerJob">
 	<input name="<%=Common.GROUP_ID%>" type="hidden"
 		value="<%=strGroupId%>" /> <input name="control_id" id="control_id"
