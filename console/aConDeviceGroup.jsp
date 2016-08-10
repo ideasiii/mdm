@@ -29,21 +29,32 @@
 <!-- JavaScript -->
 <script src="js/controller_list.js"></script>
 <script>
-	function showBtnBack(formName) {
+	function showBtnReturn(formName) {
 		var form = document.getElementById(formName);
 		var formname = form.name;
 
-		if (formname == "HideLoading") {
-			document.get.ElementById("").style.display = "none";
+		if (formname == "formLoader") {
+			document.get.ElementById("formMessage").style.display = "none";
+			document.getElementById("formLoader").style.display = "block";
 		}
-		if (formname == "HideMessage") {
-			document.getElementById("").style.display = "none";
+		if (formname == "formMessage") {
+			document.getElementById("formLoader").style.display = "none";
+			document.getElementById("formMessage").style.display = "block";
 		}
 	}
 </script>
 <script>
 	function showConName(conId, dAct) {
-		document.getElementById("controlId").innerHTML = conId;
+		var conName = '';
+		switch (conId){
+		case '1': conName = 'Camera';
+		break;
+		case '2': conName = 'Screen Lock';
+		break;
+		case '3': conName = 'Mute';
+		break;
+		}
+		document.getElementById("controlId").innerHTML = conName;
 		document.getElementById("dAction").innerHTML = dAct;
 	}
 </script>
@@ -51,13 +62,47 @@
 </head>
 <body>
 
-
-	<div class="row">
-		<div class="col-lg-12" style="text-align: center;">
-			<img src="assets/img/loader1.gif" width="600px;">
+	<form name="formLoader" id="formLoader">
+		<div class="row">
+			<div class="col-lg-12" style="text-align: center;">
+				<img src="assets/img/loader1.gif" width="600px;">
+			</div>
 		</div>
-	</div>
+	</form>
 
+	<form name="formMessage" id="formMessage">
+		<div class="row" style="margin: 10%;">
+			<div class="col-lg-12"
+				style="text-align: center; padding-left: 30%; padding-right: 30%;">
+				<div class="box">
+					<header>
+						<h5>
+							<i class="fa fa-info-circle fa-1x" aria-hidden="true"></i>
+							Message
+						</h5>
+						<div class="toolbar">
+							<div class="btn-group"></div>
+						</div>
+					</header>
+					<div class="body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="panel panel-default title" style="padding: 15px;">
+
+									<span id="controlId"></span><span> is </span><span id="dAction"></span>.
+									<p>Please click the button below to return.</p>
+									<br>
+									<button type="button" class="btn btn-primary"
+										onClick="formSubmit('FormHome')">Device Management</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</form>
 	<%
 	    request.setCharacterEncoding("UTF-8");
 
@@ -100,58 +145,33 @@
 
 				mdm.closeTypeDB(0);
 				mdm = null;
-
-				try {
-					Thread.sleep(3000);
+	%>
+	
+	<script>
+		showBtnReturn('formLoader');
+	</script>
+	<%
+	    try {
+					Thread.sleep(5000);
 				}
 
 				catch (Exception e) {
 					Logs.showError(e.toString());
 				}
 	%>
-	<form name="formShowMessage" id="formShowMessage">
-	<div class="row" style="margin:10%;">
-		<div class="col-lg-12"
-			style="text-align: center; padding-left: 30%; padding-right: 30%;">
-			<div class="box">
-				<header>
-					<h5>
-						<i class="fa fa-info-circle fa-1x" aria-hidden="true"></i> Message
-					</h5>
-					<div class="toolbar">
-						<div class="btn-group"></div>
-					</div>
-				</header>
-				<div class="body">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="panel panel-default title" style="padding: 15px;">
 
-								<span id="controlId"></span><span> is </span><span id="dAction"></span>.
-								<p>Please click the button below to return.</p>
-								<br>
-								<button type="button" class="btn btn-primary"
-									onClick="formSubmit('FormHome')">Device Management</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	</form>
-	
 	<%
 	    if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {
 	%>
 	<script>
-		showBtnBack('HideLoading');
+		showBtnReturn('formMessage');
 	</script>
 	<script>
 		showConName("<%=strControlId%>","<%=strAction%>");
 	</script>
 	<%
+	   
+	    
 	    } else {
 	%>
 	<script>
@@ -168,7 +188,7 @@
 	</form>
 	<form action="error.jsp" method="post" name="Error" id="Error">
 	</form>
-	
+
 </body>
 </html>
 

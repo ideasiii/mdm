@@ -264,7 +264,7 @@ select.icon-menu option {
 							<h4 class="modal-title" id="H1">Set a Password to Lock Your
 								Screen</h4>
 						</div>
-						<form role="form" action="controller.jsp" name="formScreenLock"
+						<form role="form" action="aConDeviceGroup.jsp" name="formScreenLock"
 							id="formScreenLock">
 							<div class="modal-body">
 								<div class="form-group">
