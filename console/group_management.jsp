@@ -128,7 +128,7 @@
 	float: right;
 	margin-left: 6px;
 	margin-right: 8px;
-	margin-top:6.5px;
+	margin-top: 6.5px;
 }
 
 /* end add button */
@@ -190,7 +190,7 @@
 				<header class="navbar-header">
 					<div>
 						<a href="group_management.jsp" class="navbar-brand"> <img
-							height="55" style="padding-bottom: 7px;margin-left:35px;"
+							height="55" style="padding-bottom: 7px; margin-left: 35px;"
 							src="assets/img/mdm_logo_web67t4.png" alt="" />
 						</a>
 					</div>
@@ -418,7 +418,7 @@
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
 							<h3 class="modal-title" id="H1">
-								Application Management - <span  id="AMGroupName"></span>
+								Application Management - <span id="AMGroupName"></span>
 							</h3>
 						</div>
 						<div class="modal-body">te velit esse cillum dolore eu
@@ -778,18 +778,21 @@
 							<h4 class="modal-title" id="H1">Upload Content</h4>
 						</div>
 						<div class="modal-body">
-							<form role="form">
+							<form role="form" action="pAddContent.jsp" method="post"
+								enctype="multipart/form-data" name="formUploadContent"
+								id="formUploadContent">
+								<input name="<%=Common.GROUP_ID%>" type="hidden" value="<%=strGroupId%>" />
 								<div class="form-group">
-									<label>File Alias</label> <input class="form-control"
+									<label>File Alias</label> <input name="<%=Common.ALIAS%>" id="<%=Common.ALIAS%>" class="form-control"
 										style="width: 60%;" />
 								</div>
 								<div class="form-group">
-									<label>File input</label> <input type="file" />
+									<label>File input</label> <input name="<%=Common.FILE_NAME%>" id="<%=Common.FILE_NAME%>" type="file" />
 								</div>
 							</form>
 							<div style="text-align: right;">
 								<button type="button" class="btn btn-primary"
-									data-dismiss="modal">Confirm</button>
+									data-dismiss="modal" onclick="   ">Confirm</button>
 							</div>
 						</div>
 					</div>
