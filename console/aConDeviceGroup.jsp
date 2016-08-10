@@ -59,6 +59,7 @@
 	}
 </script>
 
+
 </head>
 <body>
 
@@ -147,12 +148,16 @@
 				mdm = null;
 	%>
 	
+  
 	<script>
 		showBtnReturn('formLoader');
 	</script>
+
 	<%
+	if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {
+	
 	    try {
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 				}
 
 				catch (Exception e) {
@@ -161,7 +166,7 @@
 	%>
 
 	<%
-	    if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {
+	    
 	%>
 	<script>
 		showBtnReturn('formMessage');
