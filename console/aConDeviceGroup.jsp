@@ -29,7 +29,7 @@
 <!-- JavaScript -->
 <script src="js/controller_list.js"></script>
 <script>
-	function showBtnReturn(formName) {
+	function showBtnReturn(formName,conId, dAct) {
 		var form = document.getElementById(formName);
 		var formname = form.name;
 
@@ -41,6 +41,8 @@
 			document.getElementById("formLoader").style.display = "none";
 			document.getElementById("formMessage").style.display = "block";
 		}
+		
+		showConName(conId, dAct);
 	}
 </script>
 <script>
@@ -57,6 +59,11 @@
 		document.getElementById("controlId").innerHTML = conName;
 		document.getElementById("dAction").innerHTML = dAct;
 	}
+	
+	function sleep(formName, conId, dAct)
+	{
+		window.setTimeout(function(){showBtnReturn(formName, conId, dAct);},3000);
+	}
 </script>
 
 
@@ -71,7 +78,7 @@
 		</div>
 	</form>
 
-	<form name="formMessage" id="formMessage">
+	<form name="formMessage" id="formMessage" style="display:none;">
 		<div class="row" style="margin: 10%;">
 			<div class="col-lg-12"
 				style="text-align: center; padding-left: 30%; padding-right: 30%;">
@@ -154,26 +161,10 @@
 	</script>
 
 	<%
-	if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {
+	if (nResult == Mdm.MDM_DB_ERR_SUCCESS) {    
+	%>
+	<script type="text/javascript">sleep('formMessage','<%=strControlId%>','<%=strAction%>');</script>
 	
-	    try {
-					Thread.sleep(3000);
-				}
-
-				catch (Exception e) {
-					Logs.showError(e.toString());
-				}
-	%>
-
-	<%
-	    
-	%>
-	<script>
-		showBtnReturn('formMessage');
-	</script>
-	<script>
-		showConName("<%=strControlId%>","<%=strAction%>");
-	</script>
 	<%
 	   
 	    
