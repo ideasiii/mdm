@@ -792,7 +792,7 @@
 							</form>
 							<div style="text-align: right;">
 								<button type="button" class="btn btn-primary"
-									data-dismiss="modal" onclick="   ">Confirm</button>
+									data-dismiss="modal" onclick="formSubmit('formUploadContent')">Confirm</button>
 							</div>
 						</div>
 					</div>

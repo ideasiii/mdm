@@ -35,9 +35,7 @@
 
 
 	<%
-
-
-				//Check that we have a file upload request
+	    //Check that we have a file upload request
 				boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 				if (isMultipart) {
 					String saveDirectory = application.getRealPath(Common.UPLOAD_FILE_ANDROID_MANAGE_CONTENT_PATH);
@@ -78,6 +76,8 @@
 						//boolean isInMemory = itemUploadFile.isInMemory();
 						long sizeInBytes = itemUploadFile.getSize();
 
+						//	out.println(contentType); 
+
 						if (fileName != null && !"".equals(fileName) && 0 < sizeInBytes) {
 							String strPath = saveDirectory + "/" + mapData.get(Common.USER_ID) + "/"
 									+ mapData.get(Common.GROUP_ID);
@@ -90,6 +90,33 @@
 							}
 							if (contentType.trim().equals("image/bmp")) {
 								strFileName = strContentId + ".bmp";
+							}
+							if (contentType.trim().equals("image/gif")) {
+								strFileName = strContentId + ".gif";
+							}
+							if (contentType.trim().equals("application/msword")) {
+								strFileName = strContentId + ".doc";
+							}
+							if (contentType.trim().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+								strFileName = strContentId + ".docx";
+							}
+							if (contentType.trim().equals("application/vnd.ms-excel")) {
+								strFileName = strContentId + ".xls";
+							}
+							if (contentType.trim().equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
+								strFileName = strContentId + ".xlsx";
+							}
+							if (contentType.trim().equals("application/vnd.ms-powerpoint")) {
+								strFileName = strContentId + ".ppt";
+							}
+							if (contentType.trim().equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
+								strFileName = strContentId + ".pptx";
+							}
+							if (contentType.trim().equals("text/plain")) {
+								strFileName = strContentId + ".txt";
+							}
+							if (contentType.trim().equals("application/pdf")) {
+								strFileName = strContentId + ".pdf";
 							}
 							if (null != strFileName) {
 								new File(strPath).mkdirs();
@@ -109,6 +136,7 @@
 					final String strUserId = mapData.get(Common.USER_ID);
 					final String strGroupId = mapData.get(Common.GROUP_ID);
 
+					Logs.showTrace("Insert Content Data to Database, USER_ID:" + strUserId + ", GROUP__ID:" + strGroupId);
 					Mdm mdm = new Mdm();
 
 					if (!mdm.conTypeDB(0)) {
@@ -121,10 +149,6 @@
 					mdm = null;
 	%>
 
-
-
-
-
 	<form action="group_management.jsp" method="post" name="FormHome"
 		id="FormHome">
 		<input name="<%=Common.GROUP_ID%>" type="hidden"
@@ -134,7 +158,7 @@
 	<script>
 		formSubmit('FormHome');
 	</script>
-
+	
 	<%
 	    return;
 	    }
