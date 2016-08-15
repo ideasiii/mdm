@@ -63,9 +63,10 @@ public abstract class Common
 	/**sqlite mdm_android.db 
 	 * table: content_manage**/
 	final public static String ALIAS  = "alias";
+	final public static String CONTENT_TYPE  = "content_type";
 	final public static String FILE_NAME  = "file_name";
 	
-	final public static ArrayList<String> listContent = new ArrayList<>(Arrays.asList(CONTENT_ID, GROUP_ID, ALIAS, FILE_NAME, FILE_LOCATION, CREATE_TIME, UPDATE_TIME)); 
+	final public static ArrayList<String> listContent = new ArrayList<>(Arrays.asList(CONTENT_ID, GROUP_ID, ALIAS, CONTENT_TYPE, FILE_NAME, FILE_LOCATION, CREATE_TIME, UPDATE_TIME)); 
 	
 	/**sqlite mdm_android.db 
 	 * table: device_info**/

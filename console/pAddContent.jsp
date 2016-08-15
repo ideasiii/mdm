@@ -66,8 +66,9 @@
 					} // while
 
 					long timeNow = System.currentTimeMillis();
-					String strContentId = String.valueOf(timeNow);
-
+					String strFileName = String.valueOf(timeNow);
+					String strFN = null;
+					
 					if (null != itemUploadFile) {
 						// Process a file upload
 						String fieldName = itemUploadFile.getFieldName();
@@ -79,71 +80,83 @@
 						//	out.println(contentType); 
 
 						if (fileName != null && !"".equals(fileName) && 0 < sizeInBytes) {
-							String strPath = saveDirectory + "/" + mapData.get(Common.USER_ID) + "/"
+							String strPath = saveDirectory + "/" + mapData.get("userId_Android") + "/"
 									+ mapData.get(Common.GROUP_ID);
-							String strFileName = null;
+							
 							if (contentType.trim().equals("image/png")) {
-								strFileName = strContentId + ".png";
+								strFN = strFileName + ".png";
 							}
 							if (contentType.trim().equals("image/jpeg")) {
-								strFileName = strContentId + ".jpg";
+								strFN = strFileName + ".jpg";
 							}
 							if (contentType.trim().equals("image/bmp")) {
-								strFileName = strContentId + ".bmp";
+								strFN = strFileName + ".bmp";
 							}
 							if (contentType.trim().equals("image/gif")) {
-								strFileName = strContentId + ".gif";
+								strFN = strFileName + ".gif";
 							}
 							if (contentType.trim().equals("application/msword")) {
-								strFileName = strContentId + ".doc";
+								strFN = strFileName + ".doc";
 							}
-							if (contentType.trim().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
-								strFileName = strContentId + ".docx";
+							if (contentType.trim()
+									.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+								strFN = strFileName + ".docx";
 							}
 							if (contentType.trim().equals("application/vnd.ms-excel")) {
-								strFileName = strContentId + ".xls";
+								strFN = strFileName + ".xls";
 							}
-							if (contentType.trim().equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
-								strFileName = strContentId + ".xlsx";
+							if (contentType.trim()
+									.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
+								strFN = strFileName + ".xlsx";
 							}
 							if (contentType.trim().equals("application/vnd.ms-powerpoint")) {
-								strFileName = strContentId + ".ppt";
+								strFN = strFileName + ".ppt";
 							}
-							if (contentType.trim().equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
-								strFileName = strContentId + ".pptx";
+							if (contentType.trim()
+									.equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
+								strFN = strFileName + ".pptx";
 							}
 							if (contentType.trim().equals("text/plain")) {
-								strFileName = strContentId + ".txt";
+								strFN = strFileName + ".txt";
 							}
 							if (contentType.trim().equals("application/pdf")) {
-								strFileName = strContentId + ".pdf";
+								strFN = strFileName + ".pdf";
 							}
-							if (null != strFileName) {
+							if (null != strFN) {
 								new File(strPath).mkdirs();
-								File uploadedFile = new File(strPath, strFileName);
+								File uploadedFile = new File(strPath, strFN);
 								itemUploadFile.write(uploadedFile);
-								mapData.put(Common.APP_ICON,
-										Common.UPLOAD_FILE_ANDROID_MANAGE_CONTENT_PATH + "/" + mapData.get(Common.USER_ID)
-												+ "/" + mapData.get(Common.GROUP_ID) + "/" + strFileName);
+								mapData.put(Common.FILE_LOCATION,
+										Common.UPLOAD_FILE_ANDROID_MANAGE_CONTENT_PATH + "/" + mapData.get("userId_Android")
+												+ "/" + mapData.get(Common.GROUP_ID) + "/" + strFN);
+							} else {
+							    response.sendRedirect("error.html"); //insert error page 
+								return;
 							}
 						}
 					}
-					/*
+/*
 					for (Object key : mapData.keySet()) {
-						out.println(key + " : " + mapData.get(key) + "<br/>");
+						System.out.println(key + " : " + mapData.get(key) + "<br/>");
 					}
-					*/
-					final String strUserId = mapData.get(Common.USER_ID);
+*/
+					final String strUserId_Android = mapData.get("userId_Android");
 					final String strGroupId = mapData.get(Common.GROUP_ID);
+					final String strAlias = mapData.get(Common.ALIAS);
+					final String strContentType = mapData.get(Common.CONTENT_TYPE);
+					final String strFileLocation = mapData.get(Common.FILE_LOCATION);
+					
 
-					Logs.showTrace("Insert Content Data to Database, USER_ID:" + strUserId + ", GROUP__ID:" + strGroupId);
+					Logs.showTrace(
+							"Insert Content Data to Database, USER_ID:" + strUserId_Android + ", GROUP_ID:" + strGroupId);
 					Mdm mdm = new Mdm();
 
 					if (!mdm.conTypeDB(0)) {
 						response.sendRedirect("error.html"); //insert error page 
 						return;
 					}
-					mapData.put(Common.CONTENT_ID, strContentId);
+					mapData.put(Common.FILE_NAME, strFileName);
+					int nResult = mdm.insertContentManage(strGroupId, strAlias, strFN, strFileLocation);
 
 					mdm.closeTypeDB(0);
 					mdm = null;
@@ -158,7 +171,7 @@
 	<script>
 		formSubmit('FormHome');
 	</script>
-	
+
 	<%
 	    return;
 	    }

@@ -71,7 +71,6 @@
 			}
 			
 			int nResult = mdm.insertpGroupAdd(strName, strAccount, strPassword, strMaximum, strUserId);
-			String strResult = null;
 			
 			mdm.closeTypeDB(0);
 			mdm.closeDB();

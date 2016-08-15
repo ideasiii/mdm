@@ -195,7 +195,7 @@ function isText(filename) {
 }
 
 $(function() {
-    $('form').submit(function() {
+    $('formUploadContent').submit(function() {
         function failValidation(msg) {
             alert(msg); // just an alert for now but you can spice this up later
             return false;
@@ -213,7 +213,7 @@ $(function() {
         // success at this point
         // indicate success with alert for now
         alert('Valid file! Here is where you would return true to allow the form to submit normally.');
-        return false; // prevent form submitting anyway - remove this in your environment
+        return true; // prevent form submitting anyway - remove this in your environment
     });
 
 });

@@ -66,16 +66,19 @@
 		//alert(gId);
 		document.getElementById("GroupDeleteConfirm").innerHTML = gName;
 		document.getElementById("GroupEditName").innerHTML = gName;
-		document.getElementById("AMGroupName").innerHTML = gName;
 		document.getElementById("CMGroupName").innerHTML = gName;
+		document.getElementById("AMGroupName").innerHTML = gName;
 		var form = document.getElementById("formDeleteGroup");
 		form.group_id.value = gId;
 		var form = document.getElementById("formEditGroup");
+		form.group_id.value = gId;
+		var form = document.getElementById("formUploadContent");
 		form.group_id.value = gId;
 		document.getElementById("GroupEditAccount").value = gAccount;
 		document.getElementById("originalAccount").value = gAccount;
 		document.getElementById("GroupEditPassword").value = gPw;
 		document.getElementById("GroupEditMaximum").value = gMax;
+
 	}
 </script>
 
@@ -657,17 +660,31 @@
 													<tr>
 														<th>#</th>
 														<th>Alias</th>
-														<th>File Name</th>
+														<th>Type</th>
 														<th>Upload Time</th>
 														<th>Option</th>
 													</tr>
 												</thead>
+
 												<tbody>
+													<%
+													Iterator<Mdm.ContentData> itCD = null;
+													Mdm.ContentData contentData = null;
+													
+													ArrayList<Mdm.ContentData> listContent = new ArrayList<Mdm.ContentData>();
+													int nCCount = mdm.queryContent(strGroupId, listContent);
+																
+																 itCD = listContent.iterator();
+																 int i = 0;
+																while (itCD.hasNext()) {
+																   
+																	contentData = itCD.next();
+													%>
 													<tr class="odd gradeX">
-														<td>1</td>
-														<td>A_alias</td>
-														<td>demo_alias_0527_1.pdf</td>
-														<td class="center">2016/05/27 16:59:40</td>
+														<td><%=++i%></td>
+														<td><%=contentData.alias%></td>
+														<td><%=contentData.content_type%></td> 
+														<td class="center"><%=contentData.create_time%></td>
 														<td class="center"><a style="margin-right: 10px;"
 															href=""><i class="fa fa-eye" aria-hidden="true"
 																title="Preview"></i><span class="sr-only">Preview</span></a><a
@@ -675,78 +692,9 @@
 																title="Delete" data-toggle="modal"
 																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
 													</tr>
-													<tr class="even gradeC">
-														<td>2</td>
-														<td>B_alias</td>
-														<td>demo_alias_0527_2.pdf</td>
-														<td class="center">2016/05/27 16:59:42</td>
-														<td class="center"><a style="margin-right: 10px;"
-															href=""><i class="fa fa-eye" aria-hidden="true"
-																title="Preview"></i><span class="sr-only">Preview</span></a><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
-													</tr>
-													<tr class="odd gradeA">
-														<td>3</td>
-														<td>C_alias</td>
-														<td>demo_alias_0527_3.pdf</td>
-														<td class="center">2016/05/27 16:59:44</td>
-														<td class="center"><a style="margin-right: 10px;"
-															href=""><i class="fa fa-eye" aria-hidden="true"
-																title="Preview"></i><span class="sr-only">Preview</span></a><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
-													</tr>
-													<tr class="even gradeA">
-														<td>4</td>
-														<td>D_alias</td>
-														<td>demo_alias_0527_4.pdf</td>
-														<td class="center">2016/05/27 16:59:46</td>
-														<td class="center"><a style="margin-right: 10px;"
-															href=""><i class="fa fa-eye" aria-hidden="true"
-																title="Preview"></i><span class="sr-only">Preview</span></a><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
-													</tr>
-													<tr class="odd gradeA">
-														<td>5</td>
-														<td>E_alias</td>
-														<td>demo_alias_0527_5.pdf</td>
-														<td class="center">2016/05/27 16:59:48</td>
-														<td class="center"><a style="margin-right: 10px;"
-															href=""><i class="fa fa-eye" aria-hidden="true"
-																title="Preview"></i><span class="sr-only">Preview</span></a><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
-													</tr>
-													<tr class="odd gradeA">
-														<td>6</td>
-														<td>F_alias</td>
-														<td>demo_alias_0527_6.pdf</td>
-														<td class="center">2016/05/27 16:59:50</td>
-														<td class="center"><a style="margin-right: 10px;"
-															href=""><i class="fa fa-eye" aria-hidden="true"
-																title="Preview"></i><span class="sr-only">Preview</span></a><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
-													</tr>
-													<tr class="odd gradeA">
-														<td>7</td>
-														<td>G_alias</td>
-														<td>demo_alias_0527_7.pdf</td>
-														<td class="center">2016/05/27 16:59:52</td>
-														<td class="center"><a style="margin-right: 10px;"
-															href=""><i class="fa fa-eye" aria-hidden="true"
-																title="Preview"></i><span class="sr-only">Preview</span></a><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
-													</tr>
+													<%
+													    }
+													%>
 												</tbody>
 											</table>
 										</div>
@@ -781,13 +729,17 @@
 							<form role="form" action="pAddContent.jsp" method="post"
 								enctype="multipart/form-data" name="formUploadContent"
 								id="formUploadContent">
-								<input name="<%=Common.GROUP_ID%>" type="hidden" value="<%=strGroupId%>" />
+								<input name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
+									type="hidden" value="gId" /> <input name="userId_Android"
+									type="hidden" value="<%=strUserId_Android%>" />
 								<div class="form-group">
-									<label>File Alias</label> <input name="<%=Common.ALIAS%>" id="<%=Common.ALIAS%>" class="form-control"
+									<label>File Alias</label> <input name="<%=Common.ALIAS%>"
+										id="<%=Common.ALIAS%>" class="form-control"
 										style="width: 60%;" />
 								</div>
 								<div class="form-group">
-									<label>File input</label> <input name="<%=Common.FILE_NAME%>" id="<%=Common.FILE_NAME%>" type="file" />
+									<label>File input</label> <input name="<%=Common.FILE_NAME%>"
+										id="<%=Common.FILE_NAME%>" type="file" />
 								</div>
 							</form>
 							<div style="text-align: right;">
@@ -910,14 +862,17 @@
 																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i><i
 																class="fa fa-android fa-stack-1x fa-inverse"
 																title="Application Management"></i></span><span class="sr-only">Application
-																Management</span></a><a
-														style="color: #f0ad4e; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
-														data-toggle="modal" data-target="#ContentManage"><span
-															class="fa-stack fa-lg"><i
+																Management</span></a>
+													<button
+															style="color: #f0ad4e; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
+															data-toggle="modal" data-target="#ContentManage"
+															onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>')">
+															<span class="fa-stack fa-lg"><i
 																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
 																<i class="fa fa-file-text fa-stack-1x fa-inverse"
 																title="Content Management"></i></span><span class="sr-only">Content
-																Management</span></a>
+																Management</span>
+														</button>
 														<button class="btn btn-sm btn-info"
 															style="margin-right: 8px; margin-left: 6px;"
 															data-toggle="modal" data-target="#EditGroup" title="Edit"

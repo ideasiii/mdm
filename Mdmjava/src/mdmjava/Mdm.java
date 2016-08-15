@@ -62,6 +62,7 @@ public class Mdm
 	public String content_id;
 	public String group_id;
 	public String alias;
+	public String content_type;
 	public String file_name;
 	public String file_location;
 	public String create_time;
@@ -361,6 +362,33 @@ public class Mdm
 
     }
 
+    public int insertAppManage(final String strGroupId, final String strAppName, final String strCategory, final String strEdition, final String strDescription, final String strAppIcon, final String strFileLocation)
+    {
+	try
+	{
+	    String strSQL = "insert into app_manage(group_id, app_name, category, edition, description, app_icon, file_location) values(?,?,?,?,?,?,?) ;";
+	    PreparedStatement pst = null;
+	    pst = conMdmAndroid.prepareStatement(strSQL);
+	    int idx = 1;
+	    pst.setString(idx++, strGroupId);
+	    pst.setString(idx++, strAppName);
+	    pst.setString(idx++, strCategory);
+	    pst.setString(idx++, strEdition);
+	    pst.setString(idx++, strDescription);
+	    pst.setString(idx++, strAppIcon);
+	    pst.setString(idx++, strFileLocation);
+	    pst.executeUpdate();
+	    pst.close();
+	}
+	catch (Exception e)
+	{
+	    Logs.showError(e.toString());
+	    return MDM_DB_ERR_EXCEPTION;
+	}
+
+	return MDM_DB_ERR_SUCCESS;
+    }
+    
     public int queryApp(String strGroupId, ArrayList<AppData> listApp)
     {
 	int nCount = 0;
@@ -406,6 +434,31 @@ public class Mdm
 	return nCount;
     }
 
+    public int insertContentManage(final String strGroupId, final String strAlias, final String strContentType, final String strFileName, final String strFileLocation)
+    {
+	try
+	{
+	    String strSQL = "insert into content_manage(group_id, alias, content_type, file_name, file_location) values(?,?,?,?,?) ;";
+	    PreparedStatement pst = null;
+	    pst = conMdmAndroid.prepareStatement(strSQL);
+	    int idx = 1;
+	    pst.setString(idx++, strGroupId);
+	    pst.setString(idx++, strAlias);
+	    pst.setString(idx++, strContentType);
+	    pst.setString(idx++, strFileName);
+	    pst.setString(idx++, strFileLocation);
+	    pst.executeUpdate();
+	    pst.close();
+	}
+	catch (Exception e)
+	{
+	    Logs.showError(e.toString());
+	    return MDM_DB_ERR_EXCEPTION;
+	}
+
+	return MDM_DB_ERR_SUCCESS;
+    }
+    
     public int queryContent(String strGroupId, ArrayList<ContentData> listContent)
     {
 	int nCount = 0;
@@ -429,6 +482,7 @@ public class Mdm
 		    contentData.content_id = mapItem.get(Common.CONTENT_ID);
 		    contentData.group_id = mapItem.get(Common.GROUP_ID);
 		    contentData.alias = mapItem.get(Common.ALIAS);
+		    contentData.content_type = mapItem.get(Common.CONTENT_TYPE);
 		    contentData.file_name = mapItem.get(Common.FILE_NAME);
 		    contentData.file_location = mapItem.get(Common.FILE_LOCATION);
 		    contentData.create_time = mapItem.get(Common.CREATE_TIME);
