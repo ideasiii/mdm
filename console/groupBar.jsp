@@ -3,7 +3,7 @@
     final String strEmail = "juliettechien@iii.org.tw";//request.getParameter(Common.USER_EMAIL);
     String strGroupId = request.getParameter(Common.GROUP_ID);
     String strShowContent = request.getParameter("SHOW_CONTENT");
-
+	String strShowGN = request.getParameter(Common.GROUP_NAME);
     String strAccountV = "";
 
     ArrayList<String> listPermissionName = new ArrayList<String>();

@@ -85,6 +85,7 @@
 	{
 		var form = document.getElementById("FormHomeShowContent");
 		form.group_id.value = gId;
+		form.group_name.value = gName;
 		form.submit();
 	}
 </script>
@@ -694,12 +695,14 @@
 														<td><%=contentData.alias%></td>
 														<td><%=contentData.content_type%></td>
 														<td class="center"><%=contentData.create_time%></td>
-														<td class="center"><a href="<%=contentData.file_location%>" style="margin-right: 10px;"
-															target="_blank" href=""><i class="fa fa-eye" aria-hidden="true"
-																title="Preview"></i><span class="sr-only">Preview</span></a><a
-															><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+														<td class="center"><a
+															href="<%="/mdm"+ contentData.file_location%>"
+															style="margin-right: 10px;" target="_blank" href=""><i
+																class="fa fa-eye" aria-hidden="true" title="Preview"></i><span
+																class="sr-only">Preview</span></a><a><i
+																class="fa fa-trash-o" aria-hidden="true" title="Delete"
+																data-toggle="modal" data-target="#DeleteFile"></i><span
+																class="sr-only">Delete</span></a></td>
 													</tr>
 													<%
 													    }
@@ -973,11 +976,11 @@
 	<!-- END PAGE LEVEL SCRIPTS -->
 
 	<%
-	    if ( null != strShowContent && strShowContent.trim().equals("true")) {
+	    if (null != strShowContent && strShowContent.trim().equals("true")) {
 	%>
 	<script type="text/javascript"> 
-	showGN('<%=groupData.group_name%>','<%=groupData.group_id%>');
-	$('#ContentManage').modal('show');
+	showGN('<%=strShowGN%>','<%=strGroupId%>');
+		$('#ContentManage').modal('show');
 	</script>
 	<%
 	    }
@@ -987,6 +990,7 @@
 <form action="group_management.jsp" method="post"
 	name="FormHomeShowContent" id="FormHomeShowContent">
 	<input name="<%=Common.GROUP_ID%>" type="hidden"> <input
+		name="<%=Common.GROUP_NAME%>" type="hidden"> <input
 		name="SHOW_CONTENT" type="hidden" value="true">
 </form>
 
