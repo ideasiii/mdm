@@ -80,6 +80,13 @@
 		document.getElementById("GroupEditMaximum").value = gMax;
 
 	}
+	
+	function showGN2(gName, gId)
+	{
+		var form = document.getElementById("FormHomeShowContent");
+		form.group_id.value = gId;
+		form.submit();
+	}
 </script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -668,32 +675,35 @@
 
 												<tbody>
 													<%
-													Iterator<Mdm.ContentData> itCD = null;
-													Mdm.ContentData contentData = null;
-													
-													ArrayList<Mdm.ContentData> listContent = new ArrayList<Mdm.ContentData>();
-													int nCCount = mdm.queryContent(strGroupId, listContent);
-																
-																 itCD = listContent.iterator();
-																 int i = 0;
+													    Iterator<Mdm.ContentData> itCD = null;
+																Mdm.ContentData contentData = null;
+
+																ArrayList<Mdm.ContentData> listContent = new ArrayList<Mdm.ContentData>();
+																int nCCount = mdm.queryContent(strGroupId, listContent);
+
+																itCD = listContent.iterator();
+																int i = 0;
 																while (itCD.hasNext()) {
-																   
+
 																	contentData = itCD.next();
+
+																	if (null != strGroupId && (strGroupId.trim().equals(contentData.group_id.trim()))) {
 													%>
 													<tr class="odd gradeX">
 														<td><%=++i%></td>
 														<td><%=contentData.alias%></td>
-														<td><%=contentData.content_type%></td> 
+														<td><%=contentData.content_type%></td>
 														<td class="center"><%=contentData.create_time%></td>
-														<td class="center"><a style="margin-right: 10px;"
-															href=""><i class="fa fa-eye" aria-hidden="true"
+														<td class="center"><a href="<%=contentData.file_location%>" style="margin-right: 10px;"
+															target="_blank" href=""><i class="fa fa-eye" aria-hidden="true"
 																title="Preview"></i><span class="sr-only">Preview</span></a><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
+															><i class="fa fa-trash-o" aria-hidden="true"
 																title="Delete" data-toggle="modal"
 																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
 													</tr>
 													<%
 													    }
+																}
 													%>
 												</tbody>
 											</table>
@@ -846,27 +856,30 @@
 											</thead>
 											<tbody>
 												<%
-												    while (itGD.hasNext()) {
+												    int gCount = 0;
+															while (itGD.hasNext()) {
 																groupData = itGD.next();
 												%>
 												<tr>
-													<td style="text-align: center; vertical-align: middle;">1</td>
+													<td style="text-align: center; vertical-align: middle;"><%=++gCount%></td>
 													<td style="text-align: center; vertical-align: middle;"><%=groupData.group_name%></td>
 													<td style="text-align: center; vertical-align: middle;">42</td>
 													<td style="text-align: center; vertical-align: middle;"><%=groupData.maximum%></td>
 													<td style="text-align: center; vertical-align: middle;">Android</td>
-													<td style="text-align: center; padding: 0;"><a
-														style="color: #9fd256; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
-														data-toggle="modal" data-target="#AppManage"><span
-															class="fa-stack fa-lg"><i
+													<td style="text-align: center; padding: 0;"><button
+															class="btn btn-default btn-flat btn-xs"
+															style="color: #9fd256; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
+															data-toggle="modal" data-target="#AppManage">
+															<span class="fa-stack fa-lg"><i
 																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i><i
 																class="fa fa-android fa-stack-1x fa-inverse"
 																title="Application Management"></i></span><span class="sr-only">Application
-																Management</span></a>
-													<button
+																Management</span>
+														</button>
+														<button class="btn btn-default btn-flat btn-xs"
 															style="color: #f0ad4e; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
 															data-toggle="modal" data-target="#ContentManage"
-															onclick="showGN('<%=groupData.group_name%>','<%=groupData.group_id%>')">
+															onclick="showGN2('<%=groupData.group_name%>','<%=groupData.group_id%>')">
 															<span class="fa-stack fa-lg"><i
 																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
 																<i class="fa fa-file-text fa-stack-1x fa-inverse"
@@ -956,9 +969,26 @@
 		//changeBtn();
 		showBtnV();
 	</SCRIPT>
+
 	<!-- END PAGE LEVEL SCRIPTS -->
 
+	<%
+	    if ( null != strShowContent && strShowContent.trim().equals("true")) {
+	%>
+	<script type="text/javascript"> 
+	showGN('<%=groupData.group_name%>','<%=groupData.group_id%>');
+	$('#ContentManage').modal('show');
+	</script>
+	<%
+	    }
+	%>
 </body>
+
+<form action="group_management.jsp" method="post"
+	name="FormHomeShowContent" id="FormHomeShowContent">
+	<input name="<%=Common.GROUP_ID%>" type="hidden"> <input
+		name="SHOW_CONTENT" type="hidden" value="true">
+</form>
 
 </html>
 <%

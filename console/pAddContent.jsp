@@ -68,6 +68,7 @@
 					long timeNow = System.currentTimeMillis();
 					String strFileName = String.valueOf(timeNow);
 					String strFN = null;
+					String strContentType = null;
 					
 					if (null != itemUploadFile) {
 						// Process a file upload
@@ -85,42 +86,54 @@
 							
 							if (contentType.trim().equals("image/png")) {
 								strFN = strFileName + ".png";
+								strContentType = "PNG";
 							}
 							if (contentType.trim().equals("image/jpeg")) {
 								strFN = strFileName + ".jpg";
+								strContentType = "JPG";
 							}
 							if (contentType.trim().equals("image/bmp")) {
 								strFN = strFileName + ".bmp";
+								strContentType = "BMP";
 							}
 							if (contentType.trim().equals("image/gif")) {
 								strFN = strFileName + ".gif";
+								strContentType = "GIF";
 							}
 							if (contentType.trim().equals("application/msword")) {
 								strFN = strFileName + ".doc";
+								strContentType = "DOC";
 							}
 							if (contentType.trim()
 									.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
 								strFN = strFileName + ".docx";
+								strContentType = "DOCX";
 							}
 							if (contentType.trim().equals("application/vnd.ms-excel")) {
 								strFN = strFileName + ".xls";
+								strContentType = "XLS";
 							}
 							if (contentType.trim()
 									.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
 								strFN = strFileName + ".xlsx";
+								strContentType = "XLSX";
 							}
 							if (contentType.trim().equals("application/vnd.ms-powerpoint")) {
 								strFN = strFileName + ".ppt";
+								strContentType = "PPT";
 							}
 							if (contentType.trim()
 									.equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
 								strFN = strFileName + ".pptx";
+								strContentType = "PPTX";
 							}
 							if (contentType.trim().equals("text/plain")) {
 								strFN = strFileName + ".txt";
+								strContentType = "TXT";
 							}
 							if (contentType.trim().equals("application/pdf")) {
 								strFN = strFileName + ".pdf";
+								strContentType = "PDF";
 							}
 							if (null != strFN) {
 								new File(strPath).mkdirs();
@@ -143,7 +156,6 @@
 					final String strUserId_Android = mapData.get("userId_Android");
 					final String strGroupId = mapData.get(Common.GROUP_ID);
 					final String strAlias = mapData.get(Common.ALIAS);
-					final String strContentType = mapData.get(Common.CONTENT_TYPE);
 					final String strFileLocation = mapData.get(Common.FILE_LOCATION);
 					
 
@@ -156,7 +168,7 @@
 						return;
 					}
 					mapData.put(Common.FILE_NAME, strFileName);
-					int nResult = mdm.insertContentManage(strGroupId, strAlias, strFN, strFileLocation);
+					int nResult = mdm.insertContentManage(strGroupId, strAlias, strContentType, strFN, strFileLocation);
 
 					mdm.closeTypeDB(0);
 					mdm = null;
