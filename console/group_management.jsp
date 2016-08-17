@@ -81,11 +81,22 @@
 
 	}
 	
-	function showGN2(gName, gId)
+	function showGN2(gName, gId, uEmail)
 	{
 		var form = document.getElementById("FormHomeShowContent");
 		form.group_id.value = gId;
 		form.group_name.value = gName;
+		form.user_email.value = uEmail;
+		form.submit();
+	}
+	
+	function getContentFN(cFN, gId)
+	{
+		alert(cFN);
+		var form = document.getElementById("formDeleteContent");
+		alert("----97");
+		form.file_name.value = cFN;
+		alert("-----99");
 		form.submit();
 	}
 </script>
@@ -470,7 +481,7 @@
 														<td class="center" style="vertical-align: middle;"><a
 															href=""><i class="fa fa-trash-o" aria-hidden="true"
 																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
 													</tr>
 													<tr>
 														<td style="vertical-align: middle;"></td>
@@ -485,7 +496,7 @@
 														<td class="center" style="vertical-align: middle;"><a
 															href=""><i class="fa fa-trash-o" aria-hidden="true"
 																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
 													</tr>
 													<tr>
 														<td style="vertical-align: middle;"></td>
@@ -500,7 +511,7 @@
 														<td class="center" style="vertical-align: middle;"><a
 															href=""><i class="fa fa-trash-o" aria-hidden="true"
 																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
 													</tr>
 													<tr>
 														<td style="vertical-align: middle;"></td>
@@ -515,7 +526,7 @@
 														<td class="center" style="vertical-align: middle;"><a
 															href=""><i class="fa fa-trash-o" aria-hidden="true"
 																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
 													</tr>
 													<tr>
 														<td style="vertical-align: middle;"></td>
@@ -530,7 +541,7 @@
 														<td class="center" style="vertical-align: middle;"><a
 															href=""><i class="fa fa-trash-o" aria-hidden="true"
 																title="Delete" data-toggle="modal"
-																data-target="#DeleteFile"></i><span class="sr-only">Delete</span></a></td>
+																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
 													</tr>
 												</tbody>
 											</table>
@@ -641,6 +652,31 @@
 			</div>
 		</div>
 		<div class="col-lg-12">
+			<div class="modal fade" id="DeleteApp" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="padding-top: 150px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="H1">Delete Confirm</h4>
+						</div>
+						<div class="modal-body">
+							You have selected to delete this file. <br>If this was the
+							action that you wanted to do, please confirm your choice, or
+							cancel and return to the page.
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-lg-12">
 			<div class="modal fade" id="ContentManage" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="width: 90%;">
@@ -696,13 +732,14 @@
 														<td><%=contentData.content_type%></td>
 														<td class="center"><%=contentData.create_time%></td>
 														<td class="center"><a
-															href="<%="/mdm"+ contentData.file_location%>"
+															href="<%="/mdm"+ contentData.file_location%>" class="btn btn-default btn-line"
 															style="margin-right: 10px;" target="_blank" href=""><i
 																class="fa fa-eye" aria-hidden="true" title="Preview"></i><span
-																class="sr-only">Preview</span></a><a><i
+																class="sr-only">Preview</span></a>
+																<button onclick="getContentFN('<%=contentData.file_name%>','<%=contentData.group_id%>')" class="btn btn-default btn-line"><i
 																class="fa fa-trash-o" aria-hidden="true" title="Delete"
-																data-toggle="modal" data-target="#DeleteFile"></i><span
-																class="sr-only">Delete</span></a></td>
+																data-toggle="modal" data-target="#DeleteContent"></i><span
+																class="sr-only">Delete</span></button></td>
 													</tr>
 													<%
 													    }
@@ -766,7 +803,7 @@
 		</div>
 
 		<div class="col-lg-12">
-			<div class="modal fade" id="DeleteFile" tabindex="-1" role="dialog"
+			<div class="modal fade" id="DeleteContent" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="padding-top: 150px;">
 					<div class="modal-content">
@@ -775,6 +812,15 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="H1">Delete Confirm</h4>
 						</div>
+						<form action="pDeleteContent.jsp" method="post"
+							name="formDeleteContent" id="formDeleteContent">
+							<input name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
+								type="hidden" value="<%=strEmail%>" /> <input
+								name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
+								type="hidden" value="<%=strGroupId%>" />
+								<input
+								name="<%=Common.FILE_NAME%>" id="<%=Common.FILE_NAME%>"
+								type="hidden"  />
 						<div class="modal-body">
 							You have selected to delete this file. <br>If this was the
 							action that you wanted to do, please confirm your choice, or
@@ -783,8 +829,9 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+							<input type="submit" class="btn btn-danger" value="Delete">
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -882,7 +929,7 @@
 														<button class="btn btn-default btn-flat btn-xs"
 															style="color: #f0ad4e; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
 															data-toggle="modal" data-target="#ContentManage"
-															onclick="showGN2('<%=groupData.group_name%>','<%=groupData.group_id%>')">
+															onclick="showGN2('<%=groupData.group_name%>','<%=groupData.group_id%>','<%=strEmail%>')">
 															<span class="fa-stack fa-lg"><i
 																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
 																<i class="fa fa-file-text fa-stack-1x fa-inverse"
@@ -989,6 +1036,7 @@
 
 <form action="group_management.jsp" method="post"
 	name="FormHomeShowContent" id="FormHomeShowContent">
+	<input name="<%=Common.USER_EMAIL%>" type="hidden">
 	<input name="<%=Common.GROUP_ID%>" type="hidden"> <input
 		name="<%=Common.GROUP_NAME%>" type="hidden"> <input
 		name="SHOW_CONTENT" type="hidden" value="true">

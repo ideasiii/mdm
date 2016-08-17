@@ -183,7 +183,7 @@ function isText(filename) {
     case 'doc':
     case 'docx':
     case 'ppt':
-    case 'pttx':
+    case 'pptx':
     case 'xls':
     case 'xlsx':
     case 'txt':

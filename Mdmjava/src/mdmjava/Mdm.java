@@ -501,6 +501,30 @@ public class Mdm
 
 	return nCount;
     }
+    
+    public int deleteContent(final String strGroupId, final String strFileName)
+    {
+	try
+	{
+	    String strSQL = "delete from content_manage where group_id = ? and file_name = ?";
+	    PreparedStatement pst = null;
+	    pst = conMdmAndroid.prepareStatement(strSQL);
+	    int idx = 1;
+	    pst.setString(idx++, strGroupId);
+	    pst.setString(idx++, strFileName);
+	    pst.executeUpdate();
+	    pst.close();
+	    Logs.showError(strSQL + " " + strGroupId + " " +strFileName );
+	}
+	catch (Exception e)
+	{
+	    Logs.showError(e.toString());
+	    return MDM_DB_ERR_EXCEPTION;
+	}
+	return MDM_DB_ERR_SUCCESS;
+
+    }
+    
 
     public int queryDevice(String strGroupId, ArrayList<DeviceData> listDevice)
     {

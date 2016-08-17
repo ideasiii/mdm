@@ -69,7 +69,7 @@
 					String strFileName = String.valueOf(timeNow);
 					String strFN = null;
 					String strContentType = null;
-					
+
 					if (null != itemUploadFile) {
 						// Process a file upload
 						String fieldName = itemUploadFile.getFieldName();
@@ -83,7 +83,7 @@
 						if (fileName != null && !"".equals(fileName) && 0 < sizeInBytes) {
 							String strPath = saveDirectory + "/" + mapData.get("userId_Android") + "/"
 									+ mapData.get(Common.GROUP_ID);
-							
+
 							if (contentType.trim().equals("image/png")) {
 								strFN = strFileName + ".png";
 								strContentType = "PNG";
@@ -139,25 +139,24 @@
 								new File(strPath).mkdirs();
 								File uploadedFile = new File(strPath, strFN);
 								itemUploadFile.write(uploadedFile);
-								mapData.put(Common.FILE_LOCATION,
-										Common.UPLOAD_FILE_ANDROID_MANAGE_CONTENT_PATH + "/" + mapData.get("userId_Android")
-												+ "/" + mapData.get(Common.GROUP_ID) + "/" + strFN);
+								mapData.put(Common.FILE_LOCATION, Common.UPLOAD_FILE_ANDROID_MANAGE_CONTENT_PATH + "/"
+										+ mapData.get("userId_Android") + "/" + mapData.get(Common.GROUP_ID) + "/" + strFN);
 							} else {
-							    response.sendRedirect("error.html"); //insert error page 
+								//  response.sendRedirect("error.html"); //insert error page 
 								return;
 							}
 						}
 					}
-/*
-					for (Object key : mapData.keySet()) {
-						System.out.println(key + " : " + mapData.get(key) + "<br/>");
-					}
-*/
+					/*
+										for (Object key : mapData.keySet()) {
+											System.out.println(key + " : " + mapData.get(key) + "<br/>");
+										}
+					*/
+					final String strEmail = mapData.get(Common.USER_EMAIL);
 					final String strUserId_Android = mapData.get("userId_Android");
 					final String strGroupId = mapData.get(Common.GROUP_ID);
 					final String strAlias = mapData.get(Common.ALIAS);
 					final String strFileLocation = mapData.get(Common.FILE_LOCATION);
-					
 
 					Logs.showTrace(
 							"Insert Content Data to Database, USER_ID:" + strUserId_Android + ", GROUP_ID:" + strGroupId);
@@ -176,8 +175,8 @@
 
 	<form action="group_management.jsp" method="post" name="FormHome"
 		id="FormHome">
-		<input name="<%=Common.GROUP_ID%>" type="hidden"
-			value="<%=strGroupId%>" />
+		<input name="<%=Common.USER_EMAIL%>" type="hidden"
+			value="<%=strEmail%>" />
 	</form>
 
 	<script>
