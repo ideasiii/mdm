@@ -49,25 +49,26 @@ function checkAccountListData(formName) {
 		var oAccount = Trim(form.originalAccount.value);
 		for ( var key in spl) {
 			// alert(spl[key]);
-			if (Trim(form.GroupEditAccount.value) == spl[key] && Trim(form.GroupEditAccount.value)  != oAccount) {
+			if (Trim(form.GroupEditAccount.value) == spl[key]
+					&& Trim(form.GroupEditAccount.value) != oAccount) {
 				errMsg += "The login account '" + spl[key]
 						+ "' has been used, please change it !!";
 			}
 		}
 	}
-	
+
 	if (errMsg == '') {
 
 		if (formname == "formAddGroup") {
 			document.getElementById('btnA').style.display = "block";
 			document.getElementById('btnV').style.display = "none";
 		}
-		
+
 		if (formname == "formEditGroup") {
 			document.getElementById('btnA2').style.display = "block";
 			document.getElementById('btnV2').style.display = "none";
 		}
-		
+
 		return true;
 	}
 	alert(errMsg);
@@ -125,7 +126,7 @@ function checkGroupEditData(formName) {
 	var btnA2 = document.getElementById("btnA2");
 	var errMsg = '';
 	re = /\W/;
-	
+
 	if (Trim(form.GroupEditAccount.value) == '')
 		errMsg += "Please enter a login account !!\n";
 	else {
@@ -136,7 +137,7 @@ function checkGroupEditData(formName) {
 				errMsg += "Login account must be less than 20 characters !!\n";
 		}
 	}
-	
+
 	if (Trim(form.GroupEditPassword.value) == '')
 		errMsg += "Please enter a password !!\n";
 	else {
@@ -147,7 +148,7 @@ function checkGroupEditData(formName) {
 				errMsg += "Password must be less than 20 characters !!\n";
 		}
 	}
-	
+
 	if (document.getElementById("btnA2").style.display == "none")
 		errMsg += "Please verify your login account !!\n";
 
@@ -159,64 +160,96 @@ function checkGroupEditData(formName) {
 	return false;
 }
 
-/**Check Content Type**/
+/** Check Content Type* */
+var checkContentFile = false;
+
+function validate(file) {
+	var ext = file.split(".");
+	ext = ext[ext.length - 1].toLowerCase();
+	var arrayExtensions = [ "jpg", "png", "bmp", "gif", "doc", "docx", "ppt",
+			"pptx", "xls", "xlsx", "txt", "pdf" ];
+
+	if (arrayExtensions.lastIndexOf(ext) == -1) {
+		checkContentFile = false;
+	} else {
+		checkContentFile = true;
+	}
+}
+
+function checkContentType(formName) {
+	if (checkContentFile == true) {
+		formSubmit(formName);
+	}else{
+		alert("Wrong extension type.");
+	}
+}
+
+
+
+
+
+
+
+
+
+
 function getExtension(filename) {
-    var parts = filename.split('.');
-    return parts[parts.length - 1];
+	var parts = filename.split('.');
+	return parts[parts.length - 1];
 }
 
 function isImage(filename) {
-    var ext = getExtension(filename);
-    switch (ext.toLowerCase()) {
-    case 'jpg':
-    case 'gif':
-    case 'bmp':
-    case 'png':
-        return true;
-    }
-    return false;
+	var ext = getExtension(filename);
+	switch (ext.toLowerCase()) {
+	case 'jpg':
+	case 'gif':
+	case 'bmp':
+	case 'png':
+		return true;
+	}
+	return false;
 }
 
 function isText(filename) {
-    var ext = getExtension(filename);
-    switch (ext.toLowerCase()) {
-    case 'doc':
-    case 'docx':
-    case 'ppt':
-    case 'pptx':
-    case 'xls':
-    case 'xlsx':
-    case 'txt':
-    case 'pdf':
+	var ext = getExtension(filename);
+	switch (ext.toLowerCase()) {
+	case 'doc':
+	case 'docx':
+	case 'ppt':
+	case 'pptx':
+	case 'xls':
+	case 'xlsx':
+	case 'txt':
+	case 'pdf':
 
-        return true;
-    }
-    return false;
+		return true;
+	}
+	return false;
 }
 
 $(function() {
-    $('formUploadContent').submit(function() {
-        function failValidation(msg) {
-            alert(msg); // just an alert for now but you can spice this up later
-            return false;
-        }
+	$('#formUploadContent')
+			.submit(
+					function() {
+						function failValidation(msg) {
+							alert(msg); // just an alert for now but you can
+							// spice this up later
+							return false;
+						}
 
-        var file = $('#file');
-        var imageChosen = $('#type-1').is(':checked');
-        if (imageChosen && !isImage(file.val())) {
-            return failValidation('Please select a valid image');
-        }
-        else if (!imageChosen && !isText(file.val())) {
-            return failValidation('Please select a valid text file.');
-        }
+						var file = $('#file');
+						var imageChosen = $('#type-1').is(':checked');
+						if (imageChosen && !isImage(file.val())) {
+							return failValidation('Please select a valid file');
+						} else if (!imageChosen && !isText(file.val())) {
+							return failValidation('Please select a valid file.');
+						}
 
-        // success at this point
-        // indicate success with alert for now
-        alert('Valid file! Here is where you would return true to allow the form to submit normally.');
-        return true; // prevent form submitting anyway - remove this in your environment
-    });
+						// success at this point
+						// indicate success with alert for now
+						alert('Valid file! Here is where you would return true to allow the form to submit normally.');
+						return true; // prevent form submitting anyway -
+						// remove this in your environment
+					});
 
 });
-
-
-

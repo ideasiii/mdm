@@ -142,7 +142,7 @@
 								mapData.put(Common.FILE_LOCATION, Common.UPLOAD_FILE_ANDROID_MANAGE_CONTENT_PATH + "/"
 										+ mapData.get("userId_Android") + "/" + mapData.get(Common.GROUP_ID) + "/" + strFN);
 							} else {
-								//  response.sendRedirect("error.html"); //insert error page 
+								  response.sendRedirect("error.html"); //insert error page 
 								return;
 							}
 						}

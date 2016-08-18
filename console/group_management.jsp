@@ -90,15 +90,14 @@
 		form.submit();
 	}
 	
-	function getContentFN(cFN, gId)
+	function getContentFN(cFN, gId, cAlias)
 	{
-		alert(cFN);
 		var form = document.getElementById("formDeleteContent");
-		alert("----97");
 		form.file_name.value = cFN;
-		alert("-----99");
-		form.submit();
+		document.getElementById("DeleteContentName").innerHTML = cAlias;
 	}
+	
+	
 </script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -675,7 +674,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="col-lg-12">
 			<div class="modal fade" id="ContentManage" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -732,14 +731,18 @@
 														<td><%=contentData.content_type%></td>
 														<td class="center"><%=contentData.create_time%></td>
 														<td class="center"><a
-															href="<%="/mdm"+ contentData.file_location%>" class="btn btn-default btn-line"
-															style="margin-right: 10px;" target="_blank" href=""><i
-																class="fa fa-eye" aria-hidden="true" title="Preview"></i><span
-																class="sr-only">Preview</span></a>
-																<button onclick="getContentFN('<%=contentData.file_name%>','<%=contentData.group_id%>')" class="btn btn-default btn-line"><i
-																class="fa fa-trash-o" aria-hidden="true" title="Delete"
-																data-toggle="modal" data-target="#DeleteContent"></i><span
-																class="sr-only">Delete</span></button></td>
+															href="<%="/mdm" + contentData.file_location%>" target="_blank"><button 
+															class="btn btn-primary btn-line"
+															style="margin-right: 10px;" 
+															title="Preview"><i class="fa fa-eye"
+																aria-hidden="true"></i><span class="sr-only">Preview</span></button></a>
+															<button
+																onclick="getContentFN('<%=contentData.file_name%>','<%=contentData.group_id%>','<%=contentData.alias%>')"
+																class="btn btn-danger btn-line" title="Delete" data-toggle="modal" data-target="#DeleteContent">
+																<i class="fa fa-trash-o" aria-hidden="true"
+																	></i><span
+																	class="sr-only">Delete</span>
+															</button></td>
 													</tr>
 													<%
 													    }
@@ -776,6 +779,10 @@
 							<h4 class="modal-title" id="H1">Upload Content</h4>
 						</div>
 						<div class="modal-body">
+							Supported File Formats:
+							<p>jpg, gif, bmp, png, doc, docx, ppt, pptx, xls, xlsx, txt,
+								pdf.</p>
+							<br>
 							<form role="form" action="pAddContent.jsp" method="post"
 								enctype="multipart/form-data" name="formUploadContent"
 								id="formUploadContent">
@@ -789,12 +796,14 @@
 								</div>
 								<div class="form-group">
 									<label>File input</label> <input name="<%=Common.FILE_NAME%>"
-										id="<%=Common.FILE_NAME%>" type="file" />
+										id="<%=Common.FILE_NAME%>" type="file" id="contentType"
+										onChange="validate(this.value)" />
+
 								</div>
 							</form>
 							<div style="text-align: right;">
 								<button type="button" class="btn btn-primary"
-									data-dismiss="modal" onclick="formSubmit('formUploadContent')">Confirm</button>
+									onclick="checkContentType('formUploadContent')">Confirm</button>
 							</div>
 						</div>
 					</div>
@@ -803,8 +812,8 @@
 		</div>
 
 		<div class="col-lg-12">
-			<div class="modal fade" id="DeleteContent" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal fade" id="DeleteContent" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="padding-top: 150px;">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -817,20 +826,22 @@
 							<input name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
 								type="hidden" value="<%=strEmail%>" /> <input
 								name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
-								type="hidden" value="<%=strGroupId%>" />
-								<input
+								type="hidden" value="<%=strGroupId%>" /> <input
 								name="<%=Common.FILE_NAME%>" id="<%=Common.FILE_NAME%>"
-								type="hidden"  />
-						<div class="modal-body">
-							You have selected to delete this file. <br>If this was the
-							action that you wanted to do, please confirm your choice, or
-							cancel and return to the page.
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancel</button>
-							<input type="submit" class="btn btn-danger" value="Delete">
-						</div>
+								type="hidden" />
+
+							<div class="modal-body">
+								<span> You have selected to delete "<span
+									id="DeleteContentName"></span>". <br>If this was the
+									action that you wanted to do, please confirm your choice, or
+									cancel and return to the page.
+								</span>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Cancel</button>
+								<input type="submit" class="btn btn-danger" value="Delete">
+							</div>
 						</form>
 					</div>
 				</div>
@@ -1004,11 +1015,6 @@
 	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	<!-- END GLOBAL SCRIPTS -->
-
-	<!-- PAGE LEVEL SCRIPTS -->
-	<script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
-	<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();
@@ -1019,9 +1025,6 @@
 		//changeBtn();
 		showBtnV();
 	</SCRIPT>
-
-	<!-- END PAGE LEVEL SCRIPTS -->
-
 	<%
 	    if (null != strShowContent && strShowContent.trim().equals("true")) {
 	%>
@@ -1032,12 +1035,20 @@
 	<%
 	    }
 	%>
+
+	<!-- END GLOBAL SCRIPTS -->
+
+	<!-- PAGE LEVEL SCRIPTS -->
+	<script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
+	<!-- END PAGE LEVEL SCRIPTS -->
+
 </body>
 
 <form action="group_management.jsp" method="post"
 	name="FormHomeShowContent" id="FormHomeShowContent">
-	<input name="<%=Common.USER_EMAIL%>" type="hidden">
-	<input name="<%=Common.GROUP_ID%>" type="hidden"> <input
+	<input name="<%=Common.USER_EMAIL%>" type="hidden"> <input
+		name="<%=Common.GROUP_ID%>" type="hidden"> <input
 		name="<%=Common.GROUP_NAME%>" type="hidden"> <input
 		name="SHOW_CONTENT" type="hidden" value="true">
 </form>
