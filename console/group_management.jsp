@@ -413,7 +413,10 @@
 								type="hidden" value="<%=strGroupId%>" />
 							<div class="modal-body">
 								<span>You have selected to delete "<span
-									id="GroupDeleteConfirm"></span>". <br>If this was the
+									id="GroupDeleteConfirm"></span>".<br> <span
+									style="color: #b94a48;">The following procedures delete
+										either all data, or contents and applications (including files
+										in the Management) in this group.</span> <br>If this was the
 									action that you wanted to do, please confirm your choice, or
 									cancel and return to the page.
 								</span>
@@ -731,16 +734,18 @@
 														<td><%=contentData.content_type%></td>
 														<td class="center"><%=contentData.create_time%></td>
 														<td class="center"><a
-															href="<%="/mdm" + contentData.file_location%>" target="_blank"><button 
-															class="btn btn-primary btn-line"
-															style="margin-right: 10px;" 
-															title="Preview"><i class="fa fa-eye"
-																aria-hidden="true"></i><span class="sr-only">Preview</span></button></a>
+															href="<%="/mdm" + contentData.file_location%>"
+															target="_blank"><button
+																	class="btn btn-primary btn-line"
+																	style="margin-right: 10px;" title="Preview">
+																	<i class="fa fa-eye" aria-hidden="true"></i><span
+																		class="sr-only">Preview</span>
+																</button></a>
 															<button
 																onclick="getContentFN('<%=contentData.file_name%>','<%=contentData.group_id%>','<%=contentData.alias%>')"
-																class="btn btn-danger btn-line" title="Delete" data-toggle="modal" data-target="#DeleteContent">
-																<i class="fa fa-trash-o" aria-hidden="true"
-																	></i><span
+																class="btn btn-danger btn-line" title="Delete"
+																data-toggle="modal" data-target="#DeleteContent">
+																<i class="fa fa-trash-o" aria-hidden="true"></i><span
 																	class="sr-only">Delete</span>
 															</button></td>
 													</tr>
