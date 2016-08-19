@@ -450,100 +450,72 @@
 							proident, sunt in culpa qui officia deserunt mollit anim id est
 							laborum.</div>
 
-						<div class="row" style="margin-left: 10%; margin-right: 10%;">
+						<div class="row">
 							<div class="col-lg-12">
 								<div>
 									<div class="panel-body">
-										<div>
-											<table class="table table-striped table-hover"
-												style="width: 100%; display: block; overflow-x: auto; overflow-y: scroll; height: 260px;">
-												<thead>
+										<div class="table-responsive">
+											<table class="table table-bordered table-hover" id="dataTables-AM">
+												<thead class="toolbar">
 													<tr>
-														<th style="width: 5%;"></th>
-														<th style="width: 10%;"></th>
-														<th style="width: 13%;">App Name</th>
-														<th style="width: 12%;">Category</th>
-														<th style="width: 10%;">Edition</th>
-														<th style="width: 55%;">Description</th>
-														<th style="width: 10%;">Option</th>
+														<th>App Name</th>
+														<th>Category</th>
+														<th>Edition</th>
+														<th>Description</th>
+														<th>Option</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td style="vertical-align: middle;"></td>
-														<td><img src="assets/img/Apps-Android-icon.png"
+													<tr class="odd gradeA">
+														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
 															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;"
-															title="android app"></td>
-														<td style="vertical-align: middle;">aNote</td>
+															style="width: 30px; text-align: center;margin-right:5px;margin-left:10px;"
+															title="android app">aNote</td>
 														<td class="center" style="vertical-align: middle;">工具</td>
 														<td class="center" style="vertical-align: middle;">v8.4.7</td>
 														<td class="center" style="vertical-align: middle;">elit
 															esse eu nulla par iatur.</td>
-														<td class="center" style="vertical-align: middle;"><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
+														<td class="center" style="vertical-align: middle;"><button
+																onclick="  "
+																class="btn btn-danger btn-line" title="Delete"
+																data-toggle="modal" data-target="#DeleteContent">
+																<i class="fa fa-trash-o" aria-hidden="true"></i><span
+																	class="sr-only">Delete</span>
+															</button></td>
 													</tr>
-													<tr>
-														<td style="vertical-align: middle;"></td>
-														<td><img src="assets/img/Apps-Android-icon.png"
+													<tr class="odd gradeA">
+														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
 															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;"
-															title="android app"></td>
-														<td style="vertical-align: middle;">Calendar</td>
+															style="width: 30px; text-align: center;margin-right:5px;margin-left:10px;"
+															title="android app">aNote</td>
 														<td class="center" style="vertical-align: middle;">工具</td>
 														<td class="center" style="vertical-align: middle;">v8.4.7</td>
-														<td class="center" style="vertical-align: middle;">456</td>
-														<td class="center" style="vertical-align: middle;"><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
+														<td class="center" style="vertical-align: middle;">elit
+															esse eu nulla par iatur.</td>
+														<td class="center" style="vertical-align: middle;"><button
+																onclick="  "
+																class="btn btn-danger btn-line" title="Delete"
+																data-toggle="modal" data-target="#DeleteContent">
+																<i class="fa fa-trash-o" aria-hidden="true"></i><span
+																	class="sr-only">Delete</span>
+															</button></td>
 													</tr>
-													<tr>
-														<td style="vertical-align: middle;"></td>
-														<td><img src="assets/img/Apps-Android-icon.png"
+													<tr class="odd gradeA">
+														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
 															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;"
-															title="android app"></td>
-														<td style="vertical-align: middle;">Cloud</td>
+															style="width: 30px; text-align: center;margin-right:5px;margin-left:10px;"
+															title="android app">aNote</td>
 														<td class="center" style="vertical-align: middle;">工具</td>
 														<td class="center" style="vertical-align: middle;">v8.4.7</td>
-														<td class="center" style="vertical-align: middle;">789</td>
-														<td class="center" style="vertical-align: middle;"><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
-													</tr>
-													<tr>
-														<td style="vertical-align: middle;"></td>
-														<td><img src="assets/img/Apps-Android-icon.png"
-															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;"
-															title="android app"></td>
-														<td style="vertical-align: middle;">Dropbox</td>
-														<td class="center" style="vertical-align: middle;">工具</td>
-														<td class="center" style="vertical-align: middle;">v8.4.7</td>
-														<td class="center" style="vertical-align: middle;">012</td>
-														<td class="center" style="vertical-align: middle;"><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
-													</tr>
-													<tr>
-														<td style="vertical-align: middle;"></td>
-														<td><img src="assets/img/Apps-Android-icon.png"
-															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;"
-															title="android app"></td>
-														<td style="vertical-align: middle;">Facebook</td>
-														<td class="center" style="vertical-align: middle;">工具</td>
-														<td class="center" style="vertical-align: middle;">v8.4.7</td>
-														<td class="center" style="vertical-align: middle;">234</td>
-														<td class="center" style="vertical-align: middle;"><a
-															href=""><i class="fa fa-trash-o" aria-hidden="true"
-																title="Delete" data-toggle="modal"
-																data-target="#DeleteApp"></i><span class="sr-only">Delete</span></a></td>
+														<td class="center" style="vertical-align: middle;">elit
+															esse eu nulla par iatur.</td>
+														<td class="center" style="vertical-align: middle;"><button
+																onclick="  "
+																class="btn btn-danger btn-line" title="Delete"
+																data-toggle="modal" data-target="#DeleteContent">
+																<i class="fa fa-trash-o" aria-hidden="true"></i><span
+																	class="sr-only">Delete</span>
+															</button></td>
 													</tr>
 												</tbody>
 											</table>
@@ -700,8 +672,8 @@
 								<div>
 									<div class="panel-body">
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover"
-												id="dataTables-example">
+											<table class="table table-striped table-bordered table-hover" 
+												id="dataTables-CM">
 												<thead class="toolbar">
 													<tr>
 														<th>#</th>
@@ -729,10 +701,10 @@
 																	if (null != strGroupId && (strGroupId.trim().equals(contentData.group_id.trim()))) {
 													%>
 													<tr class="odd gradeX">
-														<td><%=++i%></td>
-														<td><%=contentData.alias%></td>
-														<td><%=contentData.content_type%></td>
-														<td class="center"><%=contentData.create_time%></td>
+														<td style="vertical-align:middle;"><%=++i%></td>
+														<td style="vertical-align:middle;"><%=contentData.alias%></td>
+														<td style="vertical-align:middle;"><%=contentData.content_type%></td>
+														<td class="center" style="vertical-align:middle;"><%=contentData.create_time%></td>
 														<td class="center"><a
 															href="<%="/mdm" + contentData.file_location%>"
 															target="_blank"><button
@@ -1022,7 +994,11 @@
 	<script src="assets/plugins/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#dataTables-example').dataTable();
+			$('#dataTables-CM').dataTable();
+		});
+		
+		$(document).ready(function() {
+			$('#dataTables-AM').dataTable();
 		});
 	</script>
 	<script src="assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
