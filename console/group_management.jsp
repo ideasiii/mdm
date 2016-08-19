@@ -469,7 +469,7 @@
 													<tr class="odd gradeA">
 														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
 															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;margin-right:5px;margin-left:10px;"
+															style="width: 30px; text-align: center;margin-right:10px;margin-left:10px;"
 															title="android app">aNote</td>
 														<td class="center" style="vertical-align: middle;">工具</td>
 														<td class="center" style="vertical-align: middle;">v8.4.7</td>
@@ -486,12 +486,12 @@
 													<tr class="odd gradeA">
 														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
 															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;margin-right:5px;margin-left:10px;"
-															title="android app">aNote</td>
+															style="width: 30px; text-align: center;margin-right:10px;margin-left:10px;"
+															title="android app">aNoteeeeee</td>
 														<td class="center" style="vertical-align: middle;">工具</td>
 														<td class="center" style="vertical-align: middle;">v8.4.7</td>
 														<td class="center" style="vertical-align: middle;">elit
-															esse eu nulla par iatur.</td>
+															esse eu nullap.</td>
 														<td class="center" style="vertical-align: middle;"><button
 																onclick="  "
 																class="btn btn-danger btn-line" title="Delete"
@@ -503,12 +503,11 @@
 													<tr class="odd gradeA">
 														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
 															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;margin-right:5px;margin-left:10px;"
-															title="android app">aNote</td>
+															style="width: 30px; text-align: center;margin-right:10px;margin-left:10px;"
+															title="android app">工具工具工具工具工具</td>
 														<td class="center" style="vertical-align: middle;">工具</td>
 														<td class="center" style="vertical-align: middle;">v8.4.7</td>
-														<td class="center" style="vertical-align: middle;">elit
-															esse eu nulla par iatur.</td>
+														<td class="center" style="vertical-align: middle;">工具工具工具工具工具工具工具工具工具工具</td>
 														<td class="center" style="vertical-align: middle;"><button
 																onclick="  "
 																class="btn btn-danger btn-line" title="Delete"
@@ -549,7 +548,13 @@
 							<h4 class="modal-title" id="H1">Upload an App</h4>
 						</div>
 						<div class="modal-body">
-							<form role="form">
+						<form role="form" action="pAddAPK.jsp" method="post"
+								enctype="multipart/form-data" name="formUploadApp"
+								id="formUploadApp">
+								<input name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
+									type="hidden" value="gId" /> <input name="userId_Android"
+									type="hidden" value="<%=strUserId_Android%>" />
+							
 								<div class="col-lg-8" style="float: right;">
 									<label class="control-label" style="margin-left: 20px;">App
 										icon</label>
@@ -562,63 +567,64 @@
 										<div
 											class="fileupload-preview fileupload-exists thumbnail form-group"
 											style="text-align: center; max-width: 100px; max-height: 100px; line-height: 20px;"></div>
-										<input style="margin-left: 20px;" type="file" />
+										<input name="<%=Common.APP_ICON%>" id="<%=Common.APP_ICON%>" style="margin-left: 20px;" type="file" />
 
 									</div>
 								</div>
 
 								<div class="form-group">
-									<label>App Name</label> <input class="form-control"
-										style="width: 40%;" />
+									<label>App Name</label> <input name="<%=Common.APP_NAME%>" class="form-control"
+										style="width: 40%;" maxlength="10" />
 								</div>
 								<div class="form-group">
-									<label>Edition</label> <input class="form-control"
-										style="width: 40%;" />
+									<label>Edition</label> <input name="<%=Common.EDITION%>" class="form-control"
+										style="width: 40%;" maxlength="8" />
 								</div>
 								<div class="form-group">
-									<label>Describe</label> <input class="form-control"
-										style="width: 40%;" />
+									<label>Description</label> <input name="<%=Common.DESCRIPTION%>" class="form-control"
+										style="width: 40%;" maxlength="20" />
 								</div>
 								<div class="form-group">
-									<label>Category</label> <select class="form-control"
-										style="width: 40%;" id="app_category" name="app_category"
+									<label>Category</label> <select name="<%=Common.CATEGORY%>" class="form-control"
+										style="width: 40%;" 
 										style="height: 34px;">
-										<option>工具</option>
-										<option>天氣</option>
-										<option>生活品味</option>
-										<option>生產應用</option>
-										<option>交通運輸</option>
-										<option>社交</option>
-										<option>音樂與音效</option>
-										<option>個人化</option>
-										<option>娛樂</option>
-										<option>旅遊與地方資訊</option>
-										<option>財經</option>
-										<option>健康塑身</option>
-										<option>動態桌布</option>
-										<option>商業</option>
-										<option>教育</option>
-										<option>通訊</option>
-										<option>媒體與影片</option>
-										<option>程式庫與試用程式</option>
-										<option>新聞與雜誌</option>
-										<option>運動</option>
-										<option>圖書與參考資源</option>
-										<option>漫畫</option>
-										<option>購物</option>
-										<option>醫療</option>
-										<option>攝影</option>
-										<option>遊戲</option>
-										<option>家庭</option>
+										<option value="工具">工具</option>
+										<option value="天氣">天氣</option>
+										<option value="生活品味">生活品味</option>
+										<option value="生產應用">生產應用</option>
+										<option value="交通運輸">交通運輸</option>
+										<option value="社交">社交</option>
+										<option value="音樂與音效">音樂與音效</option>
+										<option value="個人化">個人化</option>
+										<option value="娛樂">娛樂</option>
+										<option value="旅遊與地方資訊">旅遊與地方資訊</option>
+										<option value="財經">財經</option>
+										<option value="健康塑身">健康塑身</option>
+										<option value="動態桌布">動態桌布</option>
+										<option value="商業">商業</option>
+										<option value="教育">教育</option>
+										<option value="通訊">通訊</option>
+										<option value="媒體與影片">媒體與影片</option>
+										<option value="程式庫與試用程式">程式庫與試用程式</option>
+										<option value="新聞與雜誌">新聞與雜誌</option>
+										<option value="運動">運動</option>
+										<option value="圖書與參考資源">圖書與參考資源</option>
+										<option value="漫畫">漫畫</option>
+										<option value="購物">購物</option>
+										<option value="醫療">醫療</option>
+										<option value="攝影">攝影</option>
+										<option value="遊戲">遊戲</option>
+										<option value="家庭">家庭</option>
 									</select>
 								</div>
 								<div class="form-group">
-									<label>File input</label> <input type="file" />
+									<label>File input</label> <input name="<%=Common.FILE_NAME%>"
+										id="<%=Common.FILE_NAME%>" type="file" />
 								</div>
 							</form>
 							<div style="text-align: right;">
 								<button type="button" class="btn btn-primary"
-									data-dismiss="modal">Confirm</button>
+									onclick="formSubmit('formUploadApp')">Confirm</button>
 							</div>
 						</div>
 					</div>
@@ -769,7 +775,7 @@
 								<div class="form-group">
 									<label>File Alias</label> <input name="<%=Common.ALIAS%>"
 										id="<%=Common.ALIAS%>" class="form-control"
-										style="width: 60%;" />
+										style="width: 60%;" maxlength="15" />
 								</div>
 								<div class="form-group">
 									<label>File input</label> <input name="<%=Common.FILE_NAME%>"
