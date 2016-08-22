@@ -160,7 +160,7 @@ function checkGroupEditData(formName) {
 	return false;
 }
 
-/** Check Content Type* */
+/** Check Content Type * */
 var checkContentFile = false;
 
 function validate(file) {
@@ -179,7 +179,51 @@ function validate(file) {
 function checkContentType(formName) {
 	if (checkContentFile == true) {
 		formSubmit(formName);
-	}else{
+	} else {
+		alert("Wrong extension type.");
+	}
+}
+
+/** Check APK & Icon Type * */
+var checkAPKFile = false;
+var checkAppIcon = false;
+
+function validateAPK(file) {
+	var ext = file.split(".");
+	ext = ext[ext.length - 1].toLowerCase();
+	var arrayExtensions = [ "apk" ];
+
+	if (arrayExtensions.lastIndexOf(ext) == -1) {
+		checkAPKFile = false;
+	} else {
+		checkAPKFile = true;
+	}
+}
+
+function checkAPKType(formName) {
+	if (checkAPKFile == true) {
+		formSubmit(formName);
+	} else {
+		alert("Please select an APK file.");
+	}
+}
+
+function validateAppIcon(file){
+	var ext = file.split(".");
+	ext = ext[ext.length - 1].toLowerCase();
+	var arrayExtensions = [ "jpg", "png" ];
+	
+	if (arrayExtensions.lastIndexOf(ext) == -1) {
+		checkAppIcon = false;
+	} else {
+		checkAppIcon = true;
+	}
+}
+
+function checkAppIconType(formName) {
+	if (checkAppIcon == true) {
+		formSubmit(formName);
+	} else {
 		alert("Wrong extension type.");
 	}
 }
@@ -190,9 +234,7 @@ function checkContentType(formName) {
 
 
 
-
-
-
+/** test * */
 function getExtension(filename) {
 	var parts = filename.split('.');
 	return parts[parts.length - 1];

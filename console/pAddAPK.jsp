@@ -50,7 +50,7 @@
 					// Process the uploaded items
 					Iterator<FileItem> iter = items.iterator();
 					HashMap<String, String> mapData = new HashMap<String, String>();
-					FileItem itemUploadFile = null;
+					ArrayList<FileItem> itemUploadFileArray = new ArrayList<FileItem>();
 
 					while (iter.hasNext()) {
 						FileItem item = (FileItem) iter.next();
@@ -59,50 +59,90 @@
 							String strValue = item.getString();
 							strValue = new String(strValue.getBytes("ISO-8859-1"), "UTF-8");
 							mapData.put(strName.trim(), strValue.trim());
+							Logs.showTrace("KEY: " + String.valueOf(strName.trim()) + " VALUE: "
+									+ String.valueOf(strValue.trim()));
 						} else {
-							itemUploadFile = item;
+
+							itemUploadFileArray.add(item);
 						}
 					} // while
+					    
+					String strFName = null;
+					String strIName = null;
+					
 
-					long timeNow = System.currentTimeMillis();
-					String strFileName = String.valueOf(timeNow);
-					String strFN = null;
+					for (int i = 0; i < itemUploadFileArray.size(); i++) {
+						Logs.showTrace("*******" + itemUploadFileArray.get(i).getName());
+						Logs.showTrace("*******" + itemUploadFileArray.get(i).getContentType());
+						Logs.showTrace("*******" + itemUploadFileArray.get(i).getFieldName());
+						Logs.showTrace("**********************************************");
 
-					if (null != itemUploadFile) {
-						// Process a file upload
-						String fieldName = itemUploadFile.getFieldName();
-						String fileName = itemUploadFile.getName();
-						String contentType = itemUploadFile.getContentType();
-						//boolean isInMemory = itemUploadFile.isInMemory();
-						long sizeInBytes = itemUploadFile.getSize();
+						FileItem itemUploadFile = itemUploadFileArray.get(i);
+						if (null != itemUploadFile) {
+							long timeNow = System.currentTimeMillis();
+							String strFileName = String.valueOf(timeNow);
+							String strFN = strFName;
+							String strIN = strIName;
+							String strContentType = null;
 
-						//out.println(contentType);
+							// Process a file upload
+							String fieldName = itemUploadFile.getFieldName();
+							String fileName = itemUploadFile.getName();
+							String contentType = itemUploadFile.getContentType();
+							//boolean isInMemory = itemUploadFile.isInMemory();
+							long sizeInBytes = itemUploadFile.getSize();
 
-						if (fileName != null && !"".equals(fileName) && 0 < sizeInBytes) {
-							String strPath = saveDirectory + "/" + mapData.get("userId_Android") + "/"
-									+ mapData.get(Common.GROUP_ID);
+							//out.println(contentType);
 
-							if (contentType.trim().equals("application/vnd.android.package-archive")) {
-								strFN = strFileName + ".apk";
+							if (fileName != null && !"".equals(fileName) && 0 < sizeInBytes) {
+								String strPath = saveDirectory + "/" + mapData.get("userId_Android") + "/"
+										+ mapData.get(Common.GROUP_ID);
+
+								if (fieldName != null && !"".equals("app_icon")) {
+									if (contentType.trim().equals("image/png")) {
+									    strIN = strFileName + ".png";
+										strContentType = "PNG";
+									}
+									if (contentType.trim().equals("image/jpeg")) {
+									    strIN = strFileName + ".jpg";
+										strContentType = "JPG";
+									}
+
+									if (null != strIN) {
+										new File(strPath).mkdirs();
+										File uploadedFile = new File(strPath, strIN);
+										itemUploadFile.write(uploadedFile);
+										mapData.put(Common.APP_ICON,
+												Common.UPLOAD_FILE_ANDROID_MANAGE_APP_PATH + "/" + mapData.get("userId_Android")
+														+ "/" + mapData.get(Common.GROUP_ID) + "/" + strIN);
+									}
+								} 
+								else {
+									response.sendRedirect("error.html"); //insert error page 
+									return;
+								}
+
+									if (fieldName != null && !"".equals("file_name")) {
+
+										if (contentType.trim().equals("application/vnd.android.package-archive")) {
+											strFN = strFileName + ".apk";
+										}
+										
+										if (null != strFN) {
+											new File(strPath).mkdirs();
+											File uploadedFile = new File(strPath, strFN);
+											itemUploadFile.write(uploadedFile);
+											mapData.put(Common.FILE_LOCATION,
+													Common.UPLOAD_FILE_ANDROID_MANAGE_APP_PATH + "/" + mapData.get("userId_Android")
+															+ "/" + mapData.get(Common.GROUP_ID) + "/" + strFN);
+										} 
+									}
+								else {
+									response.sendRedirect("error.html"); //insert error page 
+									return;
+								}
+								
 							}
-							if (null != strFN) {
-								new File(strPath).mkdirs();
-								File uploadedFile = new File(strPath, strFN);
-								itemUploadFile.write(uploadedFile);
-								mapData.put(Common.FILE_LOCATION, Common.UPLOAD_FILE_ANDROID_MANAGE_APP_PATH + "/"
-										+ mapData.get("userId_Android") + "/" + mapData.get(Common.GROUP_ID) + "/" + strFN);
-							} else {
-								response.sendRedirect("error.html"); //insert error page 
-								return;
-							}
-							
-							
-							
-							
-							
-							
-							
-							
 						}
 					}
 					/*
@@ -119,19 +159,19 @@
 					final String strDescription = mapData.get(Common.DESCRIPTION);
 					final String strAppIcon = mapData.get(Common.APP_ICON);
 					final String strFileLocation = mapData.get(Common.FILE_LOCATION);
-
+					
 					Logs.showTrace(
 							"Insert App Data to Database, USER_ID:" + strUserId_Android + ", GROUP_ID:" + strGroupId);
-
+				
 					Mdm mdm = new Mdm();
 
 					if (!mdm.conTypeDB(0)) {
 						response.sendRedirect("error.html"); //insert error page 
 						return;
 					}
-					mapData.put(Common.FILE_NAME, strFileName);
+					mapData.put(Common.FILE_NAME, strFName);
 					int nResult = mdm.insertAppManage(strGroupId, strAppName, strCategory, strEdition, strDescription,
-							strAppIcon, strFN, strFileLocation);
+							strAppIcon, strFName, strFileLocation);
 
 					mdm.closeTypeDB(0);
 					mdm = null;

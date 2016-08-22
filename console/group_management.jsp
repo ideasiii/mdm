@@ -478,7 +478,7 @@
 														<td class="center" style="vertical-align: middle;"><button
 																onclick="  "
 																class="btn btn-danger btn-line" title="Delete"
-																data-toggle="modal" data-target="#DeleteContent">
+																data-toggle="modal" data-target="#DeleteApp">
 																<i class="fa fa-trash-o" aria-hidden="true"></i><span
 																	class="sr-only">Delete</span>
 															</button></td>
@@ -495,7 +495,7 @@
 														<td class="center" style="vertical-align: middle;"><button
 																onclick="  "
 																class="btn btn-danger btn-line" title="Delete"
-																data-toggle="modal" data-target="#DeleteContent">
+																data-toggle="modal" data-target="#DeleteApp">
 																<i class="fa fa-trash-o" aria-hidden="true"></i><span
 																	class="sr-only">Delete</span>
 															</button></td>
@@ -511,7 +511,7 @@
 														<td class="center" style="vertical-align: middle;"><button
 																onclick="  "
 																class="btn btn-danger btn-line" title="Delete"
-																data-toggle="modal" data-target="#DeleteContent">
+																data-toggle="modal" data-target="#DeleteApp">
 																<i class="fa fa-trash-o" aria-hidden="true"></i><span
 																	class="sr-only">Delete</span>
 															</button></td>
@@ -545,7 +545,7 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="H1">Upload an App</h4>
+							<h4 class="modal-title" id="H1">Upload APK</h4>
 						</div>
 						<div class="modal-body">
 						<form role="form" action="pAddAPK.jsp" method="post"
@@ -557,7 +557,7 @@
 							
 								<div class="col-lg-8" style="float: right;">
 									<label class="control-label" style="margin-left: 20px;">App
-										icon</label>
+										Icon</label>
 									<div class="fileupload fileupload-new"
 										style="text-align: center;" data-provides="fileupload">
 										<div class="fileupload-new thumbnail"
@@ -570,6 +570,11 @@
 										<input name="<%=Common.APP_ICON%>" id="<%=Common.APP_ICON%>" style="margin-left: 20px;" type="file" />
 
 									</div>
+									<br>
+									<div class="fileupload fileupload-new">
+									<label class="control-label" style="margin-left: 20px;">File Input</label> <input name="<%=Common.FILE_NAME%>"
+										id="<%=Common.FILE_NAME%>" type="file" style="margin-left: 20px;" />
+										</div>
 								</div>
 
 								<div class="form-group">
@@ -616,10 +621,6 @@
 										<option value="遊戲">遊戲</option>
 										<option value="家庭">家庭</option>
 									</select>
-								</div>
-								<div class="form-group">
-									<label>File input</label> <input name="<%=Common.FILE_NAME%>"
-										id="<%=Common.FILE_NAME%>" type="file" />
 								</div>
 							</form>
 							<div style="text-align: right;">
@@ -770,7 +771,7 @@
 								enctype="multipart/form-data" name="formUploadContent"
 								id="formUploadContent">
 								<input name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
-									type="hidden" value="gId" /> <input name="userId_Android"
+									type="hidden" value="" /> <input name="userId_Android"
 									type="hidden" value="<%=strUserId_Android%>" />
 								<div class="form-group">
 									<label>File Alias</label> <input name="<%=Common.ALIAS%>"
@@ -778,7 +779,7 @@
 										style="width: 60%;" maxlength="15" />
 								</div>
 								<div class="form-group">
-									<label>File input</label> <input name="<%=Common.FILE_NAME%>"
+									<label>File Input</label> <input name="<%=Common.FILE_NAME%>"
 										id="<%=Common.FILE_NAME%>" type="file" id="contentType"
 										onChange="validate(this.value)" />
 

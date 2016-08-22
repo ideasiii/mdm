@@ -60,6 +60,7 @@
 							String strValue = item.getString();
 							strValue = new String(strValue.getBytes("ISO-8859-1"), "UTF-8");
 							mapData.put(strName.trim(), strValue.trim());
+							Logs.showTrace("KEY: "+String.valueOf(strName.trim())+ " VALUE: "+String.valueOf(strValue.trim()));
 						} else {
 							itemUploadFile = item;
 						}
@@ -70,7 +71,8 @@
 					String strFN = null;
 					String strContentType = null;
 
-					if (null != itemUploadFile) {
+					if (null != itemUploadFile) 
+					{
 						// Process a file upload
 						String fieldName = itemUploadFile.getFieldName();
 						String fileName = itemUploadFile.getName();
