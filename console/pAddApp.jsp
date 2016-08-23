@@ -68,7 +68,6 @@
 					} // while
 
 					String strFName = null;
-					String strIName = null;
 
 					for (int i = 0; i < itemUploadFileArray.size(); i++) {
 						Logs.showTrace("*******" + itemUploadFileArray.get(i).getName());
@@ -80,8 +79,8 @@
 						if (null != itemUploadFile) {
 							long timeNow = System.currentTimeMillis();
 							String strFileName = String.valueOf(timeNow);
-							String strFN = strFName;
-							String strIN = strIName;
+							String strFN = null;
+							String strIN = null;
 							String strContentType = null;
 
 							// Process a file upload
@@ -97,10 +96,10 @@
 								String strPath = saveDirectory + "/" + mapData.get("userId_Android") + "/"
 										+ mapData.get(Common.GROUP_ID);
 
-								Logs.showTrace("APP ICON fieldName:"+fieldName);
+								Logs.showTrace(" fieldName:"+fieldName);
 								if (fieldName != null && fieldName.equals("app_icon")) 
 								{
-								    Logs.showTrace("&&&&&&& I AM APP ICON");
+								 
 									if (contentType.trim().equals("image/png"))
 									{
 										strIN = strFileName + ".png";
@@ -152,13 +151,12 @@
 																+ mapData.get("userId_Android") + "/"
 																+ mapData.get(Common.GROUP_ID) + "/" + strFN);
 												
-												strFName = strFN;
+												strFName = strFileName;
 											}
 											
 										}
 										else 
 										{
-										    Logs.showTrace("file Name GG");
 											response.sendRedirect("error.html"); //insert error page 
 											return;
 										}

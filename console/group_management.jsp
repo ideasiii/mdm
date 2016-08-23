@@ -74,6 +74,8 @@
 		form.group_id.value = gId;
 		var form = document.getElementById("formUploadContent");
 		form.group_id.value = gId;
+		var form = document.getElementById("formUploadApp");
+		form.group_id.value = gId;
 		document.getElementById("GroupEditAccount").value = gAccount;
 		document.getElementById("originalAccount").value = gAccount;
 		document.getElementById("GroupEditPassword").value = gPw;
@@ -81,9 +83,18 @@
 
 	}
 	
-	function showGN2(gName, gId, uEmail)
+	function showContentGN(gName, gId, uEmail)
 	{
 		var form = document.getElementById("FormHomeShowContent");
+		form.group_id.value = gId;
+		form.group_name.value = gName;
+		form.user_email.value = uEmail;
+		form.submit();
+	}
+		
+	function showAppGN(gName, gId, uEmail)
+	{
+		var form = document.getElementById("FormHomeShowApp");
 		form.group_id.value = gId;
 		form.group_name.value = gName;
 		form.user_email.value = uEmail;
@@ -95,6 +106,15 @@
 		var form = document.getElementById("formDeleteContent");
 		form.file_name.value = cFN;
 		document.getElementById("DeleteContentName").innerHTML = cAlias;
+	}
+	
+	function getAppFN(aFN, gId, appName)
+	{
+		alart(aFN);
+		alart(appName);
+		var form = document.getElementById("formDeleteApp");
+		form.file_name.value = aFN;
+		document.getElementById("DeleteAppName").innerHTML = appName;
 	}
 	
 	
@@ -466,56 +486,40 @@
 													</tr>
 												</thead>
 												<tbody>
+												<%
+													    Iterator<Mdm.AppData> itAD = null;
+																Mdm.AppData appData = null;
+
+																ArrayList<Mdm.AppData> listApp = new ArrayList<Mdm.AppData>();
+																int nACount = mdm.queryApp(strGroupId, listApp);
+
+																itAD = listApp.iterator();
+																while (itAD.hasNext()) {
+
+																	appData = itAD.next();
+
+																	if (null != strGroupId && (strGroupId.trim().equals(appData.group_id.trim()))) {
+													%>
 													<tr class="odd gradeA">
 														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
 															vspace="1" class="img-responsive"
 															style="width: 30px; text-align: center;margin-right:10px;margin-left:10px;"
-															title="android app">aNote</td>
-														<td class="center" style="vertical-align: middle;">工具</td>
-														<td class="center" style="vertical-align: middle;">v8.4.7</td>
-														<td class="center" style="vertical-align: middle;">elit
-															esse eu nulla par iatur.</td>
+															title="android app"><%=appData.app_name%></td>
+														<td class="center" style="vertical-align: middle;"><%=appData.category%></td>
+														<td class="center" style="vertical-align: middle;"><%=appData.edition%></td>
+														<td class="center" style="vertical-align: middle;"><%=appData.description%></td>
 														<td class="center" style="vertical-align: middle;"><button
-																onclick="  "
+																onclick="getAppFN('<%=appData.file_name%>','<%=appData.group_id%>','<%=appData.app_name%>')"
 																class="btn btn-danger btn-line" title="Delete"
 																data-toggle="modal" data-target="#DeleteApp">
 																<i class="fa fa-trash-o" aria-hidden="true"></i><span
 																	class="sr-only">Delete</span>
 															</button></td>
 													</tr>
-													<tr class="odd gradeA">
-														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
-															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;margin-right:10px;margin-left:10px;"
-															title="android app">aNoteeeeee</td>
-														<td class="center" style="vertical-align: middle;">工具</td>
-														<td class="center" style="vertical-align: middle;">v8.4.7</td>
-														<td class="center" style="vertical-align: middle;">elit
-															esse eu nullap.</td>
-														<td class="center" style="vertical-align: middle;"><button
-																onclick="  "
-																class="btn btn-danger btn-line" title="Delete"
-																data-toggle="modal" data-target="#DeleteApp">
-																<i class="fa fa-trash-o" aria-hidden="true"></i><span
-																	class="sr-only">Delete</span>
-															</button></td>
-													</tr>
-													<tr class="odd gradeA">
-														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
-															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;margin-right:10px;margin-left:10px;"
-															title="android app">工具工具工具工具工具</td>
-														<td class="center" style="vertical-align: middle;">工具</td>
-														<td class="center" style="vertical-align: middle;">v8.4.7</td>
-														<td class="center" style="vertical-align: middle;">工具工具工具工具工具工具工具工具工具工具</td>
-														<td class="center" style="vertical-align: middle;"><button
-																onclick="  "
-																class="btn btn-danger btn-line" title="Delete"
-																data-toggle="modal" data-target="#DeleteApp">
-																<i class="fa fa-trash-o" aria-hidden="true"></i><span
-																	class="sr-only">Delete</span>
-															</button></td>
-													</tr>
+													<%
+																	}
+																	}
+													%>
 												</tbody>
 											</table>
 										</div>
@@ -529,7 +533,7 @@
 								data-target="#UploadApp">
 								<i class="fa fa-plus" aria-hidden="true"
 									style="margin-right: 5px;"></i><span class="sr-only">Upload
-									a new app</span>Upload
+									an new app</span>Upload
 							</button>
 						</div>
 					</div>
@@ -548,11 +552,11 @@
 							<h4 class="modal-title" id="H1">Upload APK</h4>
 						</div>
 						<div class="modal-body">
-						<form role="form" action="pAddAPK.jsp" method="post"
+						<form role="form" action="pAddApp.jsp" method="post"
 								enctype="multipart/form-data" name="formUploadApp"
 								id="formUploadApp">
 								<input name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
-									type="hidden" value="gId" /> <input name="userId_Android"
+									type="hidden" value="" /> <input name="userId_Android"
 									type="hidden" value="<%=strUserId_Android%>" />
 							
 								<div class="col-lg-8" style="float: right;">
@@ -642,16 +646,28 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="H1">Delete Confirm</h4>
 						</div>
+						<form action="pDeleteApp.jsp" method="post"
+							name="formDeleteApp" id="formDeleteApp">
+							<input name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
+								type="hidden" value="<%=strEmail%>" /> <input
+								name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
+								type="hidden" value="<%=strGroupId%>" /> <input
+								name="<%=Common.FILE_NAME%>" id="<%=Common.FILE_NAME%>"
+								type="hidden" />
 						<div class="modal-body">
-							You have selected to delete this file. <br>If this was the
-							action that you wanted to do, please confirm your choice, or
-							cancel and return to the page.
+							<span> You have selected to delete "<span
+									id="DeleteAppName"></span>". <br>If this was the
+									action that you wanted to do, please confirm your choice, or
+									cancel and return to the page.
+								</span>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
+							<button 
+							type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+							<input type="submit" class="btn btn-danger" value="Delete">
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -914,7 +930,8 @@
 													<td style="text-align: center; padding: 0;"><button
 															class="btn btn-default btn-flat btn-xs"
 															style="color: #9fd256; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
-															data-toggle="modal" data-target="#AppManage">
+															data-toggle="modal" data-target="#AppManage"
+															onclick="showAppGN('<%=groupData.group_name%>','<%=groupData.group_id%>','<%=strEmail%>')">
 															<span class="fa-stack fa-lg"><i
 																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i><i
 																class="fa fa-android fa-stack-1x fa-inverse"
@@ -924,7 +941,7 @@
 														<button class="btn btn-default btn-flat btn-xs"
 															style="color: #f0ad4e; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;"
 															data-toggle="modal" data-target="#ContentManage"
-															onclick="showGN2('<%=groupData.group_name%>','<%=groupData.group_id%>','<%=strEmail%>')">
+															onclick="showContentGN('<%=groupData.group_name%>','<%=groupData.group_id%>','<%=strEmail%>')">
 															<span class="fa-stack fa-lg"><i
 																class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
 																<i class="fa fa-file-text fa-stack-1x fa-inverse"
@@ -1022,8 +1039,16 @@
 	</script>
 	<%
 	    }
-	%>
 
+	    if (null != strShowApp && strShowApp.trim().equals("true")) {
+	%>
+	<script type="text/javascript"> 
+	showGN('<%=strShowGN%>','<%=strGroupId%>');
+		$('#AppManage').modal('show');
+	</script>
+	<%
+	    }
+	%>
 	<!-- END GLOBAL SCRIPTS -->
 
 	<!-- PAGE LEVEL SCRIPTS -->
@@ -1039,6 +1064,13 @@
 		name="<%=Common.GROUP_ID%>" type="hidden"> <input
 		name="<%=Common.GROUP_NAME%>" type="hidden"> <input
 		name="SHOW_CONTENT" type="hidden" value="true">
+</form>
+<form action="group_management.jsp" method="post"
+	name="FormHomeShowApp" id="FormHomeShowApp">
+	<input name="<%=Common.USER_EMAIL%>" type="hidden"> <input
+		name="<%=Common.GROUP_ID%>" type="hidden"> <input
+		name="<%=Common.GROUP_NAME%>" type="hidden"> <input
+		name="SHOW_APP" type="hidden" value="true">
 </form>
 
 </html>

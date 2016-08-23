@@ -3,6 +3,7 @@
     final String strEmail = "juliettechien@iii.org.tw";//request.getParameter(Common.USER_EMAIL);
     String strGroupId = request.getParameter(Common.GROUP_ID);
     String strShowContent = request.getParameter("SHOW_CONTENT");
+    String strShowApp = request.getParameter("SHOW_APP");
 	String strShowGN = request.getParameter(Common.GROUP_NAME);
     String strAccountV = "";
 
@@ -57,7 +58,7 @@
 		onchange="location.href=this.options[this.selectedIndex].value">
 
 		<%
-		    if (null == strGroupId || null != strShowContent )
+		    if (null == strGroupId || null != strShowContent || null != strShowApp)
 					{
 		%>
 		<option value="#">Select Group</option>
