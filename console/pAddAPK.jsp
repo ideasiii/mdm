@@ -66,10 +66,9 @@
 							itemUploadFileArray.add(item);
 						}
 					} // while
-					    
+
 					String strFName = null;
 					String strIName = null;
-					
 
 					for (int i = 0; i < itemUploadFileArray.size(); i++) {
 						Logs.showTrace("*******" + itemUploadFileArray.get(i).getName());
@@ -98,13 +97,18 @@
 								String strPath = saveDirectory + "/" + mapData.get("userId_Android") + "/"
 										+ mapData.get(Common.GROUP_ID);
 
-								if (fieldName != null && !"".equals("app_icon")) {
-									if (contentType.trim().equals("image/png")) {
-									    strIN = strFileName + ".png";
+								Logs.showTrace("APP ICON fieldName:"+fieldName);
+								if (fieldName != null && fieldName.equals("app_icon")) 
+								{
+								    Logs.showTrace("&&&&&&& I AM APP ICON");
+									if (contentType.trim().equals("image/png"))
+									{
+										strIN = strFileName + ".png";
 										strContentType = "PNG";
 									}
-									if (contentType.trim().equals("image/jpeg")) {
-									    strIN = strFileName + ".jpg";
+									else if (contentType.trim().equals("image/jpeg")) 
+									{
+										strIN = strFileName + ".jpg";
 										strContentType = "JPG";
 									}
 
@@ -113,35 +117,65 @@
 										File uploadedFile = new File(strPath, strIN);
 										itemUploadFile.write(uploadedFile);
 										mapData.put(Common.APP_ICON,
-												Common.UPLOAD_FILE_ANDROID_MANAGE_APP_PATH + "/" + mapData.get("userId_Android")
-														+ "/" + mapData.get(Common.GROUP_ID) + "/" + strIN);
+												Common.UPLOAD_FILE_ANDROID_MANAGE_APP_PATH + "/"
+														+ mapData.get("userId_Android") + "/" + mapData.get(Common.GROUP_ID)
+														+ "/" + strIN);
 									}
-								} 
-								else {
-									response.sendRedirect("error.html"); //insert error page 
-									return;
-								}
-
-									if (fieldName != null && !"".equals("file_name")) {
-
-										if (contentType.trim().equals("application/vnd.android.package-archive")) {
-											strFN = strFileName + ".apk";
-										}
-										
-										if (null != strFN) {
-											new File(strPath).mkdirs();
-											File uploadedFile = new File(strPath, strFN);
-											itemUploadFile.write(uploadedFile);
-											mapData.put(Common.FILE_LOCATION,
-													Common.UPLOAD_FILE_ANDROID_MANAGE_APP_PATH + "/" + mapData.get("userId_Android")
-															+ "/" + mapData.get(Common.GROUP_ID) + "/" + strFN);
-										} 
-									}
-								else {
-									response.sendRedirect("error.html"); //insert error page 
-									return;
 								}
 								
+
+								else if (fieldName != null && fieldName.equals("file_name")) 
+								{
+
+									try 
+									{
+										String strExtension = itemUploadFile.getName().substring(
+												itemUploadFile.getName().length() - 4, itemUploadFile.getName().length());
+										Logs.showTrace("&&&&:" + strExtension);
+
+										if (strExtension.trim().equals(".apk")) 
+										{
+
+											if (contentType.trim().equals("application/vnd.android.package-archive")||contentType.trim().equals("application/octet-stream")) 
+											{
+												strFN = strFileName + ".apk";
+											}
+											
+
+											if (null != strFN) 
+											{
+												new File(strPath).mkdirs();
+												File uploadedFile = new File(strPath, strFN);
+												itemUploadFile.write(uploadedFile);
+												mapData.put(Common.FILE_LOCATION,
+														Common.UPLOAD_FILE_ANDROID_MANAGE_APP_PATH + "/"
+																+ mapData.get("userId_Android") + "/"
+																+ mapData.get(Common.GROUP_ID) + "/" + strFN);
+												
+												strFName = strFN;
+											}
+											
+										}
+										else 
+										{
+										    Logs.showTrace("file Name GG");
+											response.sendRedirect("error.html"); //insert error page 
+											return;
+										}
+									} 
+									catch (Exception e) 
+									{
+									    response.sendRedirect("error.html"); //insert error page 
+										Logs.showError(e.toString());
+										return;
+									}
+
+								}
+								else
+								{
+									response.sendRedirect("error.html"); //insert error page 
+									return;
+								}
 							}
 						}
 					}
@@ -159,10 +193,10 @@
 					final String strDescription = mapData.get(Common.DESCRIPTION);
 					final String strAppIcon = mapData.get(Common.APP_ICON);
 					final String strFileLocation = mapData.get(Common.FILE_LOCATION);
-					
+
 					Logs.showTrace(
 							"Insert App Data to Database, USER_ID:" + strUserId_Android + ", GROUP_ID:" + strGroupId);
-				
+					Logs.showTrace("FileLocation:" + strFileLocation + ", AppIcon:" + strAppIcon);
 					Mdm mdm = new Mdm();
 
 					if (!mdm.conTypeDB(0)) {
