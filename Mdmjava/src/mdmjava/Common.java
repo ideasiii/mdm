@@ -23,7 +23,6 @@ public abstract class Common
 	final public static String APP_ICON = "app_icon";
 	final public static String APP_ID  = "app_id";
 	final public static String APP_NAME = "app_name";
-	final public static String FILE_NAME  = "file_name";
 	final public static String CONTENT_ID  = "content_id";
 	final public static String MAC_ADDRESS  = "mac_address";
 	final public static String DEVICE_MODEL  = "device_model";
@@ -57,14 +56,16 @@ public abstract class Common
 	final public static String CATEGORY = "category";
 	final public static String  EDITION = "edition";
 	final public static String DESCRIPTION = "description";
+	final public static String APK_FILE_NAME  = "apk_file_name";
 	
 	final public static ArrayList<String> listApp = new ArrayList<>(Arrays.asList(APP_ID, GROUP_ID, APP_NAME, CATEGORY,
-		EDITION, DESCRIPTION, APP_ICON, FILE_NAME, FILE_LOCATION, CREATE_TIME, UPDATE_TIME)); 
+		EDITION, DESCRIPTION, APP_ICON, APK_FILE_NAME, FILE_LOCATION, CREATE_TIME, UPDATE_TIME)); 
 
 	/**sqlite mdm_android.db 
 	 * table: content_manage**/
 	final public static String ALIAS  = "alias";
 	final public static String CONTENT_TYPE  = "content_type";
+	final public static String FILE_NAME  = "file_name";
 	
 	final public static ArrayList<String> listContent = new ArrayList<>(Arrays.asList(CONTENT_ID, GROUP_ID, ALIAS, CONTENT_TYPE, FILE_NAME, FILE_LOCATION, CREATE_TIME, UPDATE_TIME)); 
 	

@@ -160,10 +160,19 @@ function checkGroupEditData(formName) {
 	return false;
 }
 
+
+function checkContentAddData(formName) {
+	var form = document.getElementById(formName);
+	var errMsg = '';
+	
+	
+	
+}
+
 /** Check Content Type * */
 var checkContentFile = false;
 
-function validate(file) {
+function validateContent(file) {
 	var ext = file.split(".");
 	ext = ext[ext.length - 1].toLowerCase();
 	var arrayExtensions = [ "jpg", "png", "bmp", "gif", "doc", "docx", "ppt",

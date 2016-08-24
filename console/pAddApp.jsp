@@ -123,7 +123,7 @@
 								}
 								
 
-								else if (fieldName != null && fieldName.equals("file_name")) 
+								else if (fieldName != null && fieldName.equals("apk_file_name")) 
 								{
 
 									try 
@@ -201,7 +201,7 @@
 						response.sendRedirect("error.html"); //insert error page 
 						return;
 					}
-					mapData.put(Common.FILE_NAME, strFName);
+					mapData.put(Common.APK_FILE_NAME, strFName);
 					int nResult = mdm.insertAppManage(strGroupId, strAppName, strCategory, strEdition, strDescription,
 							strAppIcon, strFName, strFileLocation);
 

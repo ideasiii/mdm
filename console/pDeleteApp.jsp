@@ -7,7 +7,7 @@
 
 			final String strEmail = request.getParameter(Common.USER_EMAIL);
 			final String strGroupId = request.getParameter(Common.GROUP_ID);
-			final String strFileName = request.getParameter(Common.FILE_NAME);
+			final String strAPKFileName = request.getParameter(Common.APK_FILE_NAME);
 
 			Mdm mdm = new Mdm();
 			
@@ -17,8 +17,8 @@
 			    return;
 			}
 			
-	int nResult = mdm.deleteApp(strGroupId, strFileName);
-	 mdm.deleteApp(strGroupId, strFileName);
+	int nResult = mdm.deleteApp(strGroupId, strAPKFileName);
+	 mdm.deleteApp(strGroupId, strAPKFileName);
 	 
 			String strResult = null;
 			

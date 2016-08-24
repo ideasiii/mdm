@@ -110,10 +110,8 @@
 	
 	function getAppFN(aFN, gId, appName)
 	{
-		alart(aFN);
-		alart(appName);
 		var form = document.getElementById("formDeleteApp");
-		form.file_name.value = aFN;
+		form.apk_file_name.value = aFN;
 		document.getElementById("DeleteAppName").innerHTML = appName;
 	}
 	
@@ -509,7 +507,7 @@
 														<td class="center" style="vertical-align: middle;"><%=appData.edition%></td>
 														<td class="center" style="vertical-align: middle;"><%=appData.description%></td>
 														<td class="center" style="vertical-align: middle;"><button
-																onclick="getAppFN('<%=appData.file_name%>','<%=appData.group_id%>','<%=appData.app_name%>')"
+																onclick="getAppFN('<%=appData.apk_file_name%>','<%=appData.group_id%>','<%=appData.app_name%>')"
 																class="btn btn-danger btn-line" title="Delete"
 																data-toggle="modal" data-target="#DeleteApp">
 																<i class="fa fa-trash-o" aria-hidden="true"></i><span
@@ -577,7 +575,7 @@
 									<br>
 									<div class="fileupload fileupload-new">
 									<label class="control-label" style="margin-left: 20px;">File Input</label> <input name="<%=Common.FILE_NAME%>"
-										id="<%=Common.FILE_NAME%>" type="file" style="margin-left: 20px;" />
+										id="<%=Common.APK_FILE_NAME%>" type="file" style="margin-left: 20px;" />
 										</div>
 								</div>
 
@@ -652,7 +650,7 @@
 								type="hidden" value="<%=strEmail%>" /> <input
 								name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
 								type="hidden" value="<%=strGroupId%>" /> <input
-								name="<%=Common.FILE_NAME%>" id="<%=Common.FILE_NAME%>"
+								name="<%=Common.APK_FILE_NAME%>" id="<%=Common.APK_FILE_NAME%>"
 								type="hidden" />
 						<div class="modal-body">
 							<span> You have selected to delete "<span
@@ -797,7 +795,7 @@
 								<div class="form-group">
 									<label>File Input</label> <input name="<%=Common.FILE_NAME%>"
 										id="<%=Common.FILE_NAME%>" type="file" id="contentType"
-										onChange="validate(this.value)" />
+										onChange="validateContent(this.value)" />
 
 								</div>
 							</form>

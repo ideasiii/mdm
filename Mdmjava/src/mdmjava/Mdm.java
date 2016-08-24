@@ -52,7 +52,7 @@ public class Mdm
 	public String edition;
 	public String description;
 	public String app_icon;
-	public String file_name;
+	public String apk_file_name;
 	public String file_location;
 	public String create_time;
 	public String update_time;
@@ -363,11 +363,11 @@ public class Mdm
 
     }
 
-    public int insertAppManage(final String strGroupId, final String strAppName, final String strCategory, final String strEdition, final String strDescription, final String strAppIcon, final String strFileName, final String strFileLocation)
+    public int insertAppManage(final String strGroupId, final String strAppName, final String strCategory, final String strEdition, final String strDescription, final String strAppIcon, final String strAPKFileName, final String strFileLocation)
     {
 	try
 	{
-	    String strSQL = "insert into app_manage(group_id, app_name, category, edition, description, app_icon, file_name, file_location) values(?,?,?,?,?,?,?,?) ;";
+	    String strSQL = "insert into app_manage(group_id, app_name, category, edition, description, app_icon, apk_file_name, file_location) values(?,?,?,?,?,?,?,?) ;";
 	    PreparedStatement pst = null;
 	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    int idx = 1;
@@ -377,7 +377,7 @@ public class Mdm
 	    pst.setString(idx++, strEdition);
 	    pst.setString(idx++, strDescription);
 	    pst.setString(idx++, strAppIcon);
-	    pst.setString(idx++, strFileName);
+	    pst.setString(idx++, strAPKFileName);
 	    pst.setString(idx++, strFileLocation);
 	    pst.executeUpdate();
 	    pst.close();
@@ -418,7 +418,7 @@ public class Mdm
 		    appData.edition = mapItem.get(Common.EDITION);
 		    appData.description = mapItem.get(Common.DESCRIPTION);
 		    appData.app_icon = mapItem.get(Common.APP_ICON);
-		    appData.file_name = mapItem.get(Common.FILE_NAME);
+		    appData.apk_file_name = mapItem.get(Common.APK_FILE_NAME);
 		    appData.file_location = mapItem.get(Common.FILE_LOCATION);
 		    appData.create_time = mapItem.get(Common.CREATE_TIME);
 		    appData.update_time = mapItem.get(Common.UPDATE_TIME);
@@ -437,19 +437,19 @@ public class Mdm
 	return nCount;
     }
 
-    public int deleteApp(final String strGroupId, final String strFileName)
+    public int deleteApp(final String strGroupId, final String strAPKFileName)
     {
 	try
 	{
-	    String strSQL = "delete from app_manage where group_id = ? and file_name = ?";
+	    String strSQL = "delete from app_manage where group_id = ? and apk_file_name = ?";
 	    PreparedStatement pst = null;
 	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    int idx = 1;
 	    pst.setString(idx++, strGroupId);
-	    pst.setString(idx++, strFileName);
+	    pst.setString(idx++, strAPKFileName);
 	    pst.executeUpdate();
 	    pst.close();
-	    Logs.showError(strSQL + " " + strGroupId + " " +strFileName );
+	    Logs.showError(strSQL + " " + strGroupId + " " +strAPKFileName );
 	}
 	catch (Exception e)
 	{
