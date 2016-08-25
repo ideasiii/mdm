@@ -627,7 +627,7 @@
 							</form>
 							<div style="text-align: right;">
 								<button type="button" class="btn btn-primary"
-									onclick="formSubmit('formUploadApp')">Confirm</button>
+									onclick="checkAPKAddData('formUploadApp')">Confirm</button>
 							</div>
 						</div>
 					</div>
@@ -801,7 +801,7 @@
 							</form>
 							<div style="text-align: right;">
 								<button type="button" class="btn btn-primary"
-									onclick="checkContentType('formUploadContent')">Confirm</button>
+									onclick="checkContentAddData('formUploadContent')">Confirm</button>
 							</div>
 						</div>
 					</div>

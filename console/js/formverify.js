@@ -159,15 +159,7 @@ function checkGroupEditData(formName) {
 	alert(errMsg);
 	return false;
 }
-
-
-function checkContentAddData(formName) {
-	var form = document.getElementById(formName);
-	var errMsg = '';
-	
-	
-	
-}
+s
 
 /** Check Content Type * */
 var checkContentFile = false;
@@ -185,12 +177,27 @@ function validateContent(file) {
 	}
 }
 
-function checkContentType(formName) {
-	if (checkContentFile == true) {
-		formSubmit(formName);
-	} else {
-		alert("Wrong extension type.");
+function checkContentAddData(formName) {
+	var form = document.getElementById(formName);
+	var errMsg = '';
+	var fileCheck = document.form.;
+
+	if (Trim(form.alias.value) == '')
+		errMsg += "Please enter an alias !!\n";
+
+	if (      .value == '')
+		errMsg += "Please select a file !!\n";
+	else {
+		if (checkContentFile == false)
+			errMsg += "Wrong extension type !!\n";
 	}
+	
+	if (errMsg == '') {
+		form.submit();
+		return true;
+	}
+	alert(errMsg);
+	return false;
 }
 
 /** Check APK & Icon Type * */
@@ -209,19 +216,11 @@ function validateAPK(file) {
 	}
 }
 
-function checkAPKType(formName) {
-	if (checkAPKFile == true) {
-		formSubmit(formName);
-	} else {
-		alert("Please select an APK file.");
-	}
-}
-
-function validateAppIcon(file){
+function validateAppIcon(file) {
 	var ext = file.split(".");
 	ext = ext[ext.length - 1].toLowerCase();
 	var arrayExtensions = [ "jpg", "png" ];
-	
+
 	if (arrayExtensions.lastIndexOf(ext) == -1) {
 		checkAppIcon = false;
 	} else {
@@ -229,78 +228,54 @@ function validateAppIcon(file){
 	}
 }
 
-function checkAppIconType(formName) {
-	if (checkAppIcon == true) {
-		formSubmit(formName);
-	} else {
-		alert("Wrong extension type.");
+function checkAPKAddData(formName) {
+	var form = document.getElementById(formName);
+	var errMsg = '';
+
+	if (Trim(form.app_name.value) == '')
+		errMsg += "Please enter your app name !!\n";
+
+	if (checkAPKFile == false)
+		errMsg += "Please select an APK file !!\n";
+
+	if (checkAppIcon == false)
+		errMsg += "Wrong image type !!\n";
+
+	if (errMsg == '') {
+		form.submit();
+		return true;
 	}
+	alert(errMsg);
+	return false;
 }
-
-
-
-
-
-
 
 /** test * */
-function getExtension(filename) {
-	var parts = filename.split('.');
-	return parts[parts.length - 1];
-}
-
-function isImage(filename) {
-	var ext = getExtension(filename);
-	switch (ext.toLowerCase()) {
-	case 'jpg':
-	case 'gif':
-	case 'bmp':
-	case 'png':
-		return true;
-	}
-	return false;
-}
-
-function isText(filename) {
-	var ext = getExtension(filename);
-	switch (ext.toLowerCase()) {
-	case 'doc':
-	case 'docx':
-	case 'ppt':
-	case 'pptx':
-	case 'xls':
-	case 'xlsx':
-	case 'txt':
-	case 'pdf':
-
-		return true;
-	}
-	return false;
-}
-
-$(function() {
-	$('#formUploadContent')
-			.submit(
-					function() {
-						function failValidation(msg) {
-							alert(msg); // just an alert for now but you can
-							// spice this up later
-							return false;
-						}
-
-						var file = $('#file');
-						var imageChosen = $('#type-1').is(':checked');
-						if (imageChosen && !isImage(file.val())) {
-							return failValidation('Please select a valid file');
-						} else if (!imageChosen && !isText(file.val())) {
-							return failValidation('Please select a valid file.');
-						}
-
-						// success at this point
-						// indicate success with alert for now
-						alert('Valid file! Here is where you would return true to allow the form to submit normally.');
-						return true; // prevent form submitting anyway -
-						// remove this in your environment
-					});
-
-});
+/*
+ * function getExtension(filename) { var parts = filename.split('.'); return
+ * parts[parts.length - 1]; }
+ * 
+ * function isImage(filename) { var ext = getExtension(filename); switch
+ * (ext.toLowerCase()) { case 'jpg': case 'gif': case 'bmp': case 'png': return
+ * true; } return false; }
+ * 
+ * function isText(filename) { var ext = getExtension(filename); switch
+ * (ext.toLowerCase()) { case 'doc': case 'docx': case 'ppt': case 'pptx': case
+ * 'xls': case 'xlsx': case 'txt': case 'pdf':
+ * 
+ * return true; } return false; }
+ * 
+ * $(function() { $('#formUploadContent') .submit( function() { function
+ * failValidation(msg) { alert(msg); // just an alert for now but you can //
+ * spice this up later return false; }
+ * 
+ * var file = $('#file'); var imageChosen = $('#type-1').is(':checked'); if
+ * (imageChosen && !isImage(file.val())) { return failValidation('Please select
+ * a valid file'); } else if (!imageChosen && !isText(file.val())) { return
+ * failValidation('Please select a valid file.'); }
+ *  // success at this point // indicate success with alert for now alert('Valid
+ * file! Here is where you would return true to allow the form to submit
+ * normally.'); return true; // prevent form submitting anyway - // remove this
+ * in your environment });
+ * 
+ * });
+ */
