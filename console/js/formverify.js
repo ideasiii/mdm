@@ -159,10 +159,10 @@ function checkGroupEditData(formName) {
 	alert(errMsg);
 	return false;
 }
-s
+
 
 /** Check Content Type * */
-var checkContentFile = false;
+var checkContentType = false;
 
 function validateContent(file) {
 	var ext = file.split(".");
@@ -171,27 +171,28 @@ function validateContent(file) {
 			"pptx", "xls", "xlsx", "txt", "pdf" ];
 
 	if (arrayExtensions.lastIndexOf(ext) == -1) {
-		checkContentFile = false;
+		checkContentType = false;
 	} else {
-		checkContentFile = true;
+		checkContentType = true;
 	}
 }
 
 function checkContentAddData(formName) {
+
 	var form = document.getElementById(formName);
 	var errMsg = '';
-	var fileCheck = document.form.;
+	var fileCheck = form.inputContent;
 
 	if (Trim(form.alias.value) == '')
 		errMsg += "Please enter an alias !!\n";
 
-	if (      .value == '')
+	if (fileCheck.value == '')
 		errMsg += "Please select a file !!\n";
 	else {
-		if (checkContentFile == false)
+		if (checkContentType == false)
 			errMsg += "Wrong extension type !!\n";
 	}
-	
+
 	if (errMsg == '') {
 		form.submit();
 		return true;
@@ -201,18 +202,18 @@ function checkContentAddData(formName) {
 }
 
 /** Check APK & Icon Type * */
-var checkAPKFile = false;
-var checkAppIcon = false;
+var checkAPKType = false;
+var checkIconType = false;
 
 function validateAPK(file) {
 	var ext = file.split(".");
 	ext = ext[ext.length - 1].toLowerCase();
-	var arrayExtensions = [ "apk" ];
+	var arrayExtension = [ "apk" ];
 
-	if (arrayExtensions.lastIndexOf(ext) == -1) {
-		checkAPKFile = false;
+	if (arrayExtension.lastIndexOf(ext) == -1) {
+		checkAPKType = false;
 	} else {
-		checkAPKFile = true;
+		checkAPKType = true;
 	}
 }
 
@@ -222,24 +223,30 @@ function validateAppIcon(file) {
 	var arrayExtensions = [ "jpg", "png" ];
 
 	if (arrayExtensions.lastIndexOf(ext) == -1) {
-		checkAppIcon = false;
+		checkIconType = false;
 	} else {
-		checkAppIcon = true;
+		checkIconType = true;
 	}
 }
 
 function checkAPKAddData(formName) {
 	var form = document.getElementById(formName);
 	var errMsg = '';
-
+	var APKCheck = form.inputAPK;
+	var IconCheck = form.inputIcon.value;
+	
 	if (Trim(form.app_name.value) == '')
 		errMsg += "Please enter your app name !!\n";
 
-	if (checkAPKFile == false)
+	if (IconCheck != '' && checkIconType == false)
+		errMsg += 'Wrong image type !!\n';
+	
+	if (APKCheck.value == '')
 		errMsg += "Please select an APK file !!\n";
-
-	if (checkAppIcon == false)
-		errMsg += "Wrong image type !!\n";
+	else {
+		if (checkAPKType == false)
+			errMsg += "File input must be an APK file !!\n";
+	}
 
 	if (errMsg == '') {
 		form.submit();
@@ -271,11 +278,10 @@ function checkAPKAddData(formName) {
  * var file = $('#file'); var imageChosen = $('#type-1').is(':checked'); if
  * (imageChosen && !isImage(file.val())) { return failValidation('Please select
  * a valid file'); } else if (!imageChosen && !isText(file.val())) { return
- * failValidation('Please select a valid file.'); }
- *  // success at this point // indicate success with alert for now alert('Valid
- * file! Here is where you would return true to allow the form to submit
- * normally.'); return true; // prevent form submitting anyway - // remove this
- * in your environment });
+ * failValidation('Please select a valid file.'); } // success at this point //
+ * indicate success with alert for now alert('Valid file! Here is where you
+ * would return true to allow the form to submit normally.'); return true; //
+ * prevent form submitting anyway - // remove this in your environment });
  * 
  * });
  */

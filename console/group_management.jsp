@@ -473,7 +473,8 @@
 								<div>
 									<div class="panel-body">
 										<div class="table-responsive">
-											<table class="table table-bordered table-hover" id="dataTables-AM">
+											<table class="table table-bordered table-hover"
+												id="dataTables-AM">
 												<thead class="toolbar">
 													<tr>
 														<th>App Name</th>
@@ -484,7 +485,7 @@
 													</tr>
 												</thead>
 												<tbody>
-												<%
+													<%
 													    Iterator<Mdm.AppData> itAD = null;
 																Mdm.AppData appData = null;
 
@@ -499,9 +500,10 @@
 																	if (null != strGroupId && (strGroupId.trim().equals(appData.group_id.trim()))) {
 													%>
 													<tr class="odd gradeA">
-														<td style="vertical-align: middle;"><img src="assets/img/Apps-Android-icon.png"
-															vspace="1" class="img-responsive"
-															style="width: 30px; text-align: center;margin-right:10px;margin-left:10px;"
+														<td style="vertical-align: middle;"><img
+															src="assets/img/Apps-Android-icon.png" vspace="1"
+															class="img-responsive"
+															style="width: 30px; text-align: center; margin-right: 10px; margin-left: 10px;"
 															title="android app"><%=appData.app_name%></td>
 														<td class="center" style="vertical-align: middle;"><%=appData.category%></td>
 														<td class="center" style="vertical-align: middle;"><%=appData.edition%></td>
@@ -515,8 +517,8 @@
 															</button></td>
 													</tr>
 													<%
-																	}
-																	}
+													    }
+																}
 													%>
 												</tbody>
 											</table>
@@ -550,13 +552,13 @@
 							<h4 class="modal-title" id="H1">Upload APK</h4>
 						</div>
 						<div class="modal-body">
-						<form role="form" action="pAddApp.jsp" method="post"
+							<form role="form" action="pAddApp.jsp" method="post"
 								enctype="multipart/form-data" name="formUploadApp"
 								id="formUploadApp">
 								<input name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
 									type="hidden" value="" /> <input name="userId_Android"
 									type="hidden" value="<%=strUserId_Android%>" />
-							
+
 								<div class="col-lg-8" style="float: right;">
 									<label class="control-label" style="margin-left: 20px;">App
 										Icon</label>
@@ -569,32 +571,36 @@
 										<div
 											class="fileupload-preview fileupload-exists thumbnail form-group"
 											style="text-align: center; max-width: 100px; max-height: 100px; line-height: 20px;"></div>
-										<input name="<%=Common.APP_ICON%>" id="<%=Common.APP_ICON%>" style="margin-left: 20px;" type="file" />
+										<input name="<%=Common.APP_ICON%>" id="inputIcon"
+											style="margin-left: 20px;" type="file"
+											onChange="validateAppIcon(this.value)" />
 
 									</div>
 									<br>
 									<div class="fileupload fileupload-new">
-									<label class="control-label" style="margin-left: 20px;">File Input</label> <input name="<%=Common.FILE_NAME%>"
-										id="<%=Common.APK_FILE_NAME%>" type="file" style="margin-left: 20px;" />
-										</div>
+										<label class="control-label" style="margin-left: 20px;">File
+											Input</label> <input name="<%=Common.APK_FILE_NAME%>" id="inputAPK"
+											type="file" style="margin-left: 20px;"
+											onChange="validateAPK(this.value)" />
+									</div>
 								</div>
 
 								<div class="form-group">
-									<label>App Name</label> <input name="<%=Common.APP_NAME%>" class="form-control"
-										style="width: 40%;" maxlength="10" />
+									<label>App Name</label> <input name="<%=Common.APP_NAME%>"
+										class="form-control" style="width: 40%;" maxlength="10" />
 								</div>
 								<div class="form-group">
-									<label>Edition</label> <input name="<%=Common.EDITION%>" class="form-control"
-										style="width: 40%;" maxlength="8" />
+									<label>Edition</label> <input name="<%=Common.EDITION%>"
+										class="form-control" style="width: 40%;" maxlength="8" />
 								</div>
 								<div class="form-group">
-									<label>Description</label> <input name="<%=Common.DESCRIPTION%>" class="form-control"
+									<label>Description</label> <input
+										name="<%=Common.DESCRIPTION%>" class="form-control"
 										style="width: 40%;" maxlength="20" />
 								</div>
 								<div class="form-group">
-									<label>Category</label> <select name="<%=Common.CATEGORY%>" class="form-control"
-										style="width: 40%;" 
-										style="height: 34px;">
+									<label>Category</label> <select name="<%=Common.CATEGORY%>"
+										class="form-control" style="width: 40%;" style="height: 34px;">
 										<option value="工具">工具</option>
 										<option value="天氣">天氣</option>
 										<option value="生活品味">生活品味</option>
@@ -644,27 +650,26 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title" id="H1">Delete Confirm</h4>
 						</div>
-						<form action="pDeleteApp.jsp" method="post"
-							name="formDeleteApp" id="formDeleteApp">
+						<form action="pDeleteApp.jsp" method="post" name="formDeleteApp"
+							id="formDeleteApp">
 							<input name="<%=Common.USER_EMAIL%>" id="<%=Common.USER_EMAIL%>"
 								type="hidden" value="<%=strEmail%>" /> <input
 								name="<%=Common.GROUP_ID%>" id="<%=Common.GROUP_ID%>"
 								type="hidden" value="<%=strGroupId%>" /> <input
 								name="<%=Common.APK_FILE_NAME%>" id="<%=Common.APK_FILE_NAME%>"
 								type="hidden" />
-						<div class="modal-body">
-							<span> You have selected to delete "<span
-									id="DeleteAppName"></span>". <br>If this was the
-									action that you wanted to do, please confirm your choice, or
-									cancel and return to the page.
+							<div class="modal-body">
+								<span> You have selected to delete "<span
+									id="DeleteAppName"></span>". <br>If this was the action
+									that you wanted to do, please confirm your choice, or cancel
+									and return to the page.
 								</span>
-						</div>
-						<div class="modal-footer">
-							<button 
-							type="button" class="btn btn-default"
-								data-dismiss="modal">Cancel</button>
-							<input type="submit" class="btn btn-danger" value="Delete">
-						</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Cancel</button>
+								<input type="submit" class="btn btn-danger" value="Delete">
+							</div>
 						</form>
 					</div>
 				</div>
@@ -693,7 +698,7 @@
 								<div>
 									<div class="panel-body">
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover" 
+											<table class="table table-striped table-bordered table-hover"
 												id="dataTables-CM">
 												<thead class="toolbar">
 													<tr>
@@ -722,10 +727,10 @@
 																	if (null != strGroupId && (strGroupId.trim().equals(contentData.group_id.trim()))) {
 													%>
 													<tr class="odd gradeX">
-														<td style="vertical-align:middle;"><%=++i%></td>
-														<td style="vertical-align:middle;"><%=contentData.alias%></td>
-														<td style="vertical-align:middle;"><%=contentData.content_type%></td>
-														<td class="center" style="vertical-align:middle;"><%=contentData.create_time%></td>
+														<td style="vertical-align: middle;"><%=++i%></td>
+														<td style="vertical-align: middle;"><%=contentData.alias%></td>
+														<td style="vertical-align: middle;"><%=contentData.content_type%></td>
+														<td class="center" style="vertical-align: middle;"><%=contentData.create_time%></td>
 														<td class="center"><a
 															href="<%="/mdm" + contentData.file_location%>"
 															target="_blank"><button
@@ -794,7 +799,7 @@
 								</div>
 								<div class="form-group">
 									<label>File Input</label> <input name="<%=Common.FILE_NAME%>"
-										id="<%=Common.FILE_NAME%>" type="file" id="contentType"
+										id="inputContent" type="file"
 										onChange="validateContent(this.value)" />
 
 								</div>
@@ -1038,7 +1043,7 @@
 	<%
 	    }
 
-	    if (null != strShowApp && strShowApp.trim().equals("true")) {
+				if (null != strShowApp && strShowApp.trim().equals("true")) {
 	%>
 	<script type="text/javascript"> 
 	showGN('<%=strShowGN%>','<%=strGroupId%>');
@@ -1063,8 +1068,8 @@
 		name="<%=Common.GROUP_NAME%>" type="hidden"> <input
 		name="SHOW_CONTENT" type="hidden" value="true">
 </form>
-<form action="group_management.jsp" method="post"
-	name="FormHomeShowApp" id="FormHomeShowApp">
+<form action="group_management.jsp" method="post" name="FormHomeShowApp"
+	id="FormHomeShowApp">
 	<input name="<%=Common.USER_EMAIL%>" type="hidden"> <input
 		name="<%=Common.GROUP_ID%>" type="hidden"> <input
 		name="<%=Common.GROUP_NAME%>" type="hidden"> <input
