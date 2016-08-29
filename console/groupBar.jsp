@@ -1,5 +1,6 @@
 
 <%
+	final String strContextPath = request.getContextPath();
     final String strEmail = "juliettechien@iii.org.tw";//request.getParameter(Common.USER_EMAIL);
     String strGroupId = request.getParameter(Common.GROUP_ID);
     String strShowContent = request.getParameter("SHOW_CONTENT");

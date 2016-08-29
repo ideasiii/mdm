@@ -488,7 +488,8 @@
 													<%
 													    Iterator<Mdm.AppData> itAD = null;
 																Mdm.AppData appData = null;
-
+																String strAppIconPath = null;
+																
 																ArrayList<Mdm.AppData> listApp = new ArrayList<Mdm.AppData>();
 																int nACount = mdm.queryApp(strGroupId, listApp);
 
@@ -496,15 +497,16 @@
 																while (itAD.hasNext()) {
 
 																	appData = itAD.next();
-
+																	strAppIconPath = strContextPath + appData.app_icon;
+	
 																	if (null != strGroupId && (strGroupId.trim().equals(appData.group_id.trim()))) {
 													%>
 													<tr class="odd gradeA">
 														<td style="vertical-align: middle;"><img
-															src="assets/img/Apps-Android-icon.png" vspace="1"
+															src="<%=strAppIconPath%>" vspace="1"
 															class="img-responsive"
 															style="width: 30px; text-align: center; margin-right: 10px; margin-left: 10px;"
-															title="android app"><%=appData.app_name%></td>
+															title="<%=appData.app_name%>"><%=appData.app_name%></td>
 														<td class="center" style="vertical-align: middle;"><%=appData.category%></td>
 														<td class="center" style="vertical-align: middle;"><%=appData.edition%></td>
 														<td class="center" style="vertical-align: middle;"><%=appData.description%></td>
@@ -565,12 +567,12 @@
 									<div class="fileupload fileupload-new"
 										style="text-align: center;" data-provides="fileupload">
 										<div class="fileupload-new thumbnail"
-											style="width: 100px; height: 90px;">
-											<img src="assets/img/demoUpload.jpg" alt="" />
+											style="width: 60px; height: 60px; border: 0; margin-bottom: 5px;">
+											<img src="assets/img/Apps-Android-icon.png" alt="" />
 										</div>
 										<div
 											class="fileupload-preview fileupload-exists thumbnail form-group"
-											style="text-align: center; max-width: 100px; max-height: 100px; line-height: 20px;"></div>
+											style="width: 50px; height: 50px; padding: 0; border: 0; margin-bottom: 10px;"></div>
 										<input name="<%=Common.APP_ICON%>" id="inputIcon"
 											style="margin-left: 20px;" type="file"
 											onChange="validateAppIcon(this.value)" />

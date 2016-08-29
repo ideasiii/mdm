@@ -67,7 +67,10 @@
 						}
 					} // while
 
+					long timeNow = System.currentTimeMillis();
+					String strFileName = String.valueOf(timeNow);
 					String strFName = null;
+					mapData.put(Common.APP_ICON, Common.UPLOAD_FILE_ANDROID_MANAGE_APP_PATH + "/app_icon_default.png");
 
 					for (int i = 0; i < itemUploadFileArray.size(); i++) {
 						Logs.showTrace("*******" + itemUploadFileArray.get(i).getName());
@@ -77,8 +80,6 @@
 
 						FileItem itemUploadFile = itemUploadFileArray.get(i);
 						if (null != itemUploadFile) {
-							long timeNow = System.currentTimeMillis();
-							String strFileName = String.valueOf(timeNow);
 							String strFN = null;
 							String strIN = null;
 							String strContentType = null;

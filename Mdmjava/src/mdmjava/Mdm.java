@@ -1,8 +1,11 @@
 package mdmjava;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -363,7 +366,8 @@ public class Mdm
 
     }
 
-    public int insertAppManage(final String strGroupId, final String strAppName, final String strCategory, final String strEdition, final String strDescription, final String strAppIcon, final String strAPKFileName, final String strFileLocation)
+    public int insertAppManage(final String strGroupId, final String strAppName, final String strCategory, final String strEdition, final String strDescription,
+	    final String strAppIcon, final String strAPKFileName, final String strFileLocation)
     {
 	try
 	{
@@ -390,7 +394,7 @@ public class Mdm
 
 	return MDM_DB_ERR_SUCCESS;
     }
-    
+
     public int queryApp(String strGroupId, ArrayList<AppData> listApp)
     {
 	int nCount = 0;
@@ -441,7 +445,27 @@ public class Mdm
     {
 	try
 	{
-	    String strSQL = "delete from app_manage where group_id = ? and apk_file_name = ?";
+	    sqliteClient sqlite = new sqliteClient();
+	    Connection con = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
+
+	    // Query File Path
+	    String strSQL = "select app_icon, file_location from app_manage where group_id = '" + strGroupId + "' and apk_file_name = '" + strAPKFileName + "'";
+	    Statement stat = null;
+	    ResultSet rs = null;
+	    stat = con.createStatement();
+	    rs = stat.executeQuery(strSQL);
+	    String strAppIcon = null;
+	    String strAPKfile = null;
+	    if (rs.next())
+	    {
+		strAppIcon = rs.getString("app_icon");
+		strAPKfile = rs.getString("file_location");
+	    }
+	    rs.close();
+	    stat.close();
+
+	    // Delete DB data
+	    strSQL = "delete from app_manage where group_id = ? and apk_file_name = ?";
 	    PreparedStatement pst = null;
 	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    int idx = 1;
@@ -449,7 +473,73 @@ public class Mdm
 	    pst.setString(idx++, strAPKFileName);
 	    pst.executeUpdate();
 	    pst.close();
-	    Logs.showError(strSQL + " " + strGroupId + " " +strAPKFileName );
+	    Logs.showError(strSQL + " " + strGroupId + " " + strAPKFileName);
+
+	    // Delete local file
+	    if (null != strAppIcon)
+	    {
+		File fileIcon = new File("/data/opt/tomcat/webapps/mdm" + strAppIcon);
+		if (null != fileIcon)
+		{
+		    String absolutePath = fileIcon.getAbsolutePath();
+		    String filePath = absolutePath.substring(0, absolutePath.lastIndexOf(File.separator));
+
+		    if (fileIcon.delete())
+		    {
+			System.out.println(fileIcon.getName() + " is deleted!");
+		    }
+		    else
+		    {
+			System.out.println(fileIcon.getName() + "delete operation is failed.");
+		    }
+
+		    File folderPath = new File(filePath);
+
+		    if (folderPath.isDirectory())
+		    {
+			if (folderPath.list().length <= 0)
+			{
+
+			    System.out.println("Directory is empty!");
+			    folderPath.delete();
+			}
+		    }
+
+		}
+	    }
+
+	    if (null != strAPKfile)
+	    {
+		File fileAPK = new File("/data/opt/tomcat/webapps/mdm" + strAPKfile);
+		if (null != fileAPK)
+		{
+		    String absolutePath = fileAPK.getAbsolutePath();
+		    String filePath = absolutePath.substring(0, absolutePath.lastIndexOf(File.separator));
+
+		    if (fileAPK.delete())
+		    {
+			System.out.println(fileAPK.getName() + " is deleted!");
+		    }
+		    else
+		    {
+			System.out.println(fileAPK.getName() + "delete operation is failed.");
+		    }
+
+		    File folderPath = new File(filePath);
+
+		    if (folderPath.isDirectory())
+		    {
+			if (folderPath.list().length <= 0)
+			{
+
+			    System.out.println("Directory is empty!");
+			    folderPath.delete();
+			}
+		    }
+
+		}
+	    }
+
 	}
 	catch (Exception e)
 	{
@@ -459,7 +549,7 @@ public class Mdm
 	return MDM_DB_ERR_SUCCESS;
 
     }
-    
+
     public int insertContentManage(final String strGroupId, final String strAlias, final String strContentType, final String strFileName, final String strFileLocation)
     {
 	try
@@ -484,7 +574,7 @@ public class Mdm
 
 	return MDM_DB_ERR_SUCCESS;
     }
-    
+
     public int queryContent(String strGroupId, ArrayList<ContentData> listContent)
     {
 	int nCount = 0;
@@ -527,12 +617,30 @@ public class Mdm
 
 	return nCount;
     }
-    
+
     public int deleteContent(final String strGroupId, final String strFileName)
     {
 	try
 	{
-	    String strSQL = "delete from content_manage where group_id = ? and file_name = ?";
+	    sqliteClient sqlite = new sqliteClient();
+	    Connection con = sqlite.getConnection(Common.DB_PATH_MDM_ANDROID);
+
+	    // Query File Path
+	    String strSQL = "select file_location from content_manage where group_id = '" + strGroupId + "' and file_name = '" + strFileName + "'";
+	    Statement stat = null;
+	    ResultSet rs = null;
+	    stat = con.createStatement();
+	    rs = stat.executeQuery(strSQL);
+	    String strContentFile = null;
+	    if (rs.next())
+	    {
+		strContentFile = rs.getString("file_location");
+	    }
+	    rs.close();
+	    stat.close();
+
+	    // Delete DB data
+	    strSQL = "delete from content_manage where group_id = ? and file_name = ?";
 	    PreparedStatement pst = null;
 	    pst = conMdmAndroid.prepareStatement(strSQL);
 	    int idx = 1;
@@ -540,7 +648,42 @@ public class Mdm
 	    pst.setString(idx++, strFileName);
 	    pst.executeUpdate();
 	    pst.close();
-	    Logs.showError(strSQL + " " + strGroupId + " " +strFileName );
+	    Logs.showError(strSQL + " " + strGroupId + " " + strFileName);
+
+	    // Delete local file
+	    if (null != strContentFile)
+	    {
+		File fileContent = new File("/data/opt/tomcat/webapps/mdm" + strContentFile);
+		if (null != fileContent)
+		{
+
+		    String absolutePath = fileContent.getAbsolutePath();
+		    String filePath = absolutePath.substring(0, absolutePath.lastIndexOf(File.separator));
+
+		    if (fileContent.delete())
+		    {
+			System.out.println(fileContent.getName() + " is deleted!");
+		    }
+		    else
+		    {
+			System.out.println(fileContent.getName() + "delete operation is failed.");
+		    }
+
+		    File folderPath = new File(filePath);
+
+		    if (folderPath.isDirectory())
+		    {
+
+			if (folderPath.list().length <= 0)
+			{
+
+			    System.out.println("Directory is empty!");
+			    folderPath.delete();
+			}
+		    }
+		}
+	    }
+	    
 	}
 	catch (Exception e)
 	{
@@ -550,7 +693,6 @@ public class Mdm
 	return MDM_DB_ERR_SUCCESS;
 
     }
-    
 
     public int queryDevice(String strGroupId, ArrayList<DeviceData> listDevice)
     {
@@ -599,7 +741,7 @@ public class Mdm
 	return nCount;
     }
 
-    public int insertControllerJob(final String strControlId,final String strJobSeq, final String strCmmdFrom, final String strMacAddress)
+    public int insertControllerJob(final String strControlId, final String strJobSeq, final String strCmmdFrom, final String strMacAddress)
     {
 	try
 	{
