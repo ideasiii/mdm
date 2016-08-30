@@ -561,7 +561,7 @@
 									type="hidden" value="" /> <input name="userId_Android"
 									type="hidden" value="<%=strUserId_Android%>" />
 
-								<div class="col-lg-8" style="float: right; padding-left:15px;">
+								<div class="col-lg-8" style="float: right;">
 									<label class="control-label" style="margin-left: 20px;">App
 										Icon</label>
 									<div class="fileupload fileupload-new"
