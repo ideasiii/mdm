@@ -45,16 +45,17 @@
 
 </head>
 
-<body>
+<body class="padTop53">
 
-	<!-- HEADER SECTION -->
-	<div id="top">
+	<div id="wrap">
+		<!-- HEADER SECTION -->
+		<div id="top">
 
-		<nav class="navbar navbar-inverse navbar-fixed-top "
-			style="padding-top: 7px;">
+			<nav class="navbar navbar-inverse navbar-fixed-top "
+				style="padding-top: 7px;">
 
-			<!-- LOGO SECTION -->
-			<!--  
+				<!-- LOGO SECTION -->
+				<!--  
 	   <header class="navbar-header">
 		<div>
 			<a href="group_management.jsp" class="navbar-brand"> <img
@@ -64,20 +65,37 @@
 		</div>
 	   </header>  
 	-->
-			<!-- END LOGO SECTION -->
+				<!-- END LOGO SECTION -->
 
-			<ul class="nav navbar-top-links navbar-right">
-				<li class="dropdown"><button class="btn btn-success btn-sm"
-					data-toggle="dropdown" > <span
-						class="label"> <i class="fa fa-download fa-2x"></i></span>&nbsp;
-						
-				</button></li>
-			</ul>
+				<ul class="nav navbar-top-links navbar-right">
+					<li class="dropdown"><button class="btn btn-success btn-sm"
+							data-toggle="dropdown">
+							<span class="label"> <i class="fa fa-download fa-2x"></i></span>&nbsp;
 
-		</nav>
+						</button></li>
+				</ul>
+
+			</nav>
+		</div>
+		<!-- END HEADER SECTION -->
+
+		<!--PAGE CONTENT -->
+		<div id="content">
+			<div class="inner">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="box" style="padding: 20px;">
+							<p>1</p>
+							<p>1</p>
+							<p>1</p>
+							<p>1</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<!-- END HEADER SECTION -->
-
 
 	<!-- GLOBAL SCRIPTS -->
 	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
