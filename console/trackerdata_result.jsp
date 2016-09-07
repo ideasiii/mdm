@@ -13,6 +13,7 @@
 <link rel="stylesheet"
 	href="assets/plugins/bootstrap/css/bootstrap_2.css" />
 <link rel="stylesheet" href="assets/css/main_2.css" />
+<link rel="stylesheet" href="assets/css/MoneAdmin.css" />
 <link rel="stylesheet"
 	href="assets/plugins/Font-Awesome/css/font-awesome_2.css" />
 <link rel="stylesheet"
@@ -45,6 +46,7 @@
 </head>
 
 <body>
+
 	<!-- HEADER SECTION -->
 	<div id="top">
 
@@ -64,9 +66,13 @@
 	-->
 			<!-- END LOGO SECTION -->
 
-
-
-
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><button class="btn btn-success btn-sm"
+					data-toggle="dropdown" > <span
+						class="label"> <i class="fa fa-download fa-2x"></i></span>&nbsp;
+						
+				</button></li>
+			</ul>
 
 		</nav>
 	</div>
