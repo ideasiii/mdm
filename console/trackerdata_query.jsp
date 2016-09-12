@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +65,7 @@
 						<div class="col-lg-12">
 							<div class="panel panel-default title"
 								style="padding: 30px; padding-left: 15%; padding-right: 15%;">
-								<form role="form" name="formQueryTrackerData"
+								<form action="trackerdata_result.jsp" role="form" name="formQueryTrackerData"
 									id="formQueryTrackerData">
 
 									<div class="form-group">

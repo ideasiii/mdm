@@ -214,7 +214,7 @@
 </style>
 </head>
 
-<body class="padTop53 ">
+<body class="padTop53">
 
 	<!-- MAIN WRAPPER -->
 	<div id="wrap">

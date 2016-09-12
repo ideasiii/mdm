@@ -1,3 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="com.mongodb.MongoClient"%>
+<%@ page import="com.mongodb.DB"%>
+<%@ page import="com.mongodb.DBCollection"%>
+<%@ page import="com.mongodb.BasicDBObject"%>
+<%@ page import="com.mongodb.DBObject"%>
+<%@ page import="com.mongodb.DBCursor"%>
+<%@ page import="com.mongodb.BasicDBList"%>
+<%@ page import="java.util.ArrayList"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,6 +89,7 @@
 
 			</nav>
 		</div>
+
 		<!-- END HEADER SECTION -->
 
 		<!--PAGE CONTENT -->
@@ -85,17 +98,39 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="box" style="padding: 20px;">
-							<p>1</p>
-							<p>1</p>
-							<p>1</p>
-							<p>1</p>
+							<%
+							    MongoClient mongoClient = new MongoClient();
+										DB db = mongoClient.getDB("access");
+										DBCollection collection = db.getCollection("mobile");
 
+										//BasicDBObject dataQuery = new BasicDBObject();
+										//ArrayList<BasicDBObject> obj = new ArrayList<BasicDBObject>();
+
+										//obj.add(new BasicDBObject("ID", new BasicDBObject("$regex", "1472637735369")));
+										//obj.add(new BasicDBObject("create_date", new BasicDBObject("$gte", "2016-01-05 00:00:00").append("$lte", "2016-03-05 00:00:00")));
+										//dataQuery.put("$and", obj);
+
+										BasicDBObject dataQuery = new BasicDBObject();
+										dataQuery.put("ID", new BasicDBObject("$regex", "1472637735369").append("$options", "i"));
+
+										DBCursor cursor = collection.find(dataQuery);
+
+										while (cursor.hasNext()) {
+							%>
+
+							<p><%=cursor.next()%></p>
+
+							<%
+							    }
+										mongoClient.close();
+							%>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!--END PAGE CONTENT -->
 
 	<!-- GLOBAL SCRIPTS -->
 	<script src="assets/plugins/jquery-2.0.3.min.js"></script>
