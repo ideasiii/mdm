@@ -8,6 +8,7 @@
 <%@ page import="com.mongodb.DBCursor"%>
 <%@ page import="com.mongodb.BasicDBList"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.regex.Pattern"%>
 
 
 <!DOCTYPE html>
@@ -101,27 +102,25 @@
 							<%
 							    MongoClient mongoClient = new MongoClient();
 										DB db = mongoClient.getDB("access");
-										DBCollection collection = db.getCollection("mobile");
+										if (null != db) {
+											DBCollection collection = db.getCollection("mobile");
 
-										//BasicDBObject dataQuery = new BasicDBObject();
-										//ArrayList<BasicDBObject> obj = new ArrayList<BasicDBObject>();
+											{
+												BasicDBObject dataQuery = new BasicDBObject();
+												dataQuery.put("ID", new BasicDBObject("$regex", "1456802830286").append("$options", "i"));
+												dataQuery.put("create_date",
+														new BasicDBObject("$gte", "2016-01-05").append("$lte", "2016-05-05" + " 23:59:59"));
 
-										//obj.add(new BasicDBObject("ID", new BasicDBObject("$regex", "1472637735369")));
-										//obj.add(new BasicDBObject("create_date", new BasicDBObject("$gte", "2016-01-05 00:00:00").append("$lte", "2016-03-05 00:00:00")));
-										//dataQuery.put("$and", obj);
-
-										BasicDBObject dataQuery = new BasicDBObject();
-										dataQuery.put("ID", new BasicDBObject("$regex", "1472637735369").append("$options", "i"));
-
-										DBCursor cursor = collection.find(dataQuery);
-
-										while (cursor.hasNext()) {
+												DBCursor cursor = collection.find(dataQuery);
+												while (cursor.hasNext()) {
 							%>
 
 							<p><%=cursor.next()%></p>
 
 							<%
 							    }
+											}
+										}
 										mongoClient.close();
 							%>
 						</div>

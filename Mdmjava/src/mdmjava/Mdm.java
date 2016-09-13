@@ -177,6 +177,7 @@ public class Mdm
 	}
     }
 
+    
     public int queryPermission(String strEmail, ArrayList<PermissionData> listPermission)
     {
 	int nCount = 0;

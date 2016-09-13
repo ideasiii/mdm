@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
 
+<%@include file="tracker_common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,16 +47,55 @@
 
 <!-- END PAGE LEVEL  STYLES -->
 
+<!--  JavaScript -->
+<script type="text/javascript">
+	function Trim(x) {
+		return x.replace(/^\s+|\s+$/gm, '');
+	}
+
+	function formSubmit(formName) {
+		var form = document.getElementById(formName);
+		form.submit();
+	}
+
+	function checkInputData(formName) {
+		var form = document.getElementById(formName);
+		var formname = form.name;
+		var errMsg = '';
+		re = /\d/;
+
+		if (formname == "formQueryTrackerData") {
+			if (Trim(form.app_id.value) == '')
+				errMsg += "Please enter an app ID !!\n";
+			else {
+				if (!re.test(Trim(form.app_id.value))) {
+					errMsg += "App ID must contain only numeric characters !!\n";
+				}
+			}
+		}
+
+		if (errMsg == '') {
+			form.submit();
+			return true;
+		}
+		
+		alert(errMsg);
+		return false;
+	}
+</script>
+
 </head>
 
 <body>
+
 
 	<div class="row" style="margin: 10%;">
 		<div class="col-lg-12" style="padding-left: 25%; padding-right: 25%;">
 			<div class="box">
 				<header>
 					<h5>
-						<i class="fa fa-search fa-1x" aria-hidden="true"></i> Raw Data Query
+						<i class="fa fa-search fa-1x" aria-hidden="true"></i> Raw Data
+						Query
 					</h5>
 					<div class="toolbar">
 						<div class="btn-group"></div>
@@ -65,11 +106,12 @@
 						<div class="col-lg-12">
 							<div class="panel panel-default title"
 								style="padding: 30px; padding-left: 15%; padding-right: 15%;">
-								<form action="trackerdata_result.jsp" role="form" name="formQueryTrackerData"
-									id="formQueryTrackerData">
+								<form action="trackerdata_result.jsp" role="form"
+									name="formQueryTrackerData" id="formQueryTrackerData">
 
 									<div class="form-group">
-										<label>App ID</label> <input class="form-control" name="" />
+										<label>App ID</label> <input class="form-control"
+											name="<%=Common.APP_ID%>" />
 										<p class="help-block" style="color: #b94a48;">Notification:
 											Group name cannot be changed.</p>
 									</div>
@@ -79,7 +121,8 @@
 											<dd style="text-align: left;">
 												<label for="dp3">Start Date</label>
 												<div>
-													<input type="text" class="form-control" value="26-02-2016"
+													<input type="text" class="form-control"
+														name="<%=Common.START_DATE%>"
 														data-date-format="dd-mm-yyyy" id="dp3" />
 												</div>
 											</dd>
@@ -89,20 +132,23 @@
 											<dd style="text-align: left;">
 												<label for="dp4">End Date</label>
 												<div>
-													<input type="text" class="form-control" value="26-02-2016"
-														data-date-format="dd-mm-yyyy" id="dp4" />
+													<input type="text" class="form-control"
+														name="<%=Common.END_DATE%>" data-date-format="dd-mm-yyyy"
+														id="dp4" />
 												</div>
 											</dd>
 										</dl>
 									</div>
-									<br>
-									<div style="text-align: center;">
-
-										<button type="button" class="btn btn-primary" title="Query">
-											<span class="sr-only">Query </span>Query
-										</button>
-									</div>
 								</form>
+								<br>
+								<div style="text-align: center;">
+
+									<button type="button" class="btn btn-primary" title="Query"
+										onClick="checkInputData('formQueryTrackerData')">
+										<span class="sr-only">Query </span>Query
+									</button>
+								</div>
+
 							</div>
 						</div>
 					</div>
