@@ -9,6 +9,8 @@
 <%@ page import="com.mongodb.BasicDBList"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.regex.Pattern"%>
+<%@ page import="org.json.JSONObject"%>
+<%@ page import="org.json.JSONArray"%>
 
 
 <!DOCTYPE html>
@@ -100,28 +102,30 @@
 					<div class="col-lg-12">
 						<div class="box" style="padding: 20px;">
 							<%
-							    MongoClient mongoClient = new MongoClient();
-										DB db = mongoClient.getDB("access");
-										if (null != db) {
-											DBCollection collection = db.getCollection("mobile");
+								MongoClient mongoClient = new MongoClient();
+								DB db = mongoClient.getDB("access");
+								if (null != db) {
+									DBCollection collection = db.getCollection("mobile");
 
-											{
-												BasicDBObject dataQuery = new BasicDBObject();
-												dataQuery.put("ID", new BasicDBObject("$regex", "1456802830286").append("$options", "i"));
-												dataQuery.put("create_date",
-														new BasicDBObject("$gte", "2016-01-05").append("$lte", "2016-05-05" + " 23:59:59"));
+									{
+										BasicDBObject dataQuery = new BasicDBObject();
+										dataQuery.put("ID", new BasicDBObject("$regex", "1456802830286").append("$options", "i"));
+										dataQuery.put("create_date",
+												new BasicDBObject("$gte", "2016-01-05").append("$lte", "2016-05-05" + " 23:59:59"));
 
-												DBCursor cursor = collection.find(dataQuery);
-												while (cursor.hasNext()) {
+										DBCursor cursor = collection.find(dataQuery);
+										while (cursor.hasNext()) {
+											JSONObject jsonobj = new JSONObject(cursor.next().toString());
+											jsonobj.remove("_id");
 							%>
 
-							<p><%=cursor.next()%></p>
+							<p><%=jsonobj.toString()%></p>
 
 							<%
-							    }
-											}
-										}
-										mongoClient.close();
+								}
+									}
+								}
+								mongoClient.close();
 							%>
 						</div>
 					</div>
