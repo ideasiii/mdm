@@ -62,23 +62,36 @@
 		var form = document.getElementById(formName);
 		var formname = form.name;
 		var errMsg = '';
-		re = /\d/;
+		var re = /\D/;
+		var reDate = new RegExp(/^[0-9]{4}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/);
+		var parts = form.start_date.value.split('-');
+		var sd = new Date(parts[0],parts[1]-1,parts[2]);
+		parts = form.end_date.value.split('-');
+		var ed = new Date(parts[0],parts[1]-1,parts[2]);
 
-		if (formname == "formQueryTrackerData") {
-			if (Trim(form.app_id.value) == '')
-				errMsg += "Please enter an app ID !!\n";
-			else {
-				if (!re.test(Trim(form.app_id.value))) {
-					errMsg += "App ID must contain only numeric characters !!\n";
-				}
+		if (Trim(form.app_id.value) == '')
+			errMsg += "Please enter an app ID !!\n";
+		else {
+			if (re.test(Trim(form.app_id.value))) {
+				errMsg += "App ID must contain only numeric characters !!\n";
 			}
+		}
+		
+		
+		if (Trim(form.start_date.value) != '') {
+			if (!reDate.test(form.start_date.value))
+				errMsg += "Wrong date format !!\n";
+					else{
+						if(sd > ed)
+					errMsg += "End date must be after start date !!\n";
+				}	
 		}
 
 		if (errMsg == '') {
 			form.submit();
 			return true;
 		}
-		
+
 		alert(errMsg);
 		return false;
 	}
@@ -123,7 +136,7 @@
 												<div>
 													<input type="text" class="form-control"
 														name="<%=Common.START_DATE%>"
-														data-date-format="dd-mm-yyyy" id="dp3" />
+														data-date-format="yyyy-mm-dd" id="dp3" />
 												</div>
 											</dd>
 										</dl>
@@ -133,7 +146,7 @@
 												<label for="dp4">End Date</label>
 												<div>
 													<input type="text" class="form-control"
-														name="<%=Common.END_DATE%>" data-date-format="dd-mm-yyyy"
+														name="<%=Common.END_DATE%>" data-date-format="yyyy-mm-dd"
 														id="dp4" />
 												</div>
 											</dd>
