@@ -11,8 +11,32 @@
 <%@ page import="java.util.regex.Pattern"%>
 <%@ page import="org.json.JSONObject"%>
 <%@ page import="org.json.JSONArray"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+
+<%@include file="tracker_common.jsp"%>
+<%
+request.setCharacterEncoding("UTF-8");
 
 
+SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+Date current = new Date();
+
+final String strID = request.getParameter(Common.APP_ID);
+ String strSD = request.getParameter(Common.START_DATE);
+ String strED = request.getParameter(Common.END_DATE);
+ 
+ if (null == strSD || (null != strSD && 0 >= strSD.length()))
+ {
+     strSD = dateFormat.format(current);
+ }
+ 
+ if (null == strED || (null != strED && 0 >= strED.length()))
+ {
+     strED = dateFormat.format(current);
+ }
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,10 +133,11 @@
 
 									{
 										BasicDBObject dataQuery = new BasicDBObject();
-										dataQuery.put("ID", new BasicDBObject("$regex", "1456802830286").append("$options", "i"));
+										dataQuery.put("ID", new BasicDBObject("$regex", strID).append("$options", "i"));										
 										dataQuery.put("create_date",
-												new BasicDBObject("$gte", "2016-01-05").append("$lte", "2016-05-05" + " 23:59:59"));
-
+												new BasicDBObject("$gte", strSD).append("$lte", strED + " 23:59:59"));
+										//out.println(strSD+strED);
+							
 										DBCursor cursor = collection.find(dataQuery);
 										while (cursor.hasNext()) {
 											JSONObject jsonobj = new JSONObject(cursor.next().toString());
