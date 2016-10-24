@@ -289,7 +289,7 @@
 										onclick="checkAccountListData('formAddGroup')">Verification</button>
 									<button id="btnA" type="button" class="btn btn-xs btn-success"
 										style="display: none; margin-top: 10px;"
-										style="margin-top: 10px;">Available</button>
+										>Available</button>
 									<p class="help-block">(Must be less than 20 letters in
 										alphanumeric format.)</p>
 								</div>
