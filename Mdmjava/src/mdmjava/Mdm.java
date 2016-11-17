@@ -272,6 +272,8 @@ public class Mdm
 
 	return nCount;
     }
+    
+    
 
     public int insertpGroupAdd(final String strName, final String strAccount, final String strPassword, final String strMaximum, final String strUserId)
     {
